@@ -1,1 +1,15 @@
 <h1> {{ dashboard.title }}</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="block"
+             ng-repeat="potager in dashboard.potagers">
+
+            <div class="" ng-click="dashboard.selectedPotager(potager)">
+                <h2 ng-bind="potager.name"></h2>
+                <p ng-bind="potager.temperature"></p>
+                <p ng-bind="potager.humidite"></p>
+            </div>
+        </div>
+    </div>
+</div>
