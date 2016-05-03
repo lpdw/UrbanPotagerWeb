@@ -1,5 +1,13 @@
 /* app css stylesheet */
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 
+  box-sizing: border-box;
+}
+body, p{
+  font-family: 'Montserrat', Arial, sans-serif;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -28,6 +36,7 @@
   content: "";
   padding: 0;
 }
+<<<<<<< Updated upstream
 
 .dashboard h1{
     margin: 0;
@@ -35,3 +44,50 @@
 .dash{
     background-color: #00A000;
 }
+=======
+/* Home Page */
+.text-center{
+  margin-top: 1%;
+  text-align: center;
+}
+.home-col-2{
+  margin: 3% auto;
+  background-color: rgba(194, 197, 199, 0.27);
+}
+p.home-col-2{
+  text-transform: uppercase;
+  color: #3a3939;
+}
+img.home-col-2:hover{
+  opacity: 0.6;
+}
+.home-btn{
+  padding: 1%;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  margin: auto;
+  display: table;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  background-color: #00B06C;
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+
+}
+.home-btn:hover{
+  background-color: #00883C;
+  border: black;
+}
+.home-desc{
+  width: 59%;
+}
+.home-desc p{
+  width: 70%;
+  margin: auto;
+  line-height: 1.7;
+  text-transform: uppercase;
+  transform: translateY(5%);
+}
+.angular-google-map-container{
+  height: 300px;
+}
+>>>>>>> Stashed changes
