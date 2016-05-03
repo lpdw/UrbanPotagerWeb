@@ -16,11 +16,14 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource'])
 
         var vm = this;
         vm.title = "Mes potagers";
+        vm.dash = undefined;
+        
+        vm.getDatas = function(){
+            return PotagerService.resource.query(function (datas) {
+                vm.listePotagers = datas;
+            });  
+        };
 
-        PotagerService.resource.query(function (datas) {
-            vm.listePotagers = datas;
-            console.log(vm.listePotagers);
-        });
         /*
         vm.getDatasPromise = vm.getDatas();
         $q.all([vm.getDatasPromise.$promise]).then(function() {
@@ -33,6 +36,7 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource'])
          * @param p
          */
         vm.selectedPotager = function(p){
+            vm.dash = "animated bounceOut";
             $location.path('/potager/').search({param: p});
         };
     });
