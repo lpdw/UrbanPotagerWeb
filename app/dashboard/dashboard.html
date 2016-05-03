@@ -1,16 +1,18 @@
 <h1> {{ dashboard.title }}</h1>
-
 <div class="container-fluid">
     <div class="row">
         <div class="block"
-             ng-repeat="potager in dashboard.potagers">
+             ng-repeat="potager in dashboard.listePotagers">
 
             <div class="" ng-click="dashboard.selectedPotager(potager)">
                 <h2 ng-bind="potager.name"></h2>
                 <p ng-bind="potager.temperature"></p>
                 <p ng-bind="potager.humidite"></p>
-                <button ng-click="dashboard.getDatas()">Test Récup données</button>
             </div>
+
         </div>
     </div>
 </div>
+
+
+
