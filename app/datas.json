@@ -1,23 +1,23 @@
 [
   {
-    name: "Potager 1",
-    temperature: "32°",
-    humidite: "ok"
+    "name": "Potager 1",
+    "temperature": "32°",
+    "humidite": "ok"
   },{
-    name: "Potager 2",
-    temperature: "4°",
-    humidite: "ok"
+    "name": "Potager 2",
+    "temperature": "4°",
+    "humidite": "ok"
   },{
-    name: "Potager 3",
-    temperature: "5°",
-    humidite: "ok"
+    "name": "Potager 3",
+    "temperature": "5°",
+    "humidite": "ok"
   },{
-    name: "Potager 4",
-    temperature: "22°",
-    humidite: "NOK"
+    "name": "Potager 4",
+    "temperature": "22°",
+    "humidite": "NOK"
   },{
-    name: "Potager 5",
-    temperature: "14°",
-    humidite: "ok"
+    "name": "Potager 5",
+    "temperature": "14°",
+    "humidite": "ok"
   }
 ]
