@@ -21,6 +21,7 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui
         vm.getDatas = function(){
             return PotagerService.resource.query(function (datas) {
                 vm.listePotagers = datas;
+                console.log(vm.listePotagers);
             });  
         };
 
@@ -36,7 +37,6 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui
          * @param p
          */
         vm.selectedPotager = function(p){
-            vm.dash = "animated bounceOut";
             $location.path('/potager/').search({param: p});
         };
     });
