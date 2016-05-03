@@ -17,11 +17,11 @@
       "lighting": {
         "start": 8,
         "end": 9
-      }, // "Heure de début - Heure de fin"
+      },
       "watering": {
         "start": 0,
         "end": 9
-      }, // "Heure de début - Heure de fin" ou "ON" pour toujours
+      },
       "luminosity": "70%",
       "alert_cold_air": "0°",
       "alert_hot_air": "60°",
@@ -50,11 +50,11 @@
       "lighting": {
         "start": 8,
         "end": 9
-      }, // "Heure de début - Heure de fin"
+      },
       "watering": {
         "start": 0,
         "end": 9
-      }, // "Heure de début - Heure de fin" ou "ON" pour toujours
+      },
       "luminosity": "70%",
       "alert_cold_air": "0°",
       "alert_hot_air": "60°",
@@ -83,11 +83,11 @@
       "lighting": {
         "start": 8,
         "end": 9
-      }, // "Heure de début - Heure de fin"
+      },
       "watering": {
         "start": 0,
         "end": 9
-      }, // "Heure de début - Heure de fin" ou "ON" pour toujours
+      },
       "luminosity": "70%",
       "alert_cold_air": "0°",
       "alert_hot_air": "60°",
@@ -116,11 +116,11 @@
       "lighting": {
         "start": 8,
         "end": 9
-      }, // "Heure de début - Heure de fin"
+      },
       "watering": {
         "start": 0,
         "end": 9
-      }, // "Heure de début - Heure de fin" ou "ON" pour toujours
+      },
       "luminosity": "70%",
       "alert_cold_air": "0°",
       "alert_hot_air": "60°",
@@ -149,11 +149,11 @@
       "lighting": {
         "start": 8,
         "end": 9
-      }, // "Heure de début - Heure de fin"
+      },
       "watering": {
         "start": 0,
         "end": 9
-      }, // "Heure de début - Heure de fin" ou "ON" pour toujours
+      },
       "luminosity": "70%",
       "alert_cold_air": "0°",
       "alert_hot_air": "60°",

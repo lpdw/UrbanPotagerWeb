@@ -18,5 +18,4 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
             vm.potagers = datas;
         });
 
-        console.log(vm.potagers);
     });
