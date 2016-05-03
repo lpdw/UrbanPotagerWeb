@@ -12,7 +12,7 @@ angular.module('myApp.dashboard', ['ngRoute'])
         });
     }])
 
-    .controller('DashboardCtrl', ['$location', function($location) {
+    .controller('DashboardCtrl', ['$location',  function($location) {
 
         var vm = this;
         vm.title = "Mes potagers";
@@ -35,5 +35,11 @@ angular.module('myApp.dashboard', ['ngRoute'])
             $location.path('/potager/').search({param: p});
         };
 
-        
+        vm.getDatas = function(){
+            console.log('PotagerService', PotagerService);
+            return PotagerService.resource.get(function (datas) {
+                vm.listPotagers = datas;
+            })
+        };
+
     }]);
