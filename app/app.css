@@ -29,9 +29,28 @@
   padding: 0;
 }
 
+/*********** Dashboard **********/
 .dashboard h1{
     margin: 0;
+    text-align: center;
 }
+
+.description{
+    text-align: center;
+    margin-top: 0;
+}
+
 .dash{
     background-color: #00A000;
+    margin: 2em;
+    margin-right: 4em;
+    cursor: pointer;
 }
+.dash:hover{
+  /*  -webkit-animation: bounceIn 1s;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-delay: 1s;*/
+    animation: bounceIn 1s;
+}
+
+/*********** Dashboard **********/
