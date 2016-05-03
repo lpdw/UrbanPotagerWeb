@@ -1,21 +1,131 @@
 {
-  name: "Potager 1",
-  temperature: "32°",
-  humidite: "ok"
+  id: "1",
+  description: 'description potager 1',
+  user_id: '1',
+  is_public: false,
+  environment:{
+    location:"25 rue de la paix 75001 Paris",
+    temperature_air: "32°",
+    humidity_air: "32°",
+    temperature_water: "32°",
+    sunshine_sensor: "25%",
+    reservoir_sensor:"50%",
+    is_public: false
+  },
+  settings: {
+    lighting: "8 - 20", // "Heure de début - Heure de fin"
+    watering: "8 - 20", // "Heure de début - Heure de fin" ou "ON" pour toujours
+    luminosity: "70%",
+    alert_cold_air: "0°",
+    alert_hot_air: "60°",
+    alert_cold_water: "0°",
+    alert_hot_water: "60°",
+    alert_low_humidity: "20%",
+    alert_high_humidity: "70%",
+    alert_low_water: "25%"
+  }
 },{
-  name: "Potager 2",
-  temperature: "4°",
-  humidite: "ok"
+  id: "2",
+  description: 'description potager 2',
+  user_id: '1',
+  is_public: false,
+  environment:{
+    location:"2 rue de la paix 75001 Paris",
+    temperature_air: "32°",
+    humidity_air: "32°",
+    temperature_water: "32°",
+    sunshine_sensor: "25%",
+    reservoir_sensor:"50%",
+    is_public: false
+  },
+  settings: {
+    lighting: "8 - 20", // "Heure de début - Heure de fin"
+    watering: "8 - 20", // "Heure de début - Heure de fin" ou "ON" pour toujours
+    luminosity: "70%",
+    alert_cold_air: "0°",
+    alert_hot_air: "60°",
+    alert_cold_water: "0°",
+    alert_hot_water: "60°",
+    alert_low_humidity: "20%",
+    alert_high_humidity: "70%",
+    alert_low_water: "25%"
+  }
 },{
-  name: "Potager 3",
-  temperature: "5°",
-  humidite: "ok"
+  id: "3",
+  description: 'description potager 1',
+  user_id: '2',
+  is_public: false,
+  environment:{
+    location:"25 rue de la paix 75001 Paris",
+    temperature_air: "32°",
+    humidity_air: "32°",
+    temperature_water: "32°",
+    sunshine_sensor: "25%",
+    reservoir_sensor:"50%",
+    is_public: false
+  },
+  settings: {
+    lighting: "8 - 20", // "Heure de début - Heure de fin"
+    watering: "8 - 20", // "Heure de début - Heure de fin" ou "ON" pour toujours
+    luminosity: "70%",
+    alert_cold_air: "0°",
+    alert_hot_air: "60°",
+    alert_cold_water: "0°",
+    alert_hot_water: "60°",
+    alert_low_humidity: "20%",
+    alert_high_humidity: "70%",
+    alert_low_water: "25%"
+  }
 },{
-  name: "Potager 4",
-  temperature: "22°",
-  humidite: "NOK"
+  id: "4",
+  description: 'description potager 1',
+  user_id: '3',
+  is_public: false,
+  environment:{
+    location:"25 rue de la paix 75001 Paris",
+    temperature_air: "32°",
+    humidity_air: "32°",
+    temperature_water: "32°",
+    sunshine_sensor: "25%",
+    reservoir_sensor:"50%",
+    is_public: false
+  },
+  settings: {
+    lighting: "8 - 20", // "Heure de début - Heure de fin"
+    watering: "8 - 20", // "Heure de début - Heure de fin" ou "ON" pour toujours
+    luminosity: "70%",
+    alert_cold_air: "0°",
+    alert_hot_air: "60°",
+    alert_cold_water: "0°",
+    alert_hot_water: "60°",
+    alert_low_humidity: "20%",
+    alert_high_humidity: "70%",
+    alert_low_water: "25%"
+  }
 },{
-  name: "Potager 5",
-  temperature: "14°",
-  humidite: "ok"
+  id: "5",
+  description: 'description potager 1',
+  user_id: '1',
+  is_public: false,
+  environment:{
+    location:"25 rue de la paix 75001 Paris",
+    temperature_air: "32°",
+    humidity_air: "32°",
+    temperature_water: "32°",
+    sunshine_sensor: "25%",
+    reservoir_sensor:"50%",
+    is_public: false
+  },
+  settings: {
+    lighting: "8 - 20", // "Heure de début - Heure de fin"
+    watering: "8 - 20", // "Heure de début - Heure de fin" ou "ON" pour toujours
+    luminosity: "70%",
+    alert_cold_air: "0°",
+    alert_hot_air: "60°",
+    alert_cold_water: "0°",
+    alert_hot_water: "60°",
+    alert_low_humidity: "20%",
+    alert_high_humidity: "70%",
+    alert_low_water: "25%"
+  }
 }
