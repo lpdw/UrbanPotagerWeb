@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.gestion', ['ngRoute'])
+angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/gestion', {
@@ -9,11 +9,12 @@ angular.module('myApp.gestion', ['ngRoute'])
         });
     }])
 
-    .controller('GestionCtrl', [function() {
+    .controller('GestionCtrl', function($location, PotagerService, $q) {
 
         var vm = this;
         vm.title = "Page gestion";
 
+<<<<<<< HEAD
         vm.potagers = [
             {
                 title:"potager 1",
@@ -73,3 +74,10 @@ angular.module('myApp.gestion', ['ngRoute'])
             }
         ]
     }]);
+=======
+        PotagerService.resource.query(function (datas) {
+            vm.potagers = datas;
+        });
+
+    });
+>>>>>>> master

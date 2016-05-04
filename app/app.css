@@ -1,6 +1,15 @@
 /* app css stylesheet */
 *{
+<<<<<<< HEAD
   box-sizing: border-box;
+=======
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  box-sizing: border-box;
+}
+body, p{
+>>>>>>> master
   font-family: 'Montserrat', Arial, sans-serif;
 }
 .menu {
@@ -31,6 +40,10 @@
   content: "";
   padding: 0;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+>>>>>>> master
 
 .dashboard h1{
     margin: 0;
@@ -38,6 +51,7 @@
 .dash{
     background-color: #00A000;
 }
+<<<<<<< HEAD
 /* Home Page */
 .home-title{
   text-align: center;
@@ -85,3 +99,52 @@
 .home-btn:hover{
   background-color: #07F196;
 }
+=======
+=======
+/* Home Page */
+.text-center{
+  margin-top: 1%;
+  text-align: center;
+}
+.home-col-2{
+  margin: 3% auto;
+  background-color: rgba(194, 197, 199, 0.27);
+}
+p.home-col-2{
+  text-transform: uppercase;
+  color: #3a3939;
+}
+img.home-col-2:hover{
+  opacity: 0.6;
+}
+.home-btn{
+  padding: 1%;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  margin: auto;
+  display: table;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  background-color: #00B06C;
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+
+}
+.home-btn:hover{
+  background-color: #00883C;
+  border: black;
+}
+.home-desc{
+  width: 59%;
+}
+.home-desc p{
+  width: 70%;
+  margin: auto;
+  line-height: 1.7;
+  text-transform: uppercase;
+  transform: translateY(5%);
+}
+.angular-google-map-container{
+  height: 300px;
+}
+>>>>>>> Stashed changes
+>>>>>>> master

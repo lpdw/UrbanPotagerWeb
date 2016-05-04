@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
   id: "1",
   description: 'description potager 1',
@@ -131,6 +132,8 @@
   }
 }
 =======
+=======
+>>>>>>> master
 [
   {
     "id": "1",
@@ -297,5 +300,9 @@
       "alert_low_water": "25%"
     }
   }
+<<<<<<< HEAD
+]
+>>>>>>> master
+=======
 ]
 >>>>>>> master
