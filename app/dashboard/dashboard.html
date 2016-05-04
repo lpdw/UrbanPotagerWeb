@@ -1,16 +1,17 @@
-<h1> {{ dashboard.title }}</h1>
+<div class="pure-g dashboard" ng-init="dashboard.getDatas()">
+    <h1 class="pure-u-1"> {{ dashboard.title }}</h1>
+    <div class="pure-u-1">    <!-- row -->
+        <div class="pure-u-1-4 dash animated bounceIn"
+             ng-repeat="potager in dashboard.listePotagers">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="block"
-             ng-repeat="potager in dashboard.potagers">
-
-            <div class="" ng-click="dashboard.selectedPotager(potager)">
-                <h2 ng-bind="potager.name"></h2>
-                <p ng-bind="potager.temperature"></p>
-                <p ng-bind="potager.humidite"></p>
-                <button ng-click="dashboard.getDatas()">Test Récup données</button>
+            <div ng-class="" ng-click="dashboard.selectedPotager(potager)">
+                <h1>Potager {{ potager.id }}</h1>
+                <p ng-bind="potager.description" class="description"></p>
+                <p ng-bind="potager.location.address" class="info"></p>
+                <p class="info">Luminosité de {{ potager.settings.lighting.start }}h à {{ potager.settings.lighting.end }}h</p>
+                <p class="info">Hydraté de {{ potager.settings.watering.start }}h à {{ potager.settings.watering.end }}h</p>
             </div>
+
         </div>
     </div>
 </div>

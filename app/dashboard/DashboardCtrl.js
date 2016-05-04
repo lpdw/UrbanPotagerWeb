@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.dashboard', ['ngRoute'])
+angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {
@@ -12,20 +12,25 @@ angular.module('myApp.dashboard', ['ngRoute'])
         });
     }])
 
-    .controller('DashboardCtrl', ['$location',  function($location) {
+    .controller('DashboardCtrl', function($location, PotagerService, $q) {
 
         var vm = this;
-        vm.title = "Mes potagers";
+        vm.title = "MES POTAGERS";
+        vm.dash = undefined;
         
-        vm.potagers = [{
-            name: "Potager 1",
-            temperature: "32°",
-            humidite: "ok"
-        },{
-            name: "Potager 2",
-            temperature: "30°",
-            humidite:"NOK"
-        }];
+        vm.getDatas = function(){
+            return PotagerService.resource.query(function (datas) {
+                vm.listePotagers = datas;
+                console.log(vm.listePotagers);
+            });  
+        };
+
+        /*
+        vm.getDatasPromise = vm.getDatas();
+        $q.all([vm.getDatasPromise.$promise]).then(function() {
+           console.log(vm.listePotagers);
+        });*/
+
 
         /**
          * Redirige l'utilisateur sur le potager sélectionné
@@ -34,12 +39,4 @@ angular.module('myApp.dashboard', ['ngRoute'])
         vm.selectedPotager = function(p){
             $location.path('/potager/').search({param: p});
         };
-
-        vm.getDatas = function(){
-            console.log('PotagerService', PotagerService);
-            return PotagerService.resource.get(function (datas) {
-                vm.listPotagers = datas;
-            })
-        };
-
-    }]);
+    });
