@@ -1,0 +1,37 @@
+<h3 >Potager {{gestion.potager.id}}</h3>
+
+<button ng-click="gestion.deletePotager(potager)">Supprimer</button>
+
+<p>{{gestion.potager.description}}</p>
+
+<h4>Endroit</h4>
+<ul>
+    <li>Localisation: {{gestion.potager.location.address}}</li>
+    <li>public: {{gestion.potager.location.is_public}}</li>
+</ul>
+
+<h4>Informations</h4>
+<ul>
+    <li>Air: {{gestion.potager.environment.temperature_air}}</li>
+    <li>Water: {{gestion.potager.environment.temperature_water}}</li>
+    <li>Humidité: {{gestion.potager.environment.humidity_air}}</li>
+    <li>Taux de luminosité: {{gestion.potager.environment.sunshine_sensor}}</li>
+    <li>Niveau du réservoir: {{gestion.potager.environment.reservoir_sensor}}</li>
+    <li>public: {{gestion.potager.environment.is_public}}</li>
+</ul>
+
+<h4>Settings</h4>
+<ul>
+    <li>Allumage: {{gestion.potager.settings.lightning.start}} à {{gestion.potager.settings.lightning.end}}</li>
+    <li>Arrosage: {{gestion.potager.settings.watering.start}} à {{gestion.potager.settings.watering.end}}</li>
+    <li>Luminosité: {{gestion.potager.settings.luminosity}}</li>
+    <li>Air froid: {{gestion.potager.settings.alert_cold_air}}</li>
+    <li>Air chaud: {{gestion.potager.settings.alert_hot_air}}</li>
+    <li>Eau froide: {{gestion.potager.settings.alert_cold_water}}</li>
+    <li>Eau chaude: {{gestion.potager.settings.alert_hot_air}}</li>
+    <li>Humidité basse: {{gestion.potager.settings.alert_low_humidity}}</li>
+    <li>Humidité élevée: {{gestion.potager.settings.alert_high_humidity}}</li>
+    <li>Niveau d'eau bas: {{gestion.potager.settings.alert_low_water}}</li>
+</ul>
+
+<button ng-click="gestion.allPotagers()">Voir tous</button>

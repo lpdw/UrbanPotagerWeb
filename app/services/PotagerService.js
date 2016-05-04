@@ -10,7 +10,6 @@
                 method: 'GET',
                 isArray: true,
                 transformResponse: function(datas) {
-                    console.log('datas service', datas);
                     if (datas.length > 0) {
                         try {
                             datas = angular.fromJson(datas);

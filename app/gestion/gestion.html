@@ -1,16 +1,9 @@
 <h1>{{ gestion.title }}</h1>
-<ul>
-    <li ng-repeat="potager in gestion.potagers">
 
-        <h3>{{potager.title}}</h3>
-        <p>{{potager.description}}</p>
-        <p>Place: {{potager.place}}</p>
-        <p>Owner: {{potager.owner}}</p>
-        <h5>Plants:</h5>
-        <ul>
-            <li ng-repeat="plant in potager.plants">
-                <h6>{{plant.title}}</h6>
-            </li>
-        </ul>
-    </li>
-</ul>
+<button ng-click="gestion.newPotager()">Ajouter un potager</button>
+
+<newPotager ng-if="gestion.newPotagerForm"></newPotager>
+
+<potagers ng-if="gestion.potagers"></potagers>
+
+<potager ng-if="gestion.potager"></potager>
