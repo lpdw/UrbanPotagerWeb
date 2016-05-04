@@ -1,107 +1,58 @@
 /* app css stylesheet */
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  padding: 0 0 0.5em;
-  margin-bottom: 0;
+body{
+    background-color: #fcfcfc;
+    background: url("assets/images/fond.png");
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-.menu:before {
-  content: "[";
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-.menu:after {
-  content: "]";
+.menu{
+    position: relative;
+    overflow: auto;
+    height: 64px;
+    padding: 0 8px;
+}
+.menu .logo{
+    height: 100%;
+    padding: 8px;
+    float: left;
+}
+.menu .logo img{
+    height: 100%;
 }
 
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:first-child:before {
-  content: "";
-  padding: 0;
-}
-
-/*********** Dashboard **********/
-.dashboard{
-    background-color: #e7e7e7;
-    color: #154F29;
-    font-family: 'Montserrat', sans-serif !important;
-}
-
-.dashboard h1{
+.menu ul{
+    position: absolute;
+    right: 16px;
+    bottom: 5px;
+    list-style: none;
+    padding: 0;
     margin: 0;
-    text-align: center;
-    color: #686868;
-
+    font-size: 24px;
+    font-family: "Roboto";
 }
 
-.description{
-    text-align: center;
-    margin-top: 0;
-    color: #686868;
+.menu ul > li {
+    display: inline;
+    text-transform: uppercase;
+    margin: 0 8px;
 }
-
-.dash{
-    background-color: #00A000;
-    margin: 2em;
-    margin-right: 4em;
-    cursor: pointer;
+.menu ul > li > a {
+    text-decoration: none;
+    color: #58585a;
+    transition: color 0.2s;
 }
-
-/* Home Page */
-.home-title{
-  text-align: center;
-  text-transform: uppercase;
-  font-family: 'Montserrat', Arial, sans-serif!important;
-}
-.home-container{
-  width: 80%;
-  margin: auto;
-}
-.home-desc{
-  text-transform: uppercase;
-  position: absolute;
-  top: 43%;
-  left: 45%;
-  transform: translateY(-50%);
-  width: 47%;
-  line-height: 1.7;
-}
-.home-1-2{
-  width: 49%;
-  position: relative;
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
-}
-.home-1-2:hover{
-  opacity: 0.6;
-}
-.home-img{
-  width: 90%;
-  margin: 0 auto;
-}
-.home-btn{
-  width: 10%;
-  margin: 5% auto;
-  display: block;
-  padding: 20px;
-  text-align: center;
-  background-color: #00b06c;
-  color: #fff;
-  font-family: 'Montserrat';
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
-}
-.home-btn:hover{
-  background-color: #07F196;
+.menu ul > li > a:hover {
+color: #5bb05b;
 }
 
 .padding{
@@ -110,43 +61,63 @@
 
 /*********** Dashboard **********/
 .dashboard{
-    background-color: #e7e7e7;
     color: #154F29;
     font-family: 'Montserrat', sans-serif !important;
+}
+.dashboard .dashboard-content{
+    position: relative;
+    left: 50%;
+    width: 1000px;
+    transform: translateX(-50%);
 }
 .dashboard h1{
     margin: 0;
     text-align: center;
     color: #686868;
-
 }
 
 .description{
     text-align: center;
     margin-top: 0;
-    color: #686868;
+    color: #FFF;
 }
 
 .dash{
-    background-color: #57b157;
-    margin: 2em;
-    margin-right: 4em;
+    width: calc((100%/3) - 20px);
+    margin: 10px;
+    float: left;
+    background-color: #5bb05b;
     cursor: pointer;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
+    letter-spacing: normal;
+    border: 1px solid #dedcda;
 }
+.dash .dash-img{
+    width: 100%;
+    overflow: hidden;
+    height: 200px;
+    background-color: #FFF;
 
-.info{
-    padding-left: 2em;
 }
-
-.dash:hover{
-  /*  -webkit-animation: bounceIn 1s;
+.dash .dash-img img{
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.dash h1{
+    color: #FFFFFF;
+}
+/*.dash:hover{
+  !*  -webkit-animation: bounceIn 1s;
     -webkit-animation-duration: 2s;
-    -webkit-animation-delay: 1s;*/
-    animation: bounceIn 1s;
-}
+    -webkit-animation-delay: 1s;*!
+    animation: bounceIn 3s infinite;
+}*/
 
 .info{
-    padding-left: 2em;
 }
 /*********** Dashboard **********/
 /*********** Potager sélectionné **********/

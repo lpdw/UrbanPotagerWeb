@@ -16,6 +16,7 @@
   <title>Urban Potager</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,300,900' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -37,12 +38,15 @@
 
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/home">Home</a></li>
-    <li><a href="#/dashboard">Dashboard</a></li>
-    <li><a href="#/inscription">Inscription</a></li>
-    <li><a href="#/gestion">Gestion</a></li>
-  </ul>
+  <div class="menu">
+    <div class="logo"><img src="assets/images/Logo.svg"></div>
+    <ul>
+      <li><a href="#/home">Home</a></li>
+      <li><a href="#/dashboard">Dashboard</a></li>
+      <li><a href="#/inscription">Inscription</a></li>
+      <li><a href="#/gestion">Gestion</a></li>
+    </ul>
+  </div>
 
   <div ng-view>
 

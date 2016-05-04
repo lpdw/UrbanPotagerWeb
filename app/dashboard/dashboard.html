@@ -1,8 +1,11 @@
 <div class="pure-g dashboard" ng-init="dashboard.getDatas()">
     <h1 class="pure-u-1"> {{ dashboard.title }}</h1>
-    <div class="pure-u-1">    <!-- row -->
-        <div class="pure-u-1-4 dash animated bounceInDown"
-             ng-repeat="potager in dashboard.listePotagers">
+    <div class="dashboard-content">    <!-- row -->
+        <div class="dash animated bounceIn" ng-repeat="potager in dashboard.listePotagers">
+
+            <div class="dash-img">
+                <img src="assets/images/pro.png">
+            </div>
 
             <div ng-class="" ng-click="dashboard.selectedPotager(potager)">
                 <h1>Potager {{ potager.id }}</h1>
@@ -15,10 +18,3 @@
         </div>
     </div>
 </div>
-
-<p>
-    <input type="button" value="set" ng-click="myCssVar='css-class'">
-    <input type="button" value="clear" ng-click="myCssVar=''">
-    <br>
-    <span ng-class="myCssVar">CSS-Animated Text</span>
-</p>
