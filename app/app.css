@@ -30,15 +30,23 @@
 }
 
 /*********** Dashboard **********/
+.dashboard{
+    background-color: #e7e7e7;
+    color: #154F29;
+    font-family: 'Montserrat', sans-serif !important;
+}
 
 .dashboard h1{
     margin: 0;
     text-align: center;
+    color: #686868;
+
 }
 
 .description{
     text-align: center;
     margin-top: 0;
+    color: #686868;
 }
 
 .dash{
@@ -137,4 +145,7 @@
     animation: bounceIn 1s;
 }
 
+.info{
+    padding-left: 2em;
+}
 /*********** Dashboard **********/
