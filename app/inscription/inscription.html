@@ -1,1 +1,34 @@
-<h1>{{ inscription.title }}</h1>
+<div class="pure-g">
+    <div class="pure-u-1-5"></div>
+    <div class="pure-u-3-5">
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <h1>{{ inscription.title }}</h1>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1-2 padding">
+                <form class="pure-form" ng-submit="inscription.connexion(cData)">
+                    <fieldset class="pure-group">
+                        <legend>Connexion</legend>
+                        <input type="text" class="pure-input-1" placeholder="Username" ng-model="cData.pseudo">
+                        <input type="text" class="pure-input-1" placeholder="Password" ng-model="cData.password">
+                    </fieldset>
+                    <button type="submit" class="pure-button pure-input-1">Connexion</button>
+                </form>
+            </div>
+            <div class="pure-u-1-2 padding">
+                <form class="pure-form" ng-submit="inscription.inscription(iData)">
+                    <fieldset class="pure-group">
+                        <legend>Inscription</legend>
+                        <input type="text" class="pure-input-1" placeholder="Pseudo" ng-model="iData.pseudo">
+                        <input type="password" class="pure-input-1" placeholder="Mot de passe" ng-model="iData.password">
+                        <input type="email" class="pure-input-1" placeholder="Email" ng-model="iData.email">
+                    </fieldset>
+                    <button type="submit" class="pure-button pure-input-1">Inscription</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="pure-u-1-5"></div>
+</div>

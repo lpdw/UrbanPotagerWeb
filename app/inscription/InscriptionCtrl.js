@@ -10,7 +10,18 @@ angular.module('myApp.inscription', ['ngRoute'])
     }])
 
     .controller('InscriptionCtrl', [function() {
-        var vm = this;
+        this.title = "Page d'inscription";
 
-        vm.title = "Page d'inscription";
+        this.inscription = function(data){
+
+            console.log(data);
+
+        };
+
+        this.connexion = function(data){
+
+            console.log(data);
+
+        };
+
     }]);
