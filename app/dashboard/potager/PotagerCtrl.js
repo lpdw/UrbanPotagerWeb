@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function PotagerCtrl($location, $uibModal, $scope, ConfirmationTypes) {
+    function PotagerCtrl($location, $uibModal, ConfirmationTypes) {
 
         var vm = this;
 
@@ -10,11 +10,8 @@
         vm.title = "Potager:" + vm.potager.id;
 
         vm.onEditClick = function () {
-            console.log('Modif')
+            $location.path('/potager/:id').search({param: vm.potager.id});
         };
-
-    
-
 
 
         /**
@@ -25,7 +22,7 @@
                 templateUrl: 'partials/confirm.html',
                 controller: 'ConfirmationCtrl as confirm',
                 backdrop: 'static',
-                windowClass: 'confirm-modal-class',
+                size: 'sm',
                 resolve: {
                     confirmOptions: function () {
                         return {

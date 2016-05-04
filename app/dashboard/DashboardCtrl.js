@@ -9,6 +9,9 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui
         }).when('/potager', {
             templateUrl: 'dashboard/potager/potager.html',
             controller: 'PotagerCtrl as potager'
+        }).when('/potager/:id', {
+            templateUrl: 'dashboard/potager/editGarden.html',
+            controller: 'EditGardenCtrl as editGarden'
         });
     }])
 
@@ -18,19 +21,15 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui
         vm.title = "MES POTAGERS";
         vm.dash = undefined;
 
+        /**
+         * Appel service pour récupérer les données
+         * @returns {*|{method, isArray, transformResponse}}
+         */
         vm.getDatas = function(){
             return PotagerService.resource.query(function (datas) {
                 vm.listePotagers = datas;
-                console.log(vm.listePotagers);
-            });  
+            });
         };
-
-        /*
-        vm.getDatasPromise = vm.getDatas();
-        $q.all([vm.getDatasPromise.$promise]).then(function() {
-           console.log(vm.listePotagers);
-        });*/
-
 
         /**
          * Redirige l'utilisateur sur le potager sélectionné
