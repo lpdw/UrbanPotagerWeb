@@ -1,5 +1,8 @@
 /* app css stylesheet */
-
+*{
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -34,4 +37,51 @@
 }
 .dash{
     background-color: #00A000;
+}
+/* Home Page */
+.home-title{
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', Arial, sans-serif!important;
+}
+.home-container{
+  width: 80%;
+  margin: auto;
+}
+.home-desc{
+  text-transform: uppercase;
+  position: absolute;
+  top: 43%;
+  left: 45%;
+  transform: translateY(-50%);
+  width: 47%;
+  line-height: 1.7;
+}
+.home-1-2{
+  width: 49%;
+  position: relative;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.home-1-2:hover{
+  opacity: 0.6;
+}
+.home-img{
+  width: 90%;
+  margin: 0 auto;
+}
+.home-btn{
+  width: 10%;
+  margin: 5% auto;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background-color: #00b06c;
+  color: #fff;
+  font-family: 'Montserrat';
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+.home-btn:hover{
+  background-color: #07F196;
 }

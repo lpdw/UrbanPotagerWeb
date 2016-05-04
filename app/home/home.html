@@ -1,1 +1,16 @@
-<h1>{{ home.title }}</h1>
+<div class="pure-g">
+    <h1 class="pure-u-1 home-title"> {{ home.title }}</h1>
+    <div class="pure-u-1 home-container">    <!-- row -->
+      <div class="pure-u-1-2 home-1-2">
+          <img ng-src="{{ home.imageUrl }}" alt="" class="pure-img home-img">
+          <p class="home-desc">{{ home.description }}</p>
+      </div>
+      <div class="pure-u-1-2 home-1-2">
+        <img ng-src="{{ home.imageUrl1 }}" alt="" class="pure-img home-img">
+        <p class="home-desc">{{ home.description1 }}</p>
+      </div>
+    </div>
+    <div class="pure-u-1">
+      <button class="button-xlarge pure-button home-btn">NOUS REJOINDRE</button>
+    </div>
+</div>
