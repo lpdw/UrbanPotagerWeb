@@ -3,8 +3,8 @@
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
   padding: 0 0 0.5em;
+  margin-bottom: 0;
 }
 
 .menu:before {
@@ -30,27 +30,38 @@
 }
 
 /*********** Dashboard **********/
+.dashboard{
+    background-color: #e7e7e7;
+    color: #154F29;
+    font-family: 'Montserrat', sans-serif !important;
+}
 .dashboard h1{
     margin: 0;
     text-align: center;
+    color: #686868;
+
 }
 
 .description{
     text-align: center;
     margin-top: 0;
+    color: #686868;
 }
 
 .dash{
-    background-color: #00A000;
+    background-color: #57b157;
     margin: 2em;
     margin-right: 4em;
     cursor: pointer;
 }
-.dash:hover{
-  /*  -webkit-animation: bounceIn 1s;
+/*.dash:hover{
+  !*  -webkit-animation: bounceIn 1s;
     -webkit-animation-duration: 2s;
-    -webkit-animation-delay: 1s;*/
-    animation: bounceIn 1s;
-}
+    -webkit-animation-delay: 1s;*!
+    animation: bounceIn 3s infinite;
+}*/
 
+.info{
+    padding-left: 2em;
+}
 /*********** Dashboard **********/

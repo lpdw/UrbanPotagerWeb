@@ -3,9 +3,11 @@
     "id": "1",
     "description": "description potager 1",
     "user_id": "1",
-    "is_public": false,
+    "location":{
+      "address": "25 rue de la paix 75001 Paris",
+      "is_public": false
+    },
     "environment":{
-      "location":"25 rue de la paix 75001 Paris",
       "temperature_air": "32°",
       "humidity_air": "32°",
       "temperature_water": "32°",
@@ -37,8 +39,11 @@
     "description": "description potager 2",
     "user_id": "1",
     "is_public": false,
+    "location":{
+      "address": "25 rue de la paix 75001 Paris",
+      "is_public": false
+    },
     "environment":{
-      "location":"25 rue de la paix 75001 Paris",
       "temperature_air": "32°",
       "humidity_air": "32°",
       "temperature_water": "32°",
@@ -70,8 +75,11 @@
     "description": "description potager 3",
     "user_id": "1",
     "is_public": false,
+    "location":{
+      "address": "25 rue de la paix 75001 Paris",
+      "is_public": false
+    },
     "environment":{
-      "location":"25 rue de la paix 75001 Paris",
       "temperature_air": "32°",
       "humidity_air": "32°",
       "temperature_water": "32°",
@@ -103,8 +111,11 @@
     "description": "description potager 4",
     "user_id": "1",
     "is_public": false,
+    "location":{
+      "address": "25 rue de la paix 75001 Paris",
+      "is_public": false
+    },
     "environment":{
-      "location":"25 rue de la paix 75001 Paris",
       "temperature_air": "32°",
       "humidity_air": "32°",
       "temperature_water": "32°",
@@ -136,8 +147,11 @@
     "description": "description potager 5",
     "user_id": "1",
     "is_public": false,
+    "location":{
+      "address": "25 rue de la paix 75001 Paris",
+      "is_public": false
+    },
     "environment":{
-      "location":"25 rue de la paix 75001 Paris",
       "temperature_air": "32°",
       "humidity_air": "32°",
       "temperature_water": "32°",
