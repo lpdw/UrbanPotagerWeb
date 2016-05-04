@@ -12,7 +12,8 @@
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
     "lodash": "^4.11.2",
-    "angular-resource": "=1.4.9"
+    "angular-resource": "=1.4.9",
+    "angular-bootstrap": "^0.12.2"
   },
   "resolutions": {
     "angular": "1.4.10"

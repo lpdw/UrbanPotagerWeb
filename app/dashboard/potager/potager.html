@@ -1,8 +1,29 @@
-<h1>{{ potager.title }}</h1>
+<div class="pure-g liveDatas">
+    <div class="pure-u-1">
+        <button class="pure-button btn pull-right" ng-click="potager.onEditClick()">
+            <i class="fa fa-pencil-square-o"></i>
+            Modifier
+        </button>
+        <button class="button-warning pure-button btn pull-right" ng-click="potager.confirmDelete()">
+            <i class="fa fa-trash"></i>
+            Supprimer
+        </button>
+    </div>
 
 
-<p>Température air: {{ potager.potager.environment.temperature_air }}</p>
-<p>Humidité air: {{ potager.potager.environment.humidity_air }}</p>
-<p>Température eau: {{ potager.potager.environment.temperature_water }}</p>
-<p>Luminosité: {{ potager.potager.environment.sunshine_sensor }}</p>
-<p>Réservoir: {{ potager.potager.environment.reservoir_sensor }}</p>
+
+    <h1 class="pure-u-1"> {{ potager.title }}</h1>
+    <div class="pure-u-1">
+        <p class="pure-u-1-5">Température air: {{ potager.potager.environment.temperature_air }}</p>
+        <p class="pure-u-1-5">Humidité air: {{ potager.potager.environment.humidity_air }}</p>
+    </div>
+
+    <div class="pure-u-1">
+        <p class="pure-u-1-5">Température eau: {{ potager.potager.environment.temperature_water }}</p>
+        <p class="pure-u-1-5">Luminosité: {{ potager.potager.environment.sunshine_sensor }}</p>
+    </div>
+    <div class="pure-u-1">
+        <p class="pure-u-1-5">Réservoir: {{ potager.potager.environment.reservoir_sensor }}</p>
+    </div>
+
+</div>

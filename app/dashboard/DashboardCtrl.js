@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource'])
+angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui.bootstrap', 'ngAnimate'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {

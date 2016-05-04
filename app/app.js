@@ -4,6 +4,8 @@
 angular.module('myApp', [
   'ngRoute',
   'ngResource',
+  'ngAnimate',
+  'ui.bootstrap',
   'myApp.services',
   'myApp.home',
   'myApp.inscription',

@@ -149,3 +149,18 @@
     padding-left: 2em;
 }
 /*********** Dashboard **********/
+/*********** Potager sélectionné **********/
+
+.liveDatas{
+    text-align: center;
+}
+
+.btn{
+    margin: 0.5em;
+}
+
+.button-warning {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+/*********** Potager sélectionné **********/
