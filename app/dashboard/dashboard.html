@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--
 <div class="container-fluid">
     <div class="row">
@@ -26,6 +27,22 @@
                 <p ng-bind="potager.humidite"></p>
             </div>
 
+=======
+<div class="pure-g dashboard" ng-init="dashboard.getDatas()">
+    <h1 class="pure-u-1"> {{ dashboard.title }}</h1>
+    <div class="pure-u-1">    <!-- row -->
+        <div class="pure-u-1-4 dash animated bounceIn"
+             ng-repeat="potager in dashboard.listePotagers">
+
+            <div ng-class="" ng-click="dashboard.selectedPotager(potager)">
+                <h1>Potager {{ potager.id }}</h1>
+                <p ng-bind="potager.description" class="description"></p>
+                <p ng-bind="potager.location.address" class="info"></p>
+                <p class="info">Luminosité de {{ potager.settings.lighting.start }}h à {{ potager.settings.lighting.end }}h</p>
+                <p class="info">Hydraté de {{ potager.settings.watering.start }}h à {{ potager.settings.watering.end }}h</p>
+            </div>
+
+>>>>>>> origin/Dev
         </div>
     </div>
 </div>

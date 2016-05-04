@@ -15,6 +15,7 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
         vm.title = "Page gestion";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         vm.potagers = [
             {
                 title:"potager 1",
@@ -75,9 +76,15 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
         ]
     }]);
 =======
+=======
+>>>>>>> origin/Dev
         PotagerService.resource.query(function (datas) {
             vm.potagers = datas;
         });
 
+<<<<<<< HEAD
     });
 >>>>>>> master
+=======
+    });
+>>>>>>> origin/Dev

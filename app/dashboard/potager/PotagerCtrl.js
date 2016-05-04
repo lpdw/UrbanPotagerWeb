@@ -5,8 +5,9 @@
 
         var vm = this;
 
+        //Récupération des paramètres de l'url
         vm.potager = $location.search().param;
-        vm.title = "Potager:" + vm.potager.name;
+        vm.title = "Potager:" + vm.potager.id;
 
 
     }

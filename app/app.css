@@ -1,22 +1,10 @@
 /* app css stylesheet */
-*{
-<<<<<<< HEAD
-  box-sizing: border-box;
-=======
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
 
-  box-sizing: border-box;
-}
-body, p{
->>>>>>> master
-  font-family: 'Montserrat', Arial, sans-serif;
-}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
   padding: 0 0 0.5em;
+  margin-bottom: 0;
 }
 
 .menu:before {
@@ -36,14 +24,11 @@ body, p{
   padding-right: 0.3em;
 }
 
-.menu > li:nth-child(1):before {
+.menu > li:first-child:before {
   content: "";
   padding: 0;
 }
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
->>>>>>> master
+
 
 .dashboard h1{
     margin: 0;
@@ -51,7 +36,7 @@ body, p{
 .dash{
     background-color: #00A000;
 }
-<<<<<<< HEAD
+
 /* Home Page */
 .home-title{
   text-align: center;
@@ -99,52 +84,37 @@ body, p{
 .home-btn:hover{
   background-color: #07F196;
 }
-=======
-=======
-/* Home Page */
-.text-center{
-  margin-top: 1%;
-  text-align: center;
+
+.padding{
+  padding: 16px;
 }
-.home-col-2{
-  margin: 3% auto;
-  background-color: rgba(194, 197, 199, 0.27);
+
+/*********** Dashboard **********/
+.dashboard{
+    background-color: #e7e7e7;
+    color: #154F29;
+    font-family: 'Montserrat', sans-serif !important;
 }
-p.home-col-2{
-  text-transform: uppercase;
-  color: #3a3939;
-}
-img.home-col-2:hover{
-  opacity: 0.6;
-}
-.home-btn{
-  padding: 1%;
-  text-transform: uppercase;
-  font-size: 1.4em;
-  margin: auto;
-  display: table;
-  border: 1px solid rgba(0, 0, 0, 0.22);
-  background-color: #00B06C;
-  color: #fff;
-  font-family: 'Montserrat', Arial, sans-serif;
+.dashboard h1{
+    margin: 0;
+    text-align: center;
+    color: #686868;
 
 }
-.home-btn:hover{
-  background-color: #00883C;
-  border: black;
+
+.description{
+    text-align: center;
+    margin-top: 0;
+    color: #686868;
 }
-.home-desc{
-  width: 59%;
+
+.dash{
+    background-color: #57b157;
+    margin: 2em;
+    margin-right: 4em;
+    cursor: pointer;
 }
-.home-desc p{
-  width: 70%;
-  margin: auto;
-  line-height: 1.7;
-  text-transform: uppercase;
-  transform: translateY(5%);
+
+.info{
+    padding-left: 2em;
 }
-.angular-google-map-container{
-  height: 300px;
-}
->>>>>>> Stashed changes
->>>>>>> master

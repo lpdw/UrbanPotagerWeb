@@ -15,12 +15,20 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource'])
     .controller('DashboardCtrl', function($location, PotagerService, $q) {
 
         var vm = this;
+<<<<<<< HEAD
         vm.title = "Mes potagers";
+=======
+        vm.title = "MES POTAGERS";
+>>>>>>> origin/Dev
         vm.dash = undefined;
         
         vm.getDatas = function(){
             return PotagerService.resource.query(function (datas) {
                 vm.listePotagers = datas;
+<<<<<<< HEAD
+=======
+                console.log(vm.listePotagers);
+>>>>>>> origin/Dev
             });  
         };
 
