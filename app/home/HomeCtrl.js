@@ -9,7 +9,10 @@ angular.module('myApp.home', ['ngRoute', 'leaflet-directive'])
         });
     }])
 
-    .controller('HomeCtrl', [ '$scope', function($scope) {
+    .controller('HomeCtrl', [ '$location', '$scope', function($location, $scope) {
+
+
+
             angular.extend($scope, {
                 paris: {
                     lat: 48.51,
@@ -52,6 +55,7 @@ angular.module('myApp.home', ['ngRoute', 'leaflet-directive'])
             });
 
         var vm = this;
+        var path = $location.path();
 
         vm.main_title = "CONCEPT";
         vm.conceptImageUrl = "./assets/images/home-concept.png";
@@ -76,5 +80,8 @@ angular.module('myApp.home', ['ngRoute', 'leaflet-directive'])
         vm.featureImageUrl5 = "./assets/images/home-feature5.jpg";
         vm.description5 = "Monitor and adjust your indoor garden settings, and receive real-time notifications and advices";
 
-        vm.button = "NOUS REJOINDRE"
+        vm.button = "NOUS REJOINDRE";
+        vm.login = function(){
+            $location.path('/inscription/');
+        };
     }]);
