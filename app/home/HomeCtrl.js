@@ -14,8 +14,40 @@ angular.module('myApp.home', ['ngRoute', 'leaflet-directive'])
                 paris: {
                     lat: 48.51,
                     lng: 2.20,
-                    zoom: 7
-                }
+                    zoom: 8
+                },
+                markers: {}
+            });
+
+            $scope.addMarkers = function() {
+                angular.extend($scope, {
+                    markers: {
+                        m1: {
+                            lat: 48.5,
+                            lng: 2.18,
+                            message: "Heyyyyyy",
+                        },
+                        m2: {
+                            lat: 48.8,
+                            lng: 2.15,
+                            focus: true,
+                            message: "Coucou",
+                            draggable: true
+                        }
+                    }
+                });
+            };
+
+            $scope.removeMarkers = function() {
+                $scope.markers = {};
+            }
+
+            $scope.addMarkers();
+
+
+            $scope.$on("leafletDirectiveMarker.dragend", function(event, args){
+                $scope.position.lat = args.model.lat;
+                $scope.position.lng = args.model.lng;
             });
 
         var vm = this;
