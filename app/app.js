@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+  'leaflet-directive',
   'ngResource',
   'ngAnimate',
   'ui.bootstrap',
