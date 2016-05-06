@@ -1,16 +1,26 @@
-<div class="pure-g">
-    <h1 class="pure-u-1 home-title"> {{ home.title }}</h1>
-    <div class="pure-u-1 home-container">    <!-- row -->
-      <div class="pure-u-1-2 home-1-2">
-          <img ng-src="{{ home.imageUrl }}" alt="" class="pure-img home-img">
+<div class="container">
+    <h1 class="col-md-12 text-center"> {{ home.title }}</h1>
+    <div class="row home-feature">    <!-- row -->
+      <div class="col-md-5 col-sm-12 col-xs-12 img-container">
+        <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
+          <img ng-src="{{ home.imageUrl }}" alt="" class="img-responsive home-img">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel">
           <p class="home-desc">{{ home.description }}</p>
+        </div>
       </div>
-      <div class="pure-u-1-2 home-1-2">
-        <img ng-src="{{ home.imageUrl1 }}" alt="" class="pure-img home-img">
-        <p class="home-desc">{{ home.description1 }}</p>
+      <div class="col-md-5 col-md-offset-2 col-sm-12 col-xs-12 img-container">
+        <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
+          <img ng-src="{{ home.imageUrl1 }}" alt="" class="img-responsive home-img">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel">
+          <p class="home-desc">{{ home.description1 }}</p>
+        </div>
       </div>
     </div>
-    <div class="pure-u-1">
-      <button class="button-xlarge pure-button home-btn">NOUS REJOINDRE</button>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn-default btn-lg home-btn center-block">NOUS REJOINDRE</button>
+      </div>
     </div>
 </div>
