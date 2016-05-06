@@ -1,22 +1,75 @@
 <leaflet lf-center="paris" markers="markers" height="480px" width="100%"></leaflet>
-<div class="container">
+<div class="container-fluid concept-container">
+  <div class="container concept-content">
+    <h1 class="col-md-12 text-center"> {{ home.main_title }}</h1>
+    <div class="col-md-5">
+      <img ng-src="{{ home.conceptImageUrl }}" alt="" class="img-responsive home-img">
+    </div>
+    <div class="col-md-7">
+      <p>Urban Potager is an open-source automated indoor garden developed by UrbanaPlant, in partnership with the FacLab and LetMeKnow. The goal of this project is to design and create a compact garden which can be installed in any household that doesn't have an outdoor space for growing plants (garden, terrace, balcony) with little sunlight exposure.</p>
+    </div>
+  </div>
+</div>
 
-    <h1 class="col-md-12 text-center"> {{ home.title }}</h1>
+<div class="container">
+    <h1 class="col-md-12 text-center"> {{ home.features_title }}</h1>
     <div class="row home-feature">    <!-- row -->
       <div class="col-md-5 col-sm-12 col-xs-12 img-container">
         <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
-          <img ng-src="{{ home.imageUrl }}" alt="" class="img-responsive home-img">
+          <img ng-src="{{ home.featureImageUrl }}" alt="" class="img-responsive home-img">
         </div>
-        <div class="col-md-7 col-sm-7 col-xs-7 no-rel">
-          <p class="home-desc">{{ home.description }}</p>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel home-desc">
+          <h2>{{ home.featureTitle }}</h2>
+          <p>{{ home.description }}</p>
         </div>
       </div>
       <div class="col-md-5 col-md-offset-2 col-sm-12 col-xs-12 img-container">
         <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
-          <img ng-src="{{ home.imageUrl1 }}" alt="" class="img-responsive home-img">
+          <img ng-src="{{ home.featureImageUrl1 }}" alt="" class="img-responsive home-img">
         </div>
-        <div class="col-md-7 col-sm-7 col-xs-7 no-rel">
-          <p class="home-desc">{{ home.description1 }}</p>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel home-desc">
+          <h2>{{ home.featureTitle1 }}</h2>
+          <p>{{ home.description1 }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row home-feature">    <!-- row -->
+      <div class="col-md-5 col-sm-12 col-xs-12 img-container">
+        <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
+          <img ng-src="{{ home.featureImageUrl2 }}" alt="" class="img-responsive home-img">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel home-desc">
+          <h2>{{ home.featureTitle2 }}</h2>
+          <p>{{ home.description2 }}</p>
+        </div>
+      </div>
+      <div class="col-md-5 col-md-offset-2 col-sm-12 col-xs-12 img-container">
+        <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
+          <img ng-src="{{ home.featureImageUrl3 }}" alt="" class="img-responsive home-img">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel home-desc">
+          <h2>{{ home.featureTitle3 }}</h2>
+          <p>{{ home.description3 }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row home-feature">    <!-- row -->
+      <div class="col-md-5 col-sm-12 col-xs-12 img-container">
+        <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
+          <img ng-src="{{ home.featureImageUrl4 }}" alt="" class="img-responsive home-img">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel home-desc">
+          <h2>{{ home.featureTitle4 }}</h2>
+          <p>{{ home.description4 }}</p>
+        </div>
+      </div>
+      <div class="col-md-5 col-md-offset-2 col-sm-12 col-xs-12 img-container">
+        <div class="col-md-5 col-sm-4 col-xs-4 home-img-content">
+          <img ng-src="{{ home.featureImageUrl5 }}" alt="" class="img-responsive home-img">
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-7 no-rel home-desc">
+          <h2>{{ home.featureTitle5 }}</h2>
+          <p>{{ home.description5 }}</p>
         </div>
       </div>
     </div>

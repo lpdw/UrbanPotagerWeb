@@ -26,6 +26,7 @@ angular.module('myApp.home', ['ngRoute', 'leaflet-directive'])
                             lat: 48.5,
                             lng: 2.18,
                             message: "Heyyyyyy",
+                            iconUrl: 'img/leaf-green.png',
                         },
                         m2: {
                             lat: 48.8,
@@ -52,10 +53,28 @@ angular.module('myApp.home', ['ngRoute', 'leaflet-directive'])
 
         var vm = this;
 
-        vm.title = "Bienvenue sur UrbanPotager";
-        vm.imageUrl = "./assets/images/home-feature.png";
-        vm.description = "Liquorice biscuit dragée. Ice cream ice cream brownie. Tart jelly beans bonbon cotton candy pastry tiramisu. Brownie chocolate bar chocolate cake.";
-        vm.imageUrl1 = "./assets/images/home-feature1.png";
-        vm.description1 = "Tiramisu cookie oat cake muffin. Pudding marshmallow chupa chups liquorice marzipan chocolate cake soufflé. Sesame snaps soufflé liquorice ice cream croissant sweet fruitcake.";
+        vm.main_title = "CONCEPT";
+        vm.conceptImageUrl = "./assets/images/home-concept.png";
+        vm.features_title = "FEATURES";
+
+        vm.featureTitle = "SELF WATERING";
+        vm.featureImageUrl = "./assets/images/home-feature.png";
+        vm.description = "No more over watering or under watering. Urban Potager will manage it for you";
+        vm.featureTitle1 = "ENVIRONMENT";
+        vm.featureImageUrl1 = "./assets/images/home-feature1.png";
+        vm.description1 = "Control climatic conditions (temperature, humidity, air quality) in real-time";
+        vm.featureTitle2 = "LIGHT CONTROL";
+        vm.featureImageUrl2 = "./assets/images/home-feature2.png";
+        vm.description2 = "Activate additional LED grow lights only when your place is too dark, or during winter-time";
+        vm.featureTitle3 = "LOW CONSUMPTION";
+        vm.featureImageUrl3 = "./assets/images/home-feature3.jpg";
+        vm.description3 = "Urban Potager is a low voltage and low electric consumption indoor garden";
+        vm.featureTitle4 = "MULTIPLE VARIETIES";
+        vm.featureImageUrl4 = "./assets/images/home-feature4.jpg";
+        vm.description4 = "Grow your own fresh herbs, cherry tomatoes, chili peppers, strawberries and even flowers";
+        vm.featureTitle5 = "MOBILE APPLICATION";
+        vm.featureImageUrl5 = "./assets/images/home-feature5.jpg";
+        vm.description5 = "Monitor and adjust your indoor garden settings, and receive real-time notifications and advices";
+
         vm.button = "NOUS REJOINDRE"
     }]);
