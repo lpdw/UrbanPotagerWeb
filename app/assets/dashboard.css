@@ -11,9 +11,13 @@
     transform: translateX(-50%);
 }
 .dashboard h1{
-    margin: 0;
+    margin: 0.7em;
     text-align: center;
     color: #686868;
+}
+
+.dashboard p{
+    padding-left: 0.5em;
 }
 
 .description{
@@ -37,12 +41,12 @@
 .dash .dash-img{
     width: 100%;
     overflow: hidden;
-    height: 200px;
+    height: 150px;
     background-color: #FFF;
 
 }
 .dash .dash-img img{
-    height: 200px;
+    height: 150px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -50,12 +54,6 @@
 .dash h1{
     color: #FFFFFF;
 }
-/*.dash:hover{
-  !*  -webkit-animation: bounceIn 1s;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-delay: 1s;*!
-    animation: bounceIn 3s infinite;
-}*/
 
 .info{
 }
@@ -74,6 +72,14 @@
     background: rgb(202, 60, 60); /* this is a maroon */
 }
 
+.chartContainer{
+    margin: 2em;
+}
+
+.chartContainer canvas{
+    width: 100%;
+    height: 450px;
+}
 /*********** Potager sélectionné **********/
 /*********** Edition potager **********/
 

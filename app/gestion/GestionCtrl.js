@@ -16,6 +16,9 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
         var path = $location.path();
         vm.title = "Page gestion";
 
+        console.log('test récupération du potager', $location.search());
+
+
         //Récupération des paramètres de l'url
         var params = $location.search();
 

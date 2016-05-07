@@ -7,6 +7,7 @@ angular.module('myApp', [
   'ngResource',
   'ngAnimate',
   'ui.bootstrap',
+  'chart.js',
   'myApp.services',
   'myApp.home',
   'myApp.inscription',

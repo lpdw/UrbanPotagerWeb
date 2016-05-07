@@ -4,10 +4,6 @@
             <i class="fa fa-pencil-square-o"></i>
             Modifier
         </button>
-        <button class="button-warning pure-button btn pull-right" ng-click="potager.confirmDelete()">
-            <i class="fa fa-trash"></i>
-            Supprimer
-        </button>
     </div>
 
 
@@ -23,6 +19,15 @@
     </div>
     <div class="pure-u-1">
         <p class="pure-u-1-5">Réservoir: {{ potager.potager.environment.reservoir_sensor }}</p>
+    </div>
+
+    <h1 class="pure-u-1">Historique</h1>
+
+    <div class="pure-u-1 chartContainer">
+        <canvas id="line" class="chart chart-line" chart-data="potager.data"
+                chart-labels="potager.labels" chart-legend="true" chart-series="potager.series"
+                chart-click="potager.onClick" >
+        </canvas>
     </div>
 
 </div>
