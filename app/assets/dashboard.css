@@ -43,6 +43,7 @@
     overflow: hidden;
     height: 150px;
     background-color: #FFF;
+    cursor: default;
 
 }
 .dash .dash-img img{
@@ -55,9 +56,10 @@
     color: #FFFFFF;
 }
 
-.info{
+.hvr-sweep-to-right:before{
+    background: #5bb05b;
 }
-/*********** Dashboard **********/
+    /*********** Dashboard **********/
 /*********** Potager sélectionné **********/
 
 .liveDatas{
