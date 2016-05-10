@@ -26,8 +26,9 @@ angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui
          * @returns {*|{method, isArray, transformResponse}}
          */
         vm.getDatas = function(){
-            return PotagerService.resource.query(function (datas) {
+            return PotagerService.resource.get(function (datas) {
                 vm.listePotagers = datas;
+                console.log('test récup service', vm.listePotagers);
             });
         };
 
