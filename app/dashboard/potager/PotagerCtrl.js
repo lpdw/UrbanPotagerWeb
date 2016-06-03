@@ -11,7 +11,7 @@
         vm.title = "Potager:" + vm.potager.name;
 
         vm.onEditClick = function () {
-            $location.path('/gestion').search({param: vm.potager});
+            $location.path('/gestion/').search({potager: vm.potager});
         };
 
         vm.getConfig = function () {
