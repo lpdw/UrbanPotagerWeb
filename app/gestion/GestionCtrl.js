@@ -1,16 +1,6 @@
-
 'use strict';
 
-angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
-
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/gestion', {
-            templateUrl: 'gestion/gestion.html',
-            controller: 'GestionCtrl as gestion'
-        });
-    }])
-
-    .controller('GestionCtrl', function($location, PotagerService, $q) {
+controllers.controller('GestionCtrl', function ($location, PotagerService, $q) {
 
         var vm = this;
         var path = $location.path();
@@ -48,10 +38,8 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
         //Récupération des paramètres de l'url
         var params = $location.search();
 
-        if(params.potager)
-        {
+        if (params.potager) {
             vm.potager = params.potager;
-
             vm.potagerConfigurationForm = {
                 "wateringStart": {"hour": 15, "minute": 37},
                 "wateringEnd": {"hour": 16, "minute": 30},
@@ -133,46 +121,45 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
          * Redirige l'utilisateur sur le potager sélectionné
          * @param potager
          */
-        vm.selectedPotager = function(potager){
-            $location.path(path).search({"potager":potager});
+        vm.selectedPotager = function (potager) {
+            $location.path(path).search({"potager": potager});
         };
 
         /**
          * Redirige l'utilisateur vers tous ses potagers
          */
-        vm.allPotagers = function(){
+        vm.allPotagers = function () {
             $location.path(path).search({});
         };
 
         /**
          * Supprime le potager sélectionné
          */
-        vm.deletePotager = function(potager){
-            $location.path(path).search({"delete":"success"});
+        vm.deletePotager = function (potager) {
+            $location.path(path).search({"delete": "success"});
         };
 
         /**
          * Supprime le potager sélectionné
          */
-        vm.newPotager = function(potager){
+        vm.newPotager = function (potager) {
             var newPotagerForm = [];
             $location.path(path).search({"delete":"success"});
         };
 
 
-
     })
-    .directive('potagers', function() {
+    .directive('potagers', function () {
         return {
             templateUrl: 'gestion/directives/potagers.html'
         };
     })
-    .directive('potager', function() {
+    .directive('potager', function () {
         return {
             templateUrl: 'gestion/directives/potager.html'
         };
     })
-    .directive('newPotager', function() {
+    .directive('newPotager', function () {
         return {
             templateUrl: 'gestion/directives/new-potager.html'
         };

@@ -1,20 +1,44 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'leaflet-directive',
-  'ngResource',
-  'ngAnimate',
-  'ui.bootstrap',
-  'chart.js',
-  'myApp.services',
-  'myApp.home',
-  'myApp.inscription',
-  'myApp.gestion',
-  'myApp.dashboard',
-  'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/home'});
-}]);
+angular.module('myApp', ['ngRoute', 'controllers'])
+    .config(
+        function ($routeProvider) {
+            $routeProvider
+                .when('/home', {
+                    templateUrl: 'home/home.html',
+                    controller: 'HomeCtrl as home'
+                })
+                .when('/inscription', {
+                    templateUrl: 'inscription/inscription.html',
+                    controller: 'InscriptionCtrl as inscription'
+                })
+                .when('/dashboard', {
+                    templateUrl: 'dashboard/dashboard.html',
+                    controller: 'DashboardCtrl as dashboard'
+                })
+                .when('/potager', {
+                    templateUrl: 'dashboard/potager/potager.html',
+                    controller: 'PotagerCtrl as potager'
+                })
+                .when('/potager/:id', {
+                    templateUrl: 'dashboard/potager/editGarden.html',
+                    controller: 'EditGardenCtrl as editGarden'
+                })
+                .when('/gestion', {
+                    templateUrl: 'gestion/gestion.html',
+                    controller: 'GestionCtrl as gestion'
+                })
+                .otherwise({
+                    redirectTo: '/home'
+                });
+        }
+    );
+
+var controllers = angular.module('controllers', [
+    'leaflet-directive',
+    'myApp.services',
+    'ngResource',
+    'ui.bootstrap',
+    'ngAnimate',
+    'chart.js'
+]);

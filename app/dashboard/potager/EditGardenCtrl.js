@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function EditGardenCtrl($location) {
@@ -13,6 +13,6 @@
 
     }
 
-    angular.module('myApp.dashboard').controller('EditGardenCtrl', EditGardenCtrl);
+    controllers.controller('EditGardenCtrl', EditGardenCtrl);
 
 }());

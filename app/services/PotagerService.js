@@ -1,29 +1,20 @@
-(function(){
+(function () {
     'use strict';
 
-    function PotagerService($resource){
+    function PotagerService($resource) {
 
-        var apiPath = 'datas.json';
+        //var apiPath = 'datas.json';
+        var apiPath = 'https://urbanpotager.labesse.me';
 
-        var resource = $resource(apiPath, {}, {
-            'query': {
-                method: 'GET',
-                isArray: true,
-                transformResponse: function(datas) {
-                    if (datas.length > 0) {
-                        try {
-                            datas = angular.fromJson(datas);
-                            return datas;
-                        } catch (error) {
-                            console.log('problème parse json', error);
-                        }
-                    }
-                }
-            }
+        var resource = $resource(apiPath+'/gardens/:id', {id: '@id'}, {
+            update: {
+                method: 'PUT'
+            } 
         });
         return {
             resource: resource
         };
     }
+
     angular.module('myApp.services', []).factory('PotagerService', PotagerService);
 })();
