@@ -1,42 +1,26 @@
 'use strict';
 
-angular.module('myApp.dashboard', ['ngRoute', 'myApp.services', 'ngResource','ui.bootstrap', 'ngAnimate', 'chart.js'])
+controllers.controller('DashboardCtrl', function ($location, PotagerService, $q) {
+    var vm = this;
+    vm.title = "MES POTAGERS";
+    vm.dash = undefined;
 
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/dashboard', {
-            templateUrl: 'dashboard/dashboard.html',
-            controller: 'DashboardCtrl as dashboard'
-        }).when('/potager', {
-            templateUrl: 'dashboard/potager/potager.html',
-            controller: 'PotagerCtrl as potager'
-        }).when('/potager/:id', {
-            templateUrl: 'dashboard/potager/editGarden.html',
-            controller: 'EditGardenCtrl as editGarden'
+    /**
+     * Appel service pour récupérer les données
+     * @returns {*|{method, isArray, transformResponse}}
+     */
+    vm.getDatas = function () {
+        return PotagerService.resource.get(function (datas) {
+            vm.listePotagers = datas;
+            console.log('test récup service', vm.listePotagers);
         });
-    }])
+    };
 
-    .controller('DashboardCtrl', function($location, PotagerService, $q) {
-
-        var vm = this;
-        vm.title = "MES POTAGERS";
-        vm.dash = undefined;
-
-        /**
-         * Appel service pour récupérer les données
-         * @returns {*|{method, isArray, transformResponse}}
-         */
-        vm.getDatas = function(){
-            return PotagerService.resource.get(function (datas) {
-                vm.listePotagers = datas;
-                console.log('test récup service', vm.listePotagers);
-            });
-        };
-
-        /**
-         * Redirige l'utilisateur sur le potager sélectionné
-         * @param p
-         */
-        vm.selectedPotager = function(p){
-            $location.path('/potager/').search({param: p});
-        };
-    });
+    /**
+     * Redirige l'utilisateur sur le potager sélectionné
+     * @param p
+     */
+    vm.selectedPotager = function (p) {
+        $location.path('/potager/').search({param: p});
+    };
+});

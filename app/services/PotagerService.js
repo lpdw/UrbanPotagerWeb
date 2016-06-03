@@ -1,7 +1,7 @@
-(function(){
+(function () {
     'use strict';
 
-    function PotagerService($resource){
+    function PotagerService($resource) {
 
         //var apiPath = 'datas.json';
         var apiPath = 'https://urbanpotager.labesse.me';
@@ -15,5 +15,6 @@
             resource: resource
         };
     }
+
     angular.module('myApp.services', []).factory('PotagerService', PotagerService);
 })();

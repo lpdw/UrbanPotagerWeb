@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function PotagerCtrl($location) {
@@ -27,6 +27,6 @@
 
     }
 
-    angular.module('myApp.dashboard').controller('PotagerCtrl', PotagerCtrl);
+    controllers.controller('PotagerCtrl', PotagerCtrl);
 
 }());
