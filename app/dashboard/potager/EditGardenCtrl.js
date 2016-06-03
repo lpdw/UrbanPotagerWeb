@@ -12,7 +12,5 @@
 
 
     }
-
     controllers.controller('EditGardenCtrl', EditGardenCtrl);
-
 }());

@@ -1,7 +1,7 @@
-(function () {
+(function() {
     'use strict';
 
-    function PotagerCtrl($location) {
+    function PotagerCtrl($location, ConfigurationService) {
 
         var vm = this;
         var logDatas;
@@ -13,6 +13,16 @@
         vm.onEditClick = function () {
             $location.path('/gestion').search({param: vm.potager});
         };
+
+        vm.getConfig = function () {
+            var potagerSlug = vm.potager.slug;
+            ConfigurationService.resource.get({ slugGarden: potagerSlug}, function (datas) {
+                vm.configCurrentPotager = datas;
+                console.log('test récup config potager: ', vm.configCurrentPotager);
+            });
+        };
+
+        console.log('current potager: ', vm.potager);
 
         //Téléchargement de la structure du labyrinthe
         var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(logDatas));
@@ -28,5 +38,4 @@
     }
 
     controllers.controller('PotagerCtrl', PotagerCtrl);
-
 }());

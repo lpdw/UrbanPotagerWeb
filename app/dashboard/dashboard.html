@@ -1,22 +1,19 @@
 <div class="pure-g dashboard" ng-init="dashboard.getDatas()">
     <h1 class="pure-u-1"> {{ dashboard.title }}</h1>
     <div class="dashboard-content">    <!-- row -->
-        <div class="dash animated bounceIn " ng-repeat="potager in dashboard.listePotagers">
+        <div class="dash animated bounceIn " ng-repeat="potager in dashboard.listePotagers.gardens">
 
             <div class="dash-img">
                 <img src="assets/images/pro.png">
             </div>
             <div ng-class="" ng-click="dashboard.selectedPotager(potager)">
-                <h1>Potager {{ potager.name }}</h1>
+                <h1>{{ potager.name }}</h1>
                 <p ng-bind="potager.description" class="description"></p>
                 <p ng-bind="potager.location.address" class="info"></p>
-                <p class="info">Luminosité de {{ potager.configuration.lightingStart }}h à {{ potager.configuration.lightingEnd }}h</p>
+                <!--<p class="info">Luminosité de {{ potager.configuration.lightingStart }}h à {{ potager.configuration.lightingEnd }}h</p>
                 <p class="info">Hydraté de {{ potager.configuration.wateringStart }}h à {{ potager.configuration.wateringEnd }}h</p>
-                <p class="info" nf-if="potager.configuration.isWateringActive">Hydratation en cours</p>
+                <p class="info" nf-if="potager.configuration.isWateringActive">Hydratation en cours</p>-->
             </div>
-
-
-
 
         </div>
     </div>
