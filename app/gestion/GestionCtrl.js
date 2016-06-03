@@ -15,8 +15,34 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
         var vm = this;
         var path = $location.path();
         vm.title = "Page gestion";
-
-        console.log('test récupération du potager', $location.search());
+        vm.editionConfiguration = false;
+        vm.editionAlerts = [];
+        vm.comparisonTable = [
+            "==",
+            "!=",
+            "<",
+            ">",
+            "<=",
+            ">="
+        ];
+        vm.typesTable = [
+            {
+                "name": "Niveau eau",
+                "description": "je suis description niveau eau",
+                "min": 0,
+                "max": 20,
+                "type": 1
+            },
+            {
+                "name": "Acidité",
+                "description": "acidité du sol",
+                "min": 0,
+                "max": 14,
+                "type": 1
+            }
+        ];
+        vm.typeMinTreshold = [];
+        vm.typeMaxTreshold = [];
 
 
         //Récupération des paramètres de l'url
@@ -25,12 +51,74 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
         if(params.potager)
         {
             vm.potager = params.potager;
+
+            vm.potagerConfigurationForm = {
+                "wateringStart": {"hour": 15, "minute": 37},
+                "wateringEnd": {"hour": 16, "minute": 30},
+                "lightingStart": {"hour": 15, "minute": 37},
+                "lightingEnd": {"hour": 15, "minute": 37},
+                "description": "je suis description",
+                "name": "je suis name",
+                "lightTreshold": 50.01
+            };
+
+            vm.defaultConfigurationForm = angular.copy(vm.potagerConfigurationForm);
+
+            vm.alerts = [
+                {
+                    "treshold": 50,
+                    "comparison": 1,
+                    "type": "water",
+                    "name": "Niveau eau bas",
+                    "description": "je suis description niveau eau bas",
+                    "message": "Grouille toi de remettre de l'eau"
+                },
+                {
+                    "treshold": 7,
+                    "comparison": 4,
+                    "type": "Acidité",
+                    "name": "Acidité du sol",
+                    "description": "je suis description acidité",
+                    "message": "Grouille toi de remettre de l'eau"
+                }
+            ];
+
+
+
         } else
         {
             PotagerService.resource.query(function (potagers) {
                 vm.potagers = potagers;
             });
         }
+
+        vm.edit = function(type , index)
+        {
+
+            if(type === "configuration")
+            {
+                vm.editionConfiguration = true;
+            } else if(type === "alerts"){
+                vm.editionAlerts[index] = true;
+
+            }
+
+        };
+
+        vm.reset = function(type, index)
+        {
+            if(type === "alerts")
+            {
+                vm.editionAlerts[index] = false;
+            } else if(type === "configuration")
+            {
+                vm.editionConfiguration = false;
+            }
+        };
+
+        vm.submitConfiguration = function() {
+          console.log('here');
+        };
 
         ///**
         // * Redirige l'utilisateur sur le potager sélectionné
@@ -68,7 +156,7 @@ angular.module('myApp.gestion', ['ngRoute', 'myApp.services', 'ngResource'])
          */
         vm.newPotager = function(potager){
             var newPotagerForm = [];
-            //$location.path(path).search({"delete":"success"});
+            $location.path(path).search({"delete":"success"});
         };
 
 

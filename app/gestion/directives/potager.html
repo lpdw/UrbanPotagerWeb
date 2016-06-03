@@ -20,18 +20,127 @@
     <li>public: {{gestion.potager.environment.is_public}}</li>
 </ul>
 
-<h4>Settings</h4>
-<ul>
-    <li>Allumage: {{gestion.potager.settings.lightning.start}} à {{gestion.potager.settings.lightning.end}}</li>
-    <li>Arrosage: {{gestion.potager.settings.watering.start}} à {{gestion.potager.settings.watering.end}}</li>
-    <li>Luminosité: {{gestion.potager.settings.luminosity}}</li>
-    <li>Air froid: {{gestion.potager.settings.alert_cold_air}}</li>
-    <li>Air chaud: {{gestion.potager.settings.alert_hot_air}}</li>
-    <li>Eau froide: {{gestion.potager.settings.alert_cold_water}}</li>
-    <li>Eau chaude: {{gestion.potager.settings.alert_hot_air}}</li>
-    <li>Humidité basse: {{gestion.potager.settings.alert_low_humidity}}</li>
-    <li>Humidité élevée: {{gestion.potager.settings.alert_high_humidity}}</li>
-    <li>Niveau d'eau bas: {{gestion.potager.settings.alert_low_water}}</li>
-</ul>
+<h4>Configuration</h4>
+<button class="pure-button" ng-click="gestion.edit('configuration')" ng-hide="gestion.editionConfiguration">Editer</button>
+<form name="configurationForm" ng-submit="gestion.submitConfigurationForm()">
+    <ul>
+        <li>Allumage:
+            <span class="edit" ng-show="gestion.editionConfiguration">
+                <input type="number" min="0" max="24" ng-value="gestion.potagerConfigurationForm.lightingStart.hour" ng-model="gestion.defaultConfigurationForm.lightingStart.hour"/>
+                :
+                <input type="number" min="0" max="60" ng-value="gestion.potagerConfigurationForm.lightingStart.minute" ng-model="gestion.defaultConfigurationForm.lightingStart.minute"/>
+                à
+                <input type="number" min="0" max="24" ng-value="gestion.potagerConfigurationForm.lightingEnd.hour" ng-model="gestion.defaultConfigurationForm.lightingEnd.hour"/>
+                :
+                <input type="number" min="0" max="60" ng-value="gestion.potagerConfigurationForm.lightingEnd.minute" ng-model="gestion.defaultConfigurationForm.lightingEnd.minute"/>
+            </span>
 
-<button ng-click="gestion.allPotagers()">Voir tous</button>
+            <span ng-hide="gestion.editionConfiguration">
+                {{gestion.potagerConfigurationForm.lightingStart.hour}}:{{gestion.potagerConfigurationForm.lightingStart.minute}}
+                à
+                {{gestion.potagerConfigurationForm.lightingEnd.hour}}:{{gestion.potagerConfigurationForm.lightingEnd.minute}}
+            </span>
+        </li>
+        <li>
+        Arrosage:
+            <span class="edit" ng-show="gestion.editionConfiguration">
+                <input type="number" min="0" max="24" ng-value="gestion.potagerConfigurationForm.wateringStart.hour" ng-model="gestion.defaultConfigurationForm.wateringStart.hour"/>
+                :
+                <input type="number" min="0" max="60" ng-value="gestion.potagerConfigurationForm.wateringStart.minute" ng-model="gestion.defaultConfigurationForm.wateringStart.minute"/>
+                à
+                <input type="number" min="0" max="24" ng-value="gestion.potagerConfigurationForm.wateringEnd.hour" ng-model="gestion.defaultConfigurationForm.wateringEnd.hour"/>
+                :
+                <input type="number" min="0" max="60" ng-value="gestion.potagerConfigurationForm.wateringEnd.minute" ng-model="gestion.defaultConfigurationForm.wateringEnd.minute"/>
+            </span>
+
+            <span ng-hide="gestion.editionConfiguration">
+                {{gestion.potagerConfigurationForm.wateringStart.hour}}:{{gestion.potagerConfigurationForm.wateringStart.minute}}
+                à
+                {{gestion.potagerConfigurationForm.wateringEnd.hour}}:{{gestion.potagerConfigurationForm.wateringEnd.minute}}
+            </span>
+
+        </li>
+        <li>
+            Luminosité:
+            <span class="edit" ng-show="gestion.editionConfiguration">
+                <input type="number" step="any" min="0" max="100" ng-value="gestion.potagerConfigurationForm.lightTreshold" ng-model="gestion.defaultConfigurationForm.lightTreshold"/>%
+            </span>
+
+            <span ng-hide="gestion.editionConfiguration">
+            {{gestion.potagerConfigurationForm.lightTreshold}}%
+            </span>
+        </li>
+    </ul>
+    <span ng-show="gestion.editionConfiguration">
+        <button class="pure-button" type="reset" ng-click="gestion.reset('configuration')">Annuler</button>
+        <button class="pure-button" type="submit"> Envoyer </button>
+    </span>
+</form>
+
+<h4>Alertes</h4>
+<div>
+    <ul>
+        <li ng-repeat="alert in gestion.alerts">
+            <button class="pure-button" ng-click="gestion.edit('alerts', $index)" ng-hide="gestion.editionAlerts[$index]">Editer</button>
+            <button class="pure-button button-warning" ng-click="gestion.delete('alerts', $index)">Supprimer</button>
+            <form name="alertForm{{$index}}" ng-submit="">
+                <span ng-show="gestion.editionAlerts[$index]">
+                    <input type="text" name="name" value="{{alert.name}}"/>
+                    <br>
+                    <select name="type">
+                        <option
+                                ng-repeat="type in gestion.typesTable"
+                                value="{{type.name}}"
+                                ng-selected="type.name == alert.type"
+                        >
+                            {{type.name}}
+                        </option>
+                    </select>
+
+                    <select name="comparison">
+                        <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index+1}}" ng-selected="$index == alert.comparison">{{comparison}}</option>
+                    </select>
+
+                    <input type="number" name="treshold" step="any" value="{{alert.treshold}}"/>
+                    <br>
+                    <textarea name="description">{{alert.description}}</textarea>
+                </span>
+
+                <span ng-hide="gestion.editionAlerts[$index]">
+                    <h5>{{alert.name}}</h5>
+                    {{alert.type}} {{gestion.comparisonTable[alert.comparison-1]}} {{alert.treshold}}
+                    <p>{{alert.description}}</p>
+                </span>
+                <span ng-show="gestion.editionAlerts[$index]">
+                    <button class="pure-button" type="reset" ng-click="gestion.reset('alerts', $index)">Annuler</button>
+                    <button class="pure-button" type="submit"> Envoyer </button>
+                </span>
+            </form>
+        </li>
+        <form ng-show="alertNew" ng-init="alertNew=false">
+            <label for="nameAlertNew">Nom</label>
+            <input id="nameAlertNew" type="text" placeholder="Nom de l'alerte"/>
+
+            <label for="descriptionAlertNew">Description</label>
+            <textarea id="descriptionAlertNew" placeholder="description de l'alerte"></textarea>
+
+            <label for="messageAlertNew">Message</label>
+            <input id="messageAlertNew" type="text" placeholder="Message à afficher"/>
+
+            <label for="typesAlertNew">Types</label>
+            <select id="typesAlertNew">
+                <option ng-repeat="type in gestion.typesTable" value="{{type.name}}">{{type.name}}</option>
+            </select>
+
+            <label for="comparisonAlertNew">Comparaison</label>
+            <select id="comparisonAlertNew">
+                <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index}}">{{comparison}}</option>
+            </select>
+            <label for="tresholdAlertNew">Seuil</label>
+            <input id="tresholdAlertNew" type="number" step="any" placeholder="seuil voulu"/>
+        </form>
+        <button class="pure-button" ng-click="alertNew=true">Ajouter</button>
+    </ul>
+</div>
+
+<button class="pure-button" ng-click="gestion.allPotagers()">Voir tous</button>
