@@ -17,6 +17,13 @@
                 console.log('test récup gardens', vm.listePotagers);
             });
         };
+        
+        vm.getImageRandom = function () {
+            var temp = Math.floor((Math.random() * 12) + 1);
+            vm.imgRand = "assets/images/dashboards/"+ temp +".png";
+            document.getElementById("dashImage").src = vm.imgRand;
+            console.log(vm.imgRand);
+        };
 
         /**
          * Redirige l'utilisateur sur le potager sélectionné

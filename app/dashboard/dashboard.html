@@ -1,10 +1,11 @@
 <div class="pure-g dashboard" ng-init="dashboard.getDatas()">
     <h1 class="pure-u-1"> {{ dashboard.title }}</h1>
     <div class="dashboard-content">    <!-- row -->
-        <div class="dash animated bounceIn " ng-repeat="potager in dashboard.listePotagers.gardens">
+        <div class="dash animated bounceIn test" ng-repeat="potager in dashboard.listePotagers.gardens">
 
-            <div class="dash-img">
-                <img src="assets/images/pro.png">
+            <div class="dash-img" ng-init="dashboard.getImageRandom()">
+                <!--<img src="assets/images/pro.png">-->
+                <img ng-src="{{dashboard.imgRand}}" id="dashImage" alt="Urban Potager Picture" />
             </div>
             <div ng-class="" ng-click="dashboard.selectedPotager(potager)">
                 <h1>{{ potager.name }}</h1>
