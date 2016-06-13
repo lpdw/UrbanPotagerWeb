@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function PotagerCtrl($location, ConfigurationService) {
+    function PotagerCtrl($location, ConfigurationService, toaster) {
 
         var vm = this;
         var logDatas;
@@ -19,10 +19,22 @@
             ConfigurationService.resource.get({ slugGarden: potagerSlug}, function (datas) {
                 vm.configCurrentPotager = datas;
                 console.log('test récup config potager: ', vm.configCurrentPotager);
+            }, function (response) {
+                if(response.status === 404){
+                    toaster.pop({
+                        type: 'error',
+                        title: '',
+                        body: "Aucune configuration pour ce potager",
+                        showCloseButton: true,
+                        timeout: 3000
+                    });
+                }
             });
         };
 
-        //Téléchargement d'un json
+        /**
+         * Téléchargement historique
+         */
         var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(logDatas));
 
         var a = document.createElement('a');
@@ -37,8 +49,6 @@
          * Point d'entrée du controller
          */
         (function () {
-            //Récupération des mesures
-            vm.getConfig();
 
             //Redirige vers le dashboard si aucun potager n'a été sélectionné
             if(typeof (vm.potager) === 'string'){

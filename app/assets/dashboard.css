@@ -97,3 +97,10 @@
     margin: 0 !important;
     margin-left: 0.5em !important;
 }
+
+/*************** Toaster *********************/
+#toast-container>div{
+    letter-spacing: normal !important;
+    opacity: 1 !important;
+}
+/*************** Toaster *********************/

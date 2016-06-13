@@ -14,10 +14,6 @@
                 method: 'PUT'
             }
         });
-        /*ar resource = $resource('/bug',{},{
-            ,*/
-
-
         return {
             resource: resource
         };

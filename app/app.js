@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', ['ngRoute', 'controllers'])
+angular.module('myApp', ['ngRoute', 'controllers', 'toaster'])
     .config(
         function ($routeProvider) {
             $routeProvider
