@@ -24,6 +24,7 @@
             document.getElementById("dashImage").src = vm.imgRand;
             console.log(vm.imgRand);
         };
+        
 
         /**
          * Redirige l'utilisateur sur le potager sélectionné

@@ -5,13 +5,13 @@
 
             <div class="dash-img" ng-init="dashboard.getImageRandom()">
                 <!--<img src="assets/images/pro.png">-->
-                <img ng-src="{{dashboard.imgRand}}" id="dashImage" alt="Urban Potager Picture" />
+                <img ng-src="{{ dashboard.imgRand }}" id="dashImage" alt="Urban Potager Picture" />
             </div>
-            <div ng-class="" ng-click="dashboard.selectedPotager(potager)">
+            <div ng-class="dash" ng-click="dashboard.selectedPotager(potager)">
                 <h1>{{ potager.name }}</h1>
                 <p ng-bind="potager.description" class="description"></p>
-                <p ng-bind="potager.location.address" class="info"></p>
-                <!--<p class="info">Luminosité de {{ potager.configuration.lightingStart }}h à {{ potager.configuration.lightingEnd }}h</p>
+                <!--<p ng-bind="potager.location.address" class="description"></p>
+                <p class="info">Luminosité de {{ potager.configuration.lightingStart }}h à {{ potager.configuration.lightingEnd }}h</p>
                 <p class="info">Hydraté de {{ potager.configuration.wateringStart }}h à {{ potager.configuration.wateringEnd }}h</p>
                 <p class="info" nf-if="potager.configuration.isWateringActive">Hydratation en cours</p>-->
             </div>

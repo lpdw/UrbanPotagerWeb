@@ -22,9 +22,7 @@
             });
         };
 
-        console.log('current potager: ', vm.potager);
-
-        //Téléchargement de la structure du labyrinthe
+        //Téléchargement d'un json
         var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(logDatas));
 
         var a = document.createElement('a');
@@ -34,6 +32,19 @@
 
         var container = document.getElementById('container');
         container.appendChild(a);
+
+        /**
+         * Point d'entrée du controller
+         */
+        (function () {
+            //Récupération des mesures
+            vm.getConfig();
+
+            //Redirige vers le dashboard si aucun potager n'a été sélectionné
+            if(typeof (vm.potager) === 'string'){
+                $location.path('/dashboard')
+            }
+        })();
 
     }
 
