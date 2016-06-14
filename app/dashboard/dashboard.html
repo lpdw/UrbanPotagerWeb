@@ -1,6 +1,7 @@
 <div class="pure-g dashboard" ng-init="dashboard.getDatas()">
     <h1 class="pure-u-1"> {{ dashboard.title }}</h1>
     <div class="dashboard-content">    <!-- row -->
+        <button ng-click="dashboard.addConfigTest()"></button>
         <div class="dash animated bounceIn test" ng-repeat="potager in dashboard.listePotagers.gardens">
 
             <div class="dash-img" ng-init="dashboard.addRandImages()">
