@@ -17,11 +17,20 @@
                 console.log('test récup gardens', vm.listePotagers);
             });
         };
-       
+
+        /**
+         * Gestion des images aléatoires des dash
+         */
+        vm.addRandImages = function () {
+            for(var i = 0; i < vm.listePotagers.gardens.length; i++){
+                var imagRandom = vm.getImageRandom();
+                vm.listePotagers.gardens[i].imgRand = imagRandom;
+            }
+        };
+
         vm.getImageRandom = function () {
             var temp = Math.floor((Math.random() * 12) + 1);
-            vm.imgRand = "assets/images/dashboards/"+ temp +".png";
-            document.getElementById("dashImage").src = vm.imgRand;
+            return "assets/images/dashboards/"+ temp +".png";
         };
 
         /**

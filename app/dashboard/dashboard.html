@@ -3,9 +3,9 @@
     <div class="dashboard-content">    <!-- row -->
         <div class="dash animated bounceIn test" ng-repeat="potager in dashboard.listePotagers.gardens">
 
-            <div class="dash-img" ng-init="dashboard.getImageRandom()">
+            <div class="dash-img" ng-init="dashboard.addRandImages()">
                 <!--<img src="assets/images/pro.png">-->
-                <img ng-src="{{ dashboard.imgRand }}" id="dashImage" alt="Urban Potager Picture" />
+                <img ng-src="{{ potager.imgRand }}" id="dashImage" alt="Urban Potager Picture" />
             </div>
             <div ng-class="dash" ng-click="dashboard.selectedPotager(potager)">
                 <h1>{{ potager.name }}</h1>

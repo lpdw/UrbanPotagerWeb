@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function PotagerCtrl($location, ConfigurationService, toaster) {
+    function PotagerCtrl($location, ConfigurationService, toaster, $timeout) {
 
         var vm = this;
         var logDatas;
@@ -18,16 +18,19 @@
             var potagerSlug = vm.potager.slug;
             ConfigurationService.resource.get({ slugGarden: potagerSlug}, function (datas) {
                 vm.configCurrentPotager = datas;
-                console.log('test récup config potager: ', vm.configCurrentPotager);
             }, function (response) {
+                //Si aucune configuration liée au potager
                 if(response.status === 404){
                     toaster.pop({
-                        type: 'error',
+                        type: 'info',
                         title: '',
-                        body: "Aucune configuration pour ce potager",
+                        body: "Aucune configuration pour ce potager, vous allez être redirigé vers votre dashboard",
                         showCloseButton: true,
-                        timeout: 3000
+                        timeout: 4000
                     });
+                    $timeout(function waitForRedirection() {
+                        $location.path('/dashboard');
+                    }, 4000);
                 }
             });
         };
