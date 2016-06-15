@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('InscriptionCtrl', function ($scope, $location) {
+controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $location, localStorageService) {
         this.title = "Page d'inscription";
 
         this.inscription = function (data) {
@@ -10,7 +10,11 @@ controllers.controller('InscriptionCtrl', function ($scope, $location) {
             $.ajax({
                     method: "POST",
                     url: "https://urbanpotager.labesse.me/users",
-                    data: {username: data.username, email: data.email, plainPassword: data.plainPassword}
+                    data: {
+                        username: data.username,
+                        email: data.email,
+                        plainPassword: data.plainPassword
+                    }
                 })
                 .done(function (msg) {
                     console.log(msg);
@@ -19,13 +23,18 @@ controllers.controller('InscriptionCtrl', function ($scope, $location) {
         };
 
         this.connexion = function (data) {
-            console.log(data);
             $.ajax({
                     method: "POST",
                     url: "https://urbanpotager.labesse.me/token",
-                    data: {username: data.username, password: data.password}
+                    data: {
+                        username: data.username,
+                        password: data.password
+                    }
                 })
                 .done(function (msg) {
+                    console.log(msg);
+                    $rootScope.login = true;
+                    localStorageService.set("token", msg.token);
                     $location.path("/home");
                 });
         };

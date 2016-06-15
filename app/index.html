@@ -37,18 +37,19 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>
-<body>
+<body ng-controller="MainCtrl">
   <div class="menu">
     <div class="logo"><img src="assets/images/Logo.svg"></div>
     <ul>
       <li><a href="#/home">Home</a></li>
       <li><a href="#/dashboard">Dashboard</a></li>
       <li><a href="#/inscription">Inscription</a></li>
-      <li><a href="#/gestion">Gestion</a></li>
+      <li ng-if="login"><a href="#/gestion">Gestion</a></li>
+      <li><a ng-click="logout()" href>Logout</a></li>
     </ul>
   </div>
-
-  <div ng-view></div>
+  <div ng-view>
+  </div>
 
 
   <!--[if lt IE 7]>
@@ -88,9 +89,11 @@
       </div>
     </div>
 
+  <script src="assets/js/jquery-2.2.4.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
   <script src="/node_modules/angular-animate/angular-animate.js"></script>
   <script src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
   <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js"></script>
@@ -100,8 +103,8 @@
   <script src="../node_modules/angular-animate/angular-animate.js"></script>
   <script src="bower_components/Chart.js/dist/Chart.js"></script>
   <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/Flowtype.js/flowtype.js"></script>
+  <!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
+  <!--<script src="bower_components/Flowtype.js/flowtype.js"></script>-->
   <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
   <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>

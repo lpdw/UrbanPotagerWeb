@@ -31,6 +31,12 @@ angular.module('myApp', ['ngRoute', 'controllers', 'toaster'])
                 .otherwise({
                     redirectTo: '/home'
                 });
+        },
+        function (localStorageServiceProvider) {
+            localStorageServiceProvider
+                .setPrefix('myApp') //Default prefix: ls.<your-key>
+                .setStorageType('localStorage') //Default storage: localStorage
+                .setStorageCookie(30, '/'); //expiry: default: 30, path: default: '/'
         }
     );
 
@@ -40,5 +46,15 @@ var controllers = angular.module('controllers', [
     'ngResource',
     'ui.bootstrap',
     'ngAnimate',
-    'chart.js'
+    'chart.js',
+    'LocalStorageModule'
 ]);
+
+controllers.controller('MainCtrl', function ($scope, localStorageService){
+
+    $scope.logout = function(){
+        localStorageService.clearAll();
+    }
+
+
+});

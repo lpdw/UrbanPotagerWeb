@@ -2,6 +2,8 @@
 
 controllers.controller('HomeCtrl', function ($location, $scope) {
 
+    this.test = "test";
+
     var local_icons = {
         default_icon: {},
         leaf_icon: {
@@ -87,7 +89,7 @@ controllers.controller('HomeCtrl', function ($location, $scope) {
 
     $scope.removeMarkers = function () {
         $scope.markers = {};
-    }
+    };
 
     $scope.addMarkers();
 
