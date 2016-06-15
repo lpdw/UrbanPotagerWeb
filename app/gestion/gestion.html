@@ -1,9 +1,16 @@
 <h1>{{ gestion.title }}</h1>
 
-<button ng-click="gestion.newPotager()">Ajouter un potager</button>
+<!--<button ng-click="gestion.newPotager()">Ajouter un potager</button>-->
 
-<newPotager ng-if="gestion.newPotagerForm"></newPotager>
+<!--<newPotager ng-if="gestion.newPotagerForm"></newPotager>-->
 
-<potagers ng-if="gestion.potagers"></potagers>
+<!--<potagers ng-if="gestion.potagers"></potagers>-->
 
-<potager ng-if="gestion.potager"></potager>
+<!--<potager ng-if="gestion.potager"></potager>-->
+
+
+{{gestion.configurations}}
+
+<p ng-repeat="configuration in gestion.configurations">
+    {{configuration}}
+</p>

@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, PotagerService, $q) {
+controllers.controller('GestionCtrl', function ($location, PotagerService, $q, ConfigurationService, localStorageService) {
 
         var vm = this;
         var path = $location.path();
@@ -31,8 +31,8 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q) {
                 "type": 1
             }
         ];
-        vm.typeMinTreshold = [];
-        vm.typeMaxTreshold = [];
+
+    console.log(localStorageService.get('token'));
 
 
         //Récupération des paramètres de l'url
@@ -75,9 +75,14 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q) {
 
         } else
         {
-            PotagerService.resource.query(function (potagers) {
-                vm.potagers = potagers;
+
+            ConfigurationService.resource2.get({}, function (datas) {
+                vm.configurations = datas;
             });
+
+            //PotagerService.resource.query(function (potagers) {
+            //    vm.potagers = potagers;
+            //});
         }
 
         vm.edit = function(type , index)

@@ -1,10 +1,10 @@
 (function(){
     'use strict';
 
-    function ConfigurationService($resource){
+    function ConfigurationService($resource, localStorageService){
 
         var apiPath = 'https://urbanpotager.labesse.me';
-        var token =  '';
+        var token =  localStorageService.get('token');
 
         var resource = $resource(apiPath+'/garden/:slugGarden/configuration/:slugConfiguration', {
                             slugGarden: '@slugGarden',
