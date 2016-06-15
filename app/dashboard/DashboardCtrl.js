@@ -18,8 +18,6 @@
             });
         };
 
-
-
         /**
          * Gestion des images aléatoires des dash
          */
@@ -32,30 +30,36 @@
 
         vm.addConfigTest = function () {
             var config = {
-                "id": 0,
-                "name": "configTest1",
-                "description": "Une description de test bien longue qui devrait faire péter l'ihm si c'est mal codé ce qui est surement le cas",
-                "slug": "configTest1",
+                "name": "configTest2",
+                "description": "Une autre description de test bien longue qui devrait faire péter l'ihm si c'est mal codé ce qui est surement le cas",
                 "lightTreshold": 3,
                 "lightingStart": {
-                    "hour": 15, 
+                    "hour": 15,
                     "minute": 37
                 },
                 "lightingEnd": {
                     "hour": 4, 
                     "minute": 15
                 },
-                "isWategringActive": 1,
-                "wateringStart": 4,
-                "wateringEnd": 3
+                "isWateringActive": 1,
+                "wateringStart": {
+                    "hour": 3,
+                    "minute": 15},
+                "wateringEnd": {
+                    "hour": 6,
+                    "minute": 20}
             };
-            /*ConfigurationService.resource.get(function (datas) {
-                console.log("retour get",datas);
+
+            ConfigurationService.resource2.post({slugGarden: "potagerTest2", slugConfiguration: "configTest1"}, function (datas) {
+                vm.retourPost = datas;
+                    console.log("retour post",datas);
+                    console.log("test", typeof (datas.configuration.lighting_end));
+            });
+
+            /*ConfigurationService.resource.get({ slugGarden: "potagerTest1"}, function (datas) {
+                console.log('test get', datas);
 
             });*/
-            ConfigurationService.resource2.post(config, function (datas) {
-                    console.log("retour post",datas);
-            });
 
         };
 
