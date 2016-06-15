@@ -50,7 +50,7 @@
                     "minute": 20}
             };
 
-            ConfigurationService.resource2.post({slugGarden: "potagerTest2", slugConfiguration: "configTest1"}, function (datas) {
+            ConfigurationService.resource.post({slugGarden: "potagerTest2", slugConfiguration: "configTest1"}, function (datas) {
                 vm.retourPost = datas;
                     console.log("retour post",datas);
                     console.log("test", typeof (datas.configuration.lighting_end));
