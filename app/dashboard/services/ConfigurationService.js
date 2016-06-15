@@ -4,13 +4,15 @@
     function ConfigurationService($resource, localStorageService){
 
         var apiPath = 'https://urbanpotager.labesse.me';
-        var token =  localStorageService.get('token');
+
+        var token =  localStorageService.get("token", msg.token);
+        console.log('test récup token', token);
 
 
 
         var resource = $resource(apiPath+'/garden/:slugGarden/configuration/:slugConfiguration', {
-                            slugGarden: '@slugGarden',
-                            slugConfiguration: '@slugConfiguration'
+                        slugGarden: '@slugGarden',
+                        slugConfiguration: '@slugConfiguration'
             }, {
             post:{
                 method:"POST",
