@@ -5,7 +5,7 @@
 
         var apiPath = 'https://urbanpotager.labesse.me';
 
-        var token =  localStorageService.get("token", msg.token);
+        var token =  localStorageService.get('token');
         console.log('test récup token', token);
 
 
