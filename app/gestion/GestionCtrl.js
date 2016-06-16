@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, PotagerService, $q, ConfigurationService, localStorageService) {
+controllers.controller('GestionCtrl', function ($location, PotagerService, $q, ConfigurationService, AlertService, localStorageService) {
 
         var vm = this;
         var path = $location.path();
@@ -32,57 +32,79 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
             }
         ];
 
-    console.log(localStorageService.get('token'));
-
 
         //Récupération des paramètres de l'url
         var params = $location.search();
 
-        if (params.potager) {
-            vm.potager = params.potager;
-            vm.potagerConfigurationForm = {
-                "wateringStart": {"hour": 15, "minute": 37},
-                "wateringEnd": {"hour": 16, "minute": 30},
-                "lightingStart": {"hour": 15, "minute": 37},
-                "lightingEnd": {"hour": 15, "minute": 37},
-                "description": "je suis description",
-                "name": "je suis name",
-                "lightTreshold": 50.01
-            };
+        if(params.configuration)
+        {
+            ConfigurationService.resourceConfig.get({slug: params.configuration}, function (datas) {
+                console.log(datas);
 
-            vm.defaultConfigurationForm = angular.copy(vm.potagerConfigurationForm);
+                vm.configuration = datas.configuration;
+            });
 
-            vm.alerts = [
-                {
-                    "treshold": 50,
-                    "comparison": 1,
-                    "type": "water",
-                    "name": "Niveau eau bas",
-                    "description": "je suis description niveau eau bas",
-                    "message": "Grouille toi de remettre de l'eau"
-                },
-                {
-                    "treshold": 7,
-                    "comparison": 4,
-                    "type": "Acidité",
-                    "name": "Acidité du sol",
-                    "description": "je suis description acidité",
-                    "message": "Grouille toi de remettre de l'eau"
-                }
-            ];
-            
-            
-            
+
+            vm.configurationCopy = angular.copy(vm.configuration);
+
+
+
+
+        }else if (params.potager)
+        {
+
+            ConfigurationService.resourceConfiguredGardens.get({slugGarden: params.potager}, function (datas) {
+                console.log(datas);
+
+                vm.potagerConfigurationForm = datas;
+            });
+
+            //vm.potager = params.potager;
+            //vm.potagerConfigurationForm = {
+            //    "wateringStart": {"hour": 15, "minute": 37},
+            //    "wateringEnd": {"hour": 16, "minute": 30},
+            //    "lightingStart": {"hour": 15, "minute": 37},
+            //    "lightingEnd": {"hour": 15, "minute": 37},
+            //    "description": "je suis description",
+            //    "name": "je suis name",
+            //    "lightTreshold": 50.01
+            //};
+
+
+            //vm.alerts = [
+            //    {
+            //        "treshold": 50,
+            //        "comparison": 1,
+            //        "type": "water",
+            //        "name": "Niveau eau bas",
+            //        "description": "je suis description niveau eau bas",
+            //        "message": "Grouille toi de remettre de l'eau"
+            //    },
+            //    {
+            //        "treshold": 7,
+            //        "comparison": 4,
+            //        "type": "Acidité",
+            //        "name": "Acidité du sol",
+            //        "description": "je suis description acidité",
+            //        "message": "Grouille toi de remettre de l'eau"
+            //    }
+            //];
+
+
+
         } else
         {
 
-            ConfigurationService.resource2.get({}, function (datas) {
-                vm.configurations = datas;
+            ConfigurationService.resourceConfig.get({}, function (datas) {
+                vm.configurations = datas.configurations;
             });
 
-            //PotagerService.resource.query(function (potagers) {
-            //    vm.potagers = potagers;
-            //});
+            AlertService.resourceAlert.get({}, function (datas) {
+                //console.log(datas);
+
+                vm.alerts = datas.alerts;
+            });
+
         }
 
         vm.edit = function(type , index)
@@ -110,7 +132,7 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
         };
 
         vm.submitConfiguration = function() {
-          console.log('here');
+            console.log('here');
         };
 
         ///**
@@ -124,10 +146,18 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
 
         /**
          * Redirige l'utilisateur sur le potager sélectionné
-         * @param potager
+         * @param slug
          */
-        vm.selectedPotager = function (potager) {
-            $location.path(path).search({"potager": potager});
+        vm.selectedConfiguration = function (slug) {
+            $location.path(path).search({"configuration": slug});
+        };
+
+        /**
+         * Redirige l'utilisateur sur le potager sélectionné
+         * @param slug
+         */
+        vm.selectedAlert = function (slug) {
+            $location.path(path).search({"alert": slug});
         };
 
         /**
