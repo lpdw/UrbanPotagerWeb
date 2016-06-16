@@ -7,32 +7,6 @@
         var token =  localStorageService.get('token');
 
         /**
-         * Link configuration to garden
-        */
-        var resource = $resource(apiPath+'/garden/:slugGarden/configuration/:slugConfiguration', {
-                        slugGarden: '@slugGarden',
-                        slugConfiguration: '@slugConfiguration'
-            }, {
-            post:{
-                method:"POST",
-                headers:{
-                    Accept: 'text/html, application/json, text/plain, */*',
-                    Authorization: 'Bearer '+ token
-                }
-            },
-            get: {
-                method:"GET",
-                headers:{
-                    Accept: 'text/html, application/json, text/plain, */*',
-                    Authorization: 'Bearer '+ token
-                }
-            },
-            update: {
-                method: 'PUT'
-            }
-        });
-
-        /**
          * Interact with configurations
          **/
         var resourceConfig = $resource(apiPath+'/configurations/:slug', {
@@ -80,10 +54,20 @@
             slugConfiguration: '@slugConfiguration'
 
         }, {
-            //Get garden configuration
+            get:{
+                headers:{
+                    Accept: 'text/html, application/json, text/plain, */*' ,
+                    Authorization: 'Bearer '+ token
+                }
+            },
+            //Get garden configurations
             query:{
                 method:'GET',
-                isArray:true
+                isArray:true,
+                headers:{
+                    Accept: 'text/html, application/json, text/plain, */*' ,
+                    Authorization: 'Bearer '+ token
+                }
             },
             //Unlink garden with current configuration
             delete:{
@@ -103,7 +87,6 @@
         });
 
         return {
-            resource: resource,
             resourceConfig: resourceConfig,
             resourceConfiguredGardens: resourceConfiguredGardens
         };

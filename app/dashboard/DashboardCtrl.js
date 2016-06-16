@@ -14,7 +14,6 @@
         vm.getDatas = function(){
             return PotagerService.resourcePersonalGardens.query(function (datas) {
                 vm.listePotagers = datas;
-                console.log('test récup gardens', vm.listePotagers);
             });
         };
 

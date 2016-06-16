@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function PotagerCtrl($location, ConfigurationService, toaster, $timeout) {
+    function PotagerCtrl($location, ConfigurationService, toaster, $timeout, localStorageService) {
 
         var vm = this;
         var logDatas;
@@ -16,8 +16,10 @@
 
         vm.getConfig = function () {
             var potagerSlug = vm.potager.slug;
-            ConfigurationService.resource.get({ slugGarden: potagerSlug}, function (datas) {
+            ConfigurationService.resourceConfiguredGardens.get({ slugGarden: potagerSlug}, function (datas) {
                 vm.configCurrentPotager = datas;
+                console.log('test current config', vm.configCurrentPotager);
+                console.log('test potager', vm.potager);
             }, function (response) {
                 //Si aucune configuration liée au potager
                 if(response.status === 404){
@@ -57,6 +59,8 @@
             if(typeof (vm.potager) === 'string'){
                 $location.path('/dashboard')
             }
+
+            console.log("test user loggé", localStorageService.get('token'));
         })();
 
     }
