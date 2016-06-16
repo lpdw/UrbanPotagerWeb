@@ -30,7 +30,7 @@
 
         vm.addConfigTest = function () {
             var config = {
-                "name": "configTest2",
+                "name": "configTestAssociation",
                 "description": "Une autre description de test bien longue qui devrait faire péter l'ihm si c'est mal codé ce qui est surement le cas",
                 "lightTreshold": 3,
                 "lightingStart": {
@@ -50,15 +50,30 @@
                     "minute": 20}
             };
 
-            ConfigurationService.resource.post({slugGarden: "potagerTest2", slugConfiguration: "configTest1"}, function (datas) {
+            var garden = {
+                "name": "gardenTestAssoci",
+                "description": "gardenTestAssocigardenTestAssocigardenTestAssoci",
+                "isPublic": "oui",
+                "latitude": 0,
+                "longitude": 0,
+                "showLocation": 1,
+                "country": "france",
+                "city": "paris",
+                "address1": "addressTest1",
+                "address2": "addressTest2"
+            };
+
+            /*ConfigurationService.resourceConfiguredGardens.post({slugGarden: "gardentestassoci" ,slugConfiguration: "configtestassociation"}, function (datas) {
                 vm.retourPost = datas;
-                    console.log("retour post",datas);
-                    console.log("test", typeof (datas.configuration.lighting_end));
-            });
+                console.log("retour association",datas);
+            });*/
+            
+            /*ConfigurationService.resourceConfig.post(config, function (datas) {
+                console.log('retour post config', datas);
+            });*/
 
-            /*ConfigurationService.resource.get({ slugGarden: "potagerTest1"}, function (datas) {
-                console.log('test get', datas);
-
+            /*PotagerService.resource.post(garden, function (d) {
+                console.log('retour post garden', d);
             });*/
 
         };
