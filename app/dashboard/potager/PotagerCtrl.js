@@ -5,7 +5,6 @@
 
         var vm = this;
         var logDatas;
-        var currentHour = new Date().getHours();
 
         //Récupération des paramètres de l'url
         vm.potager = $location.search().param;
@@ -44,38 +43,50 @@
         /**
          * Récupération toutes les mesures présentes dans typesMeasures
          */
-        vm.getMeasures = function () {
-           MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-level"}, function (datasWater) {
-               if(datasWater.measures[0] != undefined){
-                   vm.currentWaterLevel = datasWater.measures[0].value;
-               }else {
-                   vm.hasWaterLevel = false;
-               }
-           });
+        vm.getDaylightMeasures = function () {
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "daylight-level"}, function (datasDaylight) {
                 if(datasDaylight.measures[0] != undefined){
+                    vm.completeDaylight = datasDaylight;
                     vm.currentDayLight = datasDaylight.measures[0].value;
                 }else {
                     vm.hasDaylight = false;
                 }
             });
+        };
+        vm.getWaterLevelMeasures = function () {
+            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-level"}, function (datasWater) {
+                if(datasWater.measures[0] != undefined){
+                    vm.completeWaterLevel = datasWater;
+                    vm.currentWaterLevel = datasWater.measures[0].value;
+                }else {
+                    vm.hasWaterLevel = false;
+                }
+            });
+        };
+        vm.getHumidityMeasure = function () {
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "humidity-air"}, function (datasHumidity) {
                 if(datasHumidity.measures[0] != undefined){
+                    vm.completeHumidity = datasHumidity;
                     vm.currentAirHumidity = datasHumidity.measures[0].value;
                 }else {
                     vm.hasHumidity = false;
                 }
             });
+        };
+        vm.getWaterTempMeasure = function () {
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-temperature"}, function (datasWaterTemp) {
                 if(datasWaterTemp.measures[0] != undefined){
+                    vm.completeWaterTemp = datasWaterTemp;
                     vm.currentWaterTemp = datasWaterTemp.measures[0].value;
                 }else {
                     vm.hasWaterTemp = false;
                 }
-
             });
+        };
+        vm.getAirTempMeasure = function () {
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "air-temperature"}, function (datasAirTemp) {
                 if(datasAirTemp.measures[0] != undefined){
+                    vm.completeAirTemp = datasAirTemp;
                     vm.currentAirTemp = datasAirTemp.measures[0].value;
                 }else {
                     vm.hasAirTemp = false;
@@ -92,13 +103,12 @@
             ConfigurationService.resourceConfiguredGardens.get({ slugGarden: potagerSlug}, function (datas) {
                 vm.configCurrentPotager = datas;
                 if(vm.configCurrentPotager.configuration.is_watering_active){
-                    console.log('passe');
                     vm.isIrrigActive = true;
-                    vm.irrigation = " active";
+                    vm.irrigation = "Irrigation active";
 
                 }else {
                     vm.isIrrigActive = false;
-                    vm.irrigation = " inactive";
+                    vm.irrigation = "Irrigation inactive";
 
                 }
 
@@ -110,24 +120,75 @@
             });
         };
 
+        /**
+         * Gestion du select
+         * @type {{availableOptions: *[], selectedOption: {id: string, name: string}}}
+         */
+        vm.dataType = {
+            availableOptions: [
+                {id: '1', name: 'Ensoleillement'},
+                {id: '2', name: 'Humidité'},
+                {id: '3', name: 'Température de l\'eau'},
+                {id: '4', name: 'Température de l\'air'},
+                {id: '5', name: 'Réserve d\'eau'}
+            ],
+            selectedOption: {id: '0', name: ''}
+        };
+        vm.updateSelectedOption = function (selectedOption) {
+            vm.freshGraph(selectedOption);
+        };
 
         /**
          * Gestion du graph
          * @type {string[]}
          */
-        //12 dernières heures
-        $scope.labels = [currentHour-12 +"h", currentHour-11 +"h", currentHour-10 +"h", currentHour-9 +"h",
-            currentHour-8 +"h", currentHour-7 +"h", currentHour-6 +"h", currentHour-5 +"h", currentHour-4 +"h",
-            currentHour-3 +"h", currentHour-2 +"h", currentHour-1 +"h", currentHour +"h"
+
+        vm.freshGraph = function (selectedOtion) {
+            console.log(selectedOtion);
+            var currentHour = new Date().getHours();
+            //12 dernières heures
+            $scope.labels = [currentHour-12 +"h", currentHour-11 +"h", currentHour-10 +"h", currentHour-9 +"h",
+                currentHour-8 +"h", currentHour-7 +"h", currentHour-6 +"h", currentHour-5 +"h", currentHour-4 +"h",
+                currentHour-3 +"h", currentHour-2 +"h", currentHour-1 +"h", currentHour +"h"
             ];
-        $scope.series = ['Niveau Eau', 'Ensoleillement', 'Humidité air', 'Température eau', 'Température air'];
-        $scope.data = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
-        ];
-        $scope.onClick = function (points, evt) {
-            console.log(points, evt);
+            $scope.series = [vm.dataType.selectedOption.name];
+            switch (selectedOtion.id) {
+                case "1":
+                    vm.getDaylightMeasures();
+                    console.log('ensoleillement: ', vm.completeDaylight);
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
+                    ];
+                    break;
+                case "2":
+                    vm.getHumidityMeasure();
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
+                    ];
+                    break;
+                case "3":
+                    vm.getWaterTempMeasure();
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
+                    ];
+                    break;
+                case "4":
+                    vm.getAirTempMeasure();
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
+                    ];
+                    break;
+                case "5":
+                    vm.getWaterLevelMeasures();
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
+                    ];
+                    break;
+                default:
+                    break;
+            }
         };
+
 
         /**
          * Téléchargement historique
@@ -151,10 +212,13 @@
            if(typeof (vm.potager) === 'string'){
                 $location.path('/dashboard')
             }
-            console.log('vm.potager', vm.potager);
-            console.log('type of vm.potager', typeof (vm.potager));
             vm.getConfig();
-            vm.getMeasures();
+            vm.getWaterLevelMeasures();
+            vm.getAirTempMeasure();
+            vm.getDaylightMeasures();
+            vm.getWaterTempMeasure();
+            vm.getHumidityMeasure();
+            vm.freshGraph({id: "0", name: ""}); //option settée par défaut dans le select
         })();
 
     }
