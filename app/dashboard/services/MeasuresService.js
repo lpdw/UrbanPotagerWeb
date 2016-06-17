@@ -5,7 +5,6 @@
 
         var apiPath = 'https://urbanpotager.labesse.me';
         var token =  localStorageService.get('token');
-        console.log('vérif token', token);
 
         /**
          * Get measures of a garden

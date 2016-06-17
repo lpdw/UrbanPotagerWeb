@@ -6,9 +6,7 @@
         var vm = this;
         vm.title = "MES POTAGERS";
         vm.dash = undefined;
-
         
-
         /**
          * Appel service pour récupérer les potagers
          * @returns {*|{method, isArray, transformResponse}}

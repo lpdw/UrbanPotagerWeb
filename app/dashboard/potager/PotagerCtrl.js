@@ -16,26 +16,68 @@
             $location.path('/gestion/').search({potager: vm.potager});
         };
 
+        vm.alertingUser = function () {
+            if(vm.hasAirTemp === false || vm.hasDaylight === false || vm.hasHumidity === false || vm.hasWaterLevel === false || vm.hasWaterTemp === false){
+                toaster.pop({
+                    type: 'info',
+                    title: '',
+                    body: "Une ou plusieurs données ne sont pas remontées",
+                    showCloseButton: true,
+                    timeout: 2000
+                });
+            }
+            if(vm.hasConfiguration === false){
+                toaster.pop({
+                    type: 'info',
+                    title: '',
+                    body: "Aucune configuration pour ce potager",
+                    showCloseButton: true,
+                    timeout: 2000
+                });
+            }
+        };
+
         /**
          * Récupération toutes les mesures présentes dans typesMeasures
          */
         vm.getMeasures = function () {
            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-level"}, function (datasWater) {
-               vm.currentWaterLevel = datasWater.measures[0].value;
+               if(datasWater.measures[0] != undefined){
+                   vm.currentWaterLevel = datasWater.measures[0].value;
+               }else {
+                   vm.hasWaterLevel = false;
+               }
            });
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "daylight-level"}, function (datasDaylight) {
-                vm.currentDayLight = datasDaylight.measures[0].value;
+                if(datasDaylight.measures[0] != undefined){
+                    vm.currentDayLight = datasDaylight.measures[0].value;
+                }else {
+                    vm.hasDaylight = false;
+                }
             });
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "humidity-air"}, function (datasHumidity) {
-                vm.currentAirHumidity = datasHumidity.measures[0].value;
+                if(datasHumidity.measures[0] != undefined){
+                    vm.currentAirHumidity = datasHumidity.measures[0].value;
+                }else {
+                    vm.hasHumidity = false;
+                }
             });
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-temperature"}, function (datasWaterTemp) {
-                vm.currentWaterTemp = datasWaterTemp.measures[0].value;
+                if(datasWaterTemp.measures[0] != undefined){
+                    vm.currentWaterTemp = datasWaterTemp.measures[0].value;
+                }else {
+                    vm.hasWaterTemp = false;
+                }
+
             });
             MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "air-temperature"}, function (datasAirTemp) {
-                vm.currentAirTemp = datasAirTemp.measures[0].value;
+                if(datasAirTemp.measures[0] != undefined){
+                    vm.currentAirTemp = datasAirTemp.measures[0].value;
+                }else {
+                    vm.hasAirTemp = false;
+                }
+                vm.alertingUser();
             });
-
         };
 
         /**
@@ -55,20 +97,11 @@
                     vm.irrigation = " inactive";
 
                 }
-              
+
             }, function (response) {
                 //Si aucune configuration liée au potager
                 if(response.status === 404){
-                    toaster.pop({
-                        type: 'info',
-                        title: '',
-                        body: "Aucune configuration pour ce potager, vous allez être redirigé vers votre dashboard",
-                        showCloseButton: true,
-                        timeout: 4000
-                    });
-                    $timeout(function waitForRedirection() {
-                        $location.path('/dashboard');
-                    }, 4000);
+                    vm.hasConfiguration = false;
                 }
             });
         };
@@ -92,9 +125,10 @@
         (function () {
 
             //Redirige vers le dashboard si aucun potager n'a été sélectionné
-            if(typeof (vm.potager) === 'string'){
+           /* if(typeof (vm.potager) === 'string'){
                 $location.path('/dashboard')
-            }
+            }*/
+            vm.getConfig();
             vm.getMeasures();
         })();
 
