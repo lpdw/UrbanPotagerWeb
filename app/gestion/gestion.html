@@ -6,41 +6,13 @@
 
 <!--<potagers ng-if="gestion.potagers"></potagers>-->
 
-<potager ng-if="gestion.potager"></potager>
+<!--<potager ng-if="gestion.potager"></potager>-->
 
 
-<!--{{gestion.configurations}}-->
+<configurationslist ng-if="gestion.configurations"></configurationslist>
 
 
-<div ng-if="gestion.configurations">
-
-    <h3>Configurations</h3>
-    <div class="dash animated bounceIn test" ng-repeat="configuration in gestion.configurations">
-
-        <div ng-class="dash" ng-click="gestion.selectedConfiguration(configuration.slug)">
-            <h1>{{ configuration.name }}</h1>
-            <p ng-bind="configuration.description" class="description"></p>
-        </div>
-
-    </div>
-    <p ng-hide="gestion.configurations.length">No Configuration</p>
-</div>
-
-
-<div ng-if="gestion.alerts">
-
-    <h3>Alertes</h3>
-    <div class="dash animated bounceIn test" ng-repeat="alert in gestion.alerts">
-
-        <div ng-class="dash" ng-click="gestion.selectedAlert(alert.slug)">
-            <h1>{{ alert.name }}</h1>
-            <p ng-bind="alert.description" class="description"></p>
-        </div>
-
-    </div>
-    <p ng-hide="gestion.alerts.length">No Alert</p>
-
-</div>
+<alertslist ng-if="gestion.alerts"></alertslist>
 
 
 <div ng-if="gestion.configuration" class="dash animated bounceIn test">

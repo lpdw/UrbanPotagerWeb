@@ -47,6 +47,7 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
 
             vm.configurationCopy = angular.copy(vm.configuration);
 
+            //vm.potager = "bla";
 
 
 
@@ -183,6 +184,16 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
         };
 
 
+    })
+    .directive('configurationslist', function () {
+        return {
+            templateUrl: 'gestion/directives/configurations-list.html'
+        };
+    })
+    .directive('alertslist', function () {
+        return {
+            templateUrl: 'gestion/directives/alerts-list.html'
+        };
     })
     .directive('potagers', function () {
         return {
