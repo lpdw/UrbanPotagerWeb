@@ -1,10 +1,11 @@
 (function() {
     'use strict';
 
-    function PotagerCtrl($location, ConfigurationService, toaster, $timeout, $sce, MeasuresService) {
+    function PotagerCtrl($location, ConfigurationService, toaster, $scope, MeasuresService) {
 
         var vm = this;
         var logDatas;
+        var currentHour = new Date().getHours();
 
         //Récupération des paramètres de l'url
         vm.potager = $location.search().param;
@@ -13,9 +14,12 @@
          * Redirection vers la page de gestion du potager
          */
         vm.onEditClick = function () {
-            $location.path('/gestion/').search({potager: vm.potager});
+            $location.path('/gestion/').search({potager: vm.potager.slug});
         };
 
+        /**
+         * Gestion toaster alerting
+         */
         vm.alertingUser = function () {
             if(vm.hasAirTemp === false || vm.hasDaylight === false || vm.hasHumidity === false || vm.hasWaterLevel === false || vm.hasWaterTemp === false){
                 toaster.pop({
@@ -106,6 +110,25 @@
             });
         };
 
+
+        /**
+         * Gestion du graph
+         * @type {string[]}
+         */
+        //12 dernières heures
+        $scope.labels = [currentHour-12 +"h", currentHour-11 +"h", currentHour-10 +"h", currentHour-9 +"h",
+            currentHour-8 +"h", currentHour-7 +"h", currentHour-6 +"h", currentHour-5 +"h", currentHour-4 +"h",
+            currentHour-3 +"h", currentHour-2 +"h", currentHour-1 +"h", currentHour +"h"
+            ];
+        $scope.series = ['Niveau Eau', 'Ensoleillement', 'Humidité air', 'Température eau', 'Température air'];
+        $scope.data = [
+            [65, 59, 80, 81, 56, 55, 40],
+            [28, 48, 40, 19, 86, 27, 90]
+        ];
+        $scope.onClick = function (points, evt) {
+            console.log(points, evt);
+        };
+
         /**
          * Téléchargement historique
          */
@@ -125,9 +148,11 @@
         (function () {
 
             //Redirige vers le dashboard si aucun potager n'a été sélectionné
-           /* if(typeof (vm.potager) === 'string'){
+           if(typeof (vm.potager) === 'string'){
                 $location.path('/dashboard')
-            }*/
+            }
+            console.log('vm.potager', vm.potager);
+            console.log('type of vm.potager', typeof (vm.potager));
             vm.getConfig();
             vm.getMeasures();
         })();

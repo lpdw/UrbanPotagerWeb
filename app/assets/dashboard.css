@@ -62,7 +62,7 @@
 .hvr-sweep-to-right:before{
     background: #5bb05b;
 }
-    /*********** Dashboard **********/
+/*********** Dashboard **********/
 /*********** Potager sélectionné **********/
 
 .liveDatas{
@@ -104,3 +104,13 @@
     opacity: 1 !important;
 }
 /*************** Toaster *********************/
+/*************** Graph *********************/
+.chartContainer{
+    margin: 2em;
+}
+
+.chartContainer canvas{
+    width: 100% !important;
+    height: 450px !important;
+}
+/*************** Graph *********************/
