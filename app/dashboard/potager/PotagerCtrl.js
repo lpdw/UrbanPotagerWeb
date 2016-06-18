@@ -9,10 +9,6 @@
         //Récupération des paramètres de l'url
         vm.potager = $location.search().param;
 
-        ConfigurationService.resourceConfiguredGardens.patch({slug: "gardentestassoci" }, MONOBJET, function (datas) {
-                 console.log('test update', datas);
-          });
-
         /**
          * Redirection vers la page de gestion du potager
          */
@@ -143,50 +139,139 @@
         };
 
         /**
+         * Calcul la moyenne d'un tableau
+         */
+        vm.calcMoyenne = function(array) {
+            var somme = 0;
+
+            for(var j = 0; j < array.length; j++){
+                somme += array[j].value;
+            }
+            return somme/array.length;;
+        };
+
+        /**
+         * Organisation/Tri datas
+         * @param datas
+         * @returns {*[]}
+         */
+        vm.organisationDatas = function(datas){
+            var datasAfterDeletedUseless = [];
+            vm.datasForCurrentHour = []; vm.datasForCurrentHourLess1 = []; vm.datasForCurrentHourLess2 = []; vm.datasForCurrentHourLess3 = [];
+            vm.datasForCurrentHourLess4 = []; vm.datasForCurrentHourLess5 = []; vm.datasForCurrentHourLess6 = []; vm.datasForCurrentHourLess7 = [];
+            vm.datasForCurrentHourLess8 = []; vm.datasForCurrentHourLess9 = []; vm.datasForCurrentHourLess10 = []; vm.datasForCurrentHourLess11 = [];
+            vm.datasForCurrentHourLess12 = [];
+
+            //Suppression des valeurs au delà des 12 dernières heures
+            for(var it = 0; it < datas.measures.length; it++){
+                if(moment(datas.measures[it].created_at).hour() <= moment().hour()){
+                    datasAfterDeletedUseless.push(datas.measures[it]);
+                }
+            }
+
+            //Tri des données restantes dans le bon créneau horaire
+            for(var ite = 0; ite < datasAfterDeletedUseless.length; ite++){
+                switch (moment(datasAfterDeletedUseless[ite].created_at).hour()){
+                    case moment().hour():
+                        vm.datasForCurrentHour.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(1, 'hour').hour():
+                        vm.datasForCurrentHourLess1.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(2, 'hour').hour():
+                        vm.datasForCurrentHourLess2.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(3, 'hour').hour():
+                        vm.datasForCurrentHourLess3.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(4, 'hour').hour():
+                        vm.datasForCurrentHourLess4.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(5, 'hour').hour():
+                        vm.datasForCurrentHourLess5.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(6, 'hour').hour():
+                        vm.datasForCurrentHourLess6.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(7, 'hour').hour():
+                        vm.datasForCurrentHourLess7.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(8, 'hour').hour():
+                        vm.datasForCurrentHourLess8.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(9, 'hour').hour():
+                        vm.datasForCurrentHourLess9.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(10, 'hour').hour():
+                        vm.datasForCurrentHourLess10.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(11, 'hour').hour():
+                        vm.datasForCurrentHourLess11.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    case moment().subtract(12, 'hour').hour():
+                        vm.datasForCurrentHourLess12.push(datasAfterDeletedUseless[ite]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            //Calcul les moyennes des données de chaque heure
+            vm.dataForCurrHour = vm.calcMoyenne(vm.datasForCurrentHour);
+            vm.dataForCurrHourLess1 = vm.calcMoyenne(vm.datasForCurrentHourLess1);
+            vm.dataForCurrHourLess2 = vm.calcMoyenne(vm.datasForCurrentHourLess2);
+            vm.dataForCurrHourLess3 = vm.calcMoyenne(vm.datasForCurrentHourLess3);
+            vm.dataForCurrHourLess4 = vm.calcMoyenne(vm.datasForCurrentHourLess4);
+            vm.dataForCurrHourLess5 = vm.calcMoyenne(vm.datasForCurrentHourLess5);
+            vm.dataForCurrHourLess6 = vm.calcMoyenne(vm.datasForCurrentHourLess6);
+            vm.dataForCurrHourLess7 = vm.calcMoyenne(vm.datasForCurrentHourLess7);
+            vm.dataForCurrHourLess8 = vm.calcMoyenne(vm.datasForCurrentHourLess8);
+            vm.dataForCurrHourLess9 = vm.calcMoyenne(vm.datasForCurrentHourLess9);
+            vm.dataForCurrHourLess10 = vm.calcMoyenne(vm.datasForCurrentHourLess10);
+            vm.dataForCurrHourLess11 = vm.calcMoyenne(vm.datasForCurrentHourLess11);
+            vm.dataForCurrHourLess12 = vm.calcMoyenne(vm.datasForCurrentHourLess12);
+
+            return [vm.dataForCurrHourLess12, vm.dataForCurrHourLess11, vm.dataForCurrHourLess10, vm.dataForCurrHourLess9,
+                vm.dataForCurrHourLess8, vm.dataForCurrHourLess7, vm.dataForCurrHourLess6, vm.dataForCurrHourLess5,
+                vm.dataForCurrHourLess4, vm.dataForCurrHourLess3, vm.dataForCurrHourLess2,  vm.dataForCurrHourLess1, vm.dataForCurrHour];
+        };
+
+        /**
          * Gestion du graph
          * @type {string[]}
          */
-
         vm.freshGraph = function (selectedOtion) {
-            console.log(selectedOtion);
-            var currentHour = new Date().getHours();
-            //12 dernières heures
-            $scope.labels = [currentHour-12 +"h", currentHour-11 +"h", currentHour-10 +"h", currentHour-9 +"h",
-                currentHour-8 +"h", currentHour-7 +"h", currentHour-6 +"h", currentHour-5 +"h", currentHour-4 +"h",
-                currentHour-3 +"h", currentHour-2 +"h", currentHour-1 +"h", currentHour +"h"
-            ];
+            //Graph 12 dernières heures
+            $scope.labels = [];
+            for(var d = 0; d < 13; d++){
+                vm.currentHour = moment();
+                var tempHour = 0;
+                tempHour = vm.currentHour.subtract(d, 'hour').hour();
+                $scope.labels.push(tempHour+"h");
+            }
+            $scope.labels.reverse();
+
             $scope.series = [vm.dataType.selectedOption.name];
             switch (selectedOtion.id) {
                 case "1":
                     vm.getDaylightMeasures();
-                    console.log('ensoleillement: ', vm.completeDaylight);
-                    $scope.data = [
-                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
-                    ];
+                    $scope.data = vm.organisationDatas(vm.completeDaylight);
                     break;
                 case "2":
                     vm.getHumidityMeasure();
-                    $scope.data = [
-                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
-                    ];
+                    $scope.data = vm.organisationDatas(vm.completeHumidity);
                     break;
                 case "3":
                     vm.getWaterTempMeasure();
-                    $scope.data = [
-                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
-                    ];
+                    $scope.data = vm.organisationDatas(vm.completeWaterTemp);
                     break;
                 case "4":
                     vm.getAirTempMeasure();
-                    $scope.data = [
-                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
-                    ];
+                    $scope.data = vm.organisationDatas(vm.completeAirTemp);
                     break;
                 case "5":
                     vm.getWaterLevelMeasures();
-                    $scope.data = [
-                        [65, 59, 80, 81, 56, 55, 40, 12, 34, 22, 87, 43, 12]
-                    ];
+                    $scope.data = vm.organisationDatas(vm.completeWaterLevel);
                     break;
                 default:
                     break;
@@ -195,7 +280,7 @@
 
 
         /**
-         * Téléchargement historique
+         * Téléchargement historique (@todo à implémenter quand ce sera fait au niveau de l'api)
          */
        /* var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(logDatas));
 
