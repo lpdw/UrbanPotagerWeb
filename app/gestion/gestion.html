@@ -6,16 +6,16 @@
 
 <!--<potagers ng-if="gestion.potagers"></potagers>-->
 
-<!--<potager ng-if="gestion.potager"></potager>-->
+<potager ng-if="gestion.page === 'potager'"></potager>
 
 
-<configurationslist ng-if="gestion.configurations"></configurationslist>
+<configurationslist ng-if="gestion.page === 'index'"></configurationslist>
 
 
-<alertslist ng-if="gestion.alerts"></alertslist>
+<alertslist ng-if="gestion.page === 'index'"></alertslist>
 
 
-<div ng-if="gestion.configuration" class="dash animated bounceIn test">
+<div ng-if="gestion.page === 'configuration'" class="dash animated bounceIn test">
 
     <div ng-class="dash">
         <h1>{{ gestion.configuration.name }}</h1>

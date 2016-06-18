@@ -10,6 +10,13 @@
          * All public gardens
          **/
         var resource = $resource(apiPath+'/gardens/:id', {id: '@id'}, {
+            get: {
+                method: 'GET',
+                headers:{
+                    Accept: 'text/html, application/json, text/plain, */*',
+                    Authorization: 'Bearer '+ token
+                }
+            },
             update: {
                 method: 'PUT',
                 headers:{
