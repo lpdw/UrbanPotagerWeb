@@ -49,15 +49,18 @@
         /**
          * Interact with gardens with alert
          * */
-        var resourceConfiguredGardens = $resource(apiPath+'/gardens/:slugGarden/alerts/:slugAlert', {
+        var resourceAlertGardens = $resource(apiPath+'/gardens/:slugGarden/alerts/:slugAlert', {
             slugGarden: '@slugGarden',
             slugAlert: '@slugAlert'
 
         }, {
             //Get garden alert
-            query:{
+            get:{
                 method:'GET',
-                isArray:true
+                headers:{
+                    Accept: 'text/html, application/json, text/plain, */*' ,
+                    Authorization: 'Bearer '+ token
+                }
             },
             //Unlink garden with current alert
             delete:{
@@ -69,6 +72,7 @@
             },
             post:{
                 method:"POST",
+                isArray:true,
                 headers:{
                     Accept: 'text/html, application/json, text/plain, */*' ,
                     Authorization: 'Bearer '+ token
@@ -78,7 +82,7 @@
 
         return {
             resourceAlert: resourceAlert,
-            resourceConfiguredGardens: resourceConfiguredGardens
+            resourceAlertGardens: resourceAlertGardens
         };
     }
     controllers.factory('AlertService', AlertService);

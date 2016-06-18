@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, $route, PotagerService, $q, ConfigurationService, AlertService, localStorageService) {
+controllers.controller('GestionCtrl', function ($location, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService) {
 
         var vm = this;
         var path = $location.path();
@@ -9,6 +9,8 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
         vm.changeConfiguration = false;
         vm.newConfiguration = false;
         vm.newAlert = false;
+        vm.changeAlert = false;
+        vm.changeAlertValue=0;
         vm.editAlerts = [];
         vm.comparisonTable = [
             "==",
@@ -39,6 +41,14 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                 "hour": null,
                 "minute": null
             }
+        };
+        vm.alertModel = {
+            "name": null,
+            "description": null,
+            "message": null,
+            "type": null,
+            "comparison": null,
+            "threshold": null
         };
 
 
@@ -74,54 +84,65 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                 vm.potager = datas.garden;
 
                 vm.potagerCopy = angular.copy(vm.potager);
+
+
+                ConfigurationService.resourceConfiguredGardens.get({slugGarden: params.potager}, function (datas) {
+
+                    vm.configuration = datas.configuration;
+
+                    //vm.configurationCopy = angular.copy(vm.configuration);
+
+                    vm.configurationCopy = {
+                        "name": vm.configuration.name,
+                        "description": vm.configuration.description,
+                        "lightTreshold": vm.configuration.light_treshold,
+                        "lightingStart": {
+                            "hour":vm.getHours(vm.configuration.lighting_start),
+                            "minute": vm.getMinutes(vm.configuration.lighting_start)
+                        },
+                        "lightingEnd": {
+                            "hour":vm.getHours(vm.configuration.lighting_end),
+                            "minute": vm.getMinutes(vm.configuration.lighting_end)
+                        },
+                        "isWateringActive": vm.configuration.is_watering_active,
+                        "wateringStart": {
+                            "hour":vm.getHours(vm.configuration.watering_start),
+                            "minute": vm.getMinutes(vm.configuration.watering_start)
+                        },
+                        "wateringEnd": {
+                            "hour":vm.getHours(vm.configuration.watering_end),
+                            "minute": vm.getMinutes(vm.configuration.watering_end)
+                        }
+                    };
+                });
+
+                ConfigurationService.resourceConfig.get({}, function (datas) {
+                    console.log(datas);
+
+                    vm.configurations = datas.configurations;
+                });
+
+                AlertService.resourceAlertGardens.get({slugGarden: params.potager}, function(datas) {
+                    console.log(datas);
+
+                    vm.alerts = datas.alerts;
+
+                    vm.alertsCopy = angular.copy(vm.alerts);
+
+
+                });
+
+                TypeService.resourceType.get({}, function(datas){
+                    vm.types = datas.types;
+                });
+
+                AlertService.resourceAlert.get({}, function(datas){
+                    vm.userAlerts = datas.alerts;
+                    console.log(vm.userAlerts);
+                });
             });
 
-            ConfigurationService.resourceConfiguredGardens.get({slugGarden: params.potager}, function (datas) {
-                console.log(datas);
 
-                vm.configuration = datas.configuration;
-
-                //vm.configurationCopy = angular.copy(vm.configuration);
-
-                vm.configurationCopy = {
-                    "name": vm.configuration.name,
-                    "description": vm.configuration.description,
-                    "lightTreshold": vm.configuration.light_treshold,
-                    "lightingStart": {
-                        "hour":vm.getHours(vm.configuration.lighting_start),
-                        "minute": vm.getMinutes(vm.configuration.lighting_start)
-                    },
-                    "lightingEnd": {
-                        "hour":vm.getHours(vm.configuration.lighting_end),
-                        "minute": vm.getMinutes(vm.configuration.lighting_end)
-                    },
-                    "isWateringActive": vm.configuration.is_watering_active,
-                    "wateringStart": {
-                        "hour":vm.getHours(vm.configuration.watering_start),
-                        "minute": vm.getMinutes(vm.configuration.watering_start)
-                    },
-                    "wateringEnd": {
-                        "hour":vm.getHours(vm.configuration.watering_end),
-                        "minute": vm.getMinutes(vm.configuration.watering_end)
-                    }
-                };
-
-                console.log(vm.configurationCopy);
-            });
-
-            ConfigurationService.resourceConfig.get({}, function (datas) {
-                console.log(datas);
-
-                vm.configurations = datas.configurations;
-            });
-
-            AlertService.resourceAlert.get({slugGarden: params.potager}, function(datas) {
-               console.log(datas);
-
-                vm.alerts = datas.alerts;
-
-                vm.alertsCopy = angular.copy(vm.alerts);
-            });
 
         } else if (params.alerts)
         {
@@ -158,7 +179,16 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
         {
             if(type === "alert")
             {
-                vm.editAlerts[index] = false;
+                if(action === "edit")
+                {
+                    vm.editAlerts[index] = false;
+                } else if(action === "new")
+                {
+                    vm.newAlert = false;
+                } else if(action === "change")
+                {
+                    vm.changeAlert = false;
+                }
             } else if(type === "configuration")
             {
                 if(action === "edit")
@@ -178,7 +208,23 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
         {
             if(type === "alert")
             {
-                vm.editAlerts[index] = true;
+                if(action === "edit")
+                {
+                    vm.editAlerts[index] = true;
+                    vm.newAlert = false;
+                    vm.changeAlert = false;
+                } else if(action === "new")
+                {
+                    vm.editAlerts = false;
+                    vm.newAlert = true;
+                    vm.changeAlert = false;
+                } else if(action === "change")
+                {
+                    vm.editAlerts = false;
+                    vm.newAlert = false;
+                    vm.changeAlert = true;
+                }
+
             } else if(type === "configuration")
             {
                 if(action === "edit")
@@ -213,6 +259,16 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                     });
 
                 });
+            } else if (type==="alert")
+            {
+                console.log(model);
+                AlertService.resourceAlert.post({}, model, function (datas) {
+                    console.log(datas);
+                    AlertService.resourceAlertGardens.post({slugGarden: slugGarden, slugAlert:datas.alert.slug}, function(datas){
+                        $route.reload();
+                    })
+
+                });
             }
         };
 
@@ -223,10 +279,17 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                 ConfigurationService.resourceConfig.patch({slug: slug}, changes ,function (datas){
                     $route.reload();
                 });
+            } else if (type === "alert")
+            {
+                console.log(changes);
+                delete changes.slug;
+                AlertService.resourceAlert.patch({slug: slug}, changes, function(datas){
+                   $route.reload();
+                });
             }
         };
 
-        vm.change = function(type, slugGarden, slugConfiguration)
+        vm.change = function(type, slugGarden, slug)
         {
             if(type === "configuration")
             {
@@ -235,22 +298,33 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                     ConfigurationService.resourceConfiguredGardens.delete({slugGarden: slugGarden}, function (datas){});
                 }
 
-                    ConfigurationService.resourceConfiguredGardens.post({slugGarden: slugGarden, slugConfiguration: slugConfiguration}, function (datas){
+                    ConfigurationService.resourceConfiguredGardens.post({slugGarden: slugGarden, slugConfiguration: slug}, function (datas){
                         ConfigurationService.resourceConfiguredGardens.get({slugGarden: slugGarden}, function (datas) {
                             vm.configuration = datas.configuration;
                             vm.changeConfiguration = false;
                         });
                     });
+            } else if(type === "alert")
+            {
+                console.log(slug);
+                AlertService.resourceAlertGardens.post({slugGarden: slugGarden, slugAlert: slug}, function(datas){
+                   $route.reload();
+                });
             }
         };
 
-        vm.unlink = function(type, slug)
+        vm.unlink = function(type, slugGarden, slug)
         {
             if(type === "configuration")
             {
-                ConfigurationService.resourceConfiguredGardens.delete({slugGarden: slug}, function (datas){
+                ConfigurationService.resourceConfiguredGardens.delete({slugGarden: slugGarden}, function (datas){
                     delete vm.configuration;
                 });
+            } else if (type === "alert")
+            {
+                AlertService.resourceAlertGardens.delete({slugGarden: slugGarden, slugAlert: slug}, function(datas){
+                    $route.reload();
+                })
             }
         };
 

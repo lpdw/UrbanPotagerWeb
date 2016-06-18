@@ -22,7 +22,7 @@
 
     <button class="pure-button" ng-click="gestion.display('configuration', 'new')" ng-if="!gestion.configuration">Créer une configuration</button>
     <button class="pure-button" ng-click="gestion.display('configuration', 'edit')" ng-hide="gestion.editConfiguration" ng-if="gestion.configuration">Editer</button>
-    <button class="pure-button" ng-click="gestion.display('configuration', 'change')" ng-if="gestion.configurations.length">Sélectionner parmis les configaritions</button>
+    <button class="pure-button" ng-click="gestion.display('configuration', 'change')" ng-if="gestion.configurations.length">Changer pour une autre configuration existante</button>
     <button class="pure-button" ng-click="gestion.unlink('configuration', gestion.potager.slug)" ng-show="gestion.configuration">Dé-associer</button>
 
 
@@ -250,70 +250,90 @@
     <ul>
         <li ng-repeat="alert in gestion.alerts">
             <button class="pure-button" ng-click="gestion.display('alert', 'edit', $index)" ng-hide="gestion.editAlerts[$index]">Editer</button>
-            <button class="pure-button button-warning" ng-click="gestion.delete('alert', alert.slug)">Supprimer</button>
-            <form name="alertForm{{$index}}" ng-submit="">
-                <span ng-show="gestion.editAlerts[$index]">
-                    <input type="text" name="name" value="{{alert.name}}"/>
+            <button class="pure-button button-warning" ng-click="gestion.unlink('alert', gestion.potager.slug, alert.slug)">Dé-associer</button>
+            <form name="alertForm{{$index}}" ng-submit="gestion.edit('alert', alert.slug,gestion.alertsCopy[$index] )" ng-show="gestion.editAlerts[$index]">
+                <span>Nom:
+                    <input type="text" name="name" ng-model="gestion.alertsCopy[$index].name" value="{{alert.name}}"/>
                     <br>
-                    <select name="type">
+                    Description:
+                    <textarea name="description" ng-model="gestion.alertsCopy[$index].description">{{alert.description}}</textarea>
+                    <br>
+                    Message:
+                    <input type="text" name="message" ng-model="gestion.alertsCopy[$index].message" value="{{alert.message}}"/>
+                    <br>
+                    <select name="type" ng-model="gestion.alertsCopy[$index].type">
                         <option
-                                ng-repeat="type in gestion.typesTable"
-                                value="{{type.name}}"
-                                ng-selected="type.name == alert.type"
+                                ng-repeat="type in gestion.types"
+                                value="{{type.slug}}"
+                                ng-selected="type.slug == alert.type.slug"
                         >
                             {{type.name}}
                         </option>
                     </select>
 
-                    <select name="comparison">
+                    <select name="comparison" ng-model="gestion.alertsCopy[$index].comparison">
                         <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index+1}}" ng-selected="$index == alert.comparison">{{comparison}}</option>
                     </select>
 
-                    <input type="number" name="treshold" step="any" value="{{alert.treshold}}"/>
-                    <br>
-                    <textarea name="description">{{alert.description}}</textarea>
+                    <input type="number" name="treshold" step="any" ng-model="gestion.alertsCopy[$index].threshold" value="{{alert.threshold}}"/>
                 </span>
-
-                <span ng-hide="gestion.editAlerts[$index]">
-                    <h5>{{alert.name}}</h5>
-                    {{alert.type}} {{gestion.comparisonTable[alert.comparison-1]}} {{alert.treshold}}
-                    <p>{{alert.description}}</p>
-                </span>
-                <span ng-show="gestion.editAlerts[$index]">
+                <span>
                     <button class="pure-button" type="reset" ng-click="gestion.reset('alert', 'edit', $index)">Annuler</button>
                     <button class="pure-button" type="submit"> Envoyer </button>
                 </span>
             </form>
+
+                <span ng-hide="gestion.editAlerts[$index]">
+
+                    <h5>{{alert.name}}</h5>
+                    <p>{{alert.description}}</p>
+                    <p>{{alert.message}}</p>
+
+                    <hr>
+                    {{alert.type.name}} {{gestion.comparisonTable[alert.comparison-1]}} {{alert.threshold}}
+                    <p>{{alert.description}}</p>
+                </span>
         </li>
         <p ng-hide="gestion.alerts.length">No Alert</p>
-        <form ng-show="gestion.newAlert" ng-submit="gestion.new('alert')">
+        <form ng-show="gestion.newAlert" ng-submit="gestion.new('alert', gestion.alertModel, gestion.potager.slug)">
             <label for="nameAlertNew">Nom</label>
-            <input id="nameAlertNew" type="text" placeholder="Nom de l'alerte"/>
-
+            <input id="nameAlertNew" type="text" ng-model="gestion.alertModel.name" placeholder="Nom de l'alerte"/>
+            <br>
             <label for="descriptionAlertNew">Description</label>
-            <textarea id="descriptionAlertNew" placeholder="description de l'alerte"></textarea>
-
+            <textarea id="descriptionAlertNew" ng-model="gestion.alertModel.description" placeholder="description de l'alerte"></textarea>
+            <br>
             <label for="messageAlertNew">Message</label>
-            <input id="messageAlertNew" type="text" placeholder="Message à afficher"/>
-
+            <input id="messageAlertNew" type="text" ng-model="gestion.alertModel.message" placeholder="Message à afficher"/>
+            <br>
             <label for="typesAlertNew">Types</label>
-            <select id="typesAlertNew">
-                <option ng-repeat="type in gestion.typesTable" value="{{type.name}}">{{type.name}}</option>
+            <select id="typesAlertNew" ng-model="gestion.alertModel.type">
+                <option ng-repeat="type in gestion.types" value="{{type.slug}}">{{type.name}}</option>
             </select>
-
+            <br>
             <label for="comparisonAlertNew">Comparaison</label>
-            <select id="comparisonAlertNew">
-                <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index}}">{{comparison}}</option>
+            <select id="comparisonAlertNew" ng-model="gestion.alertModel.comparison">
+                <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index+1}}">{{comparison}}</option>
             </select>
+            <br>
             <label for="tresholdAlertNew">Seuil</label>
-            <input id="tresholdAlertNew" type="number" step="any" placeholder="seuil voulu"/>
-
+            <input id="tresholdAlertNew" type="number" step="any" ng-model="gestion.alertModel.threshold" placeholder="seuil voulu"/>
+            <br>
             <button class="pure-button" type="reset" ng-click="gestion.reset('alert','new')">Annuler</button>
             <button class="pure-button" type="submit">Ajouter</button>
         </form>
 
+        <form novalidate ng-show="gestion.changeAlert">
+            <select ng-model="gestion.changeAlertValue">
+                <option ng-repeat="alert in gestion.userAlerts" ng-value="alert.slug">{{alert.name}}</option>
+            </select>
+            <button class="pure-button" type="reset" ng-click="gestion.reset('alert','change')">Annuler</button>
+            <button class="pure-button" type="submit" ng-click="gestion.change('alert', gestion.potager.slug, gestion.changeAlertValue )">Associer</button>
+        </form>
 
-        <button class="pure-button" ng-click="gestion.display('alert', 'new')" ng-hide="gestion.newAlert">Créer une alerte</button>
+        <div  ng-hide="gestion.newAlert||gestion.changeAlert">
+            <button class="pure-button" ng-click="gestion.display('alert', 'new')">Créer une alerte</button>
+            <button class="pure-button" ng-click="gestion.display('alert', 'change')">Associer une alerte existante</button>
+        </div>
     </ul>
 </div>
 
