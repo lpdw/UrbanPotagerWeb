@@ -30,7 +30,7 @@
 
 
 <div ng-if="gestion.configuration">
-    <form name="configurationsList" novalidate ng-show="gestion.changeConfiguration">
+    <form novalidate ng-show="gestion.changeConfiguration">
         <select name="configurationSlug" ng-model="configuration.slug" >
             <option ng-repeat="configuration in gestion.configurations" ng-value="configuration.slug" ng-selected="gestion.configuration.slug === configuration.slug">
                 {{configuration.name}}
@@ -41,7 +41,7 @@
         <button type="submit" class="pure-button" ng-click="gestion.change('configuration', gestion.potager.slug, configuration.slug)">Valider</button>
     </form>
 
-    <form name="configurationForm" ng-submit="gestion.edit('configuration', gestion.configuration.slug, gestion.configurationCopy)">
+    <form ng-submit="gestion.edit('configuration', gestion.configuration.slug, gestion.configurationCopy)">
         <ul>
             <li>
                 Nom:
@@ -102,7 +102,25 @@
             </li>
             <li>
                 Arrosage:
+                <br>
             <span class="edit" ng-show="gestion.editConfiguration">
+
+                <div>
+                    Activé:<br>
+                    Oui:
+                    <input type="radio" name="is_watering_active"
+                           ng-model="gestion.configurationCopy.isWateringActive"
+                           ng-value="true"
+                           ng-checked="gestion.configuration.is_watering_active"
+                    /> <br>
+                    Non:
+                    <input type="radio" name="is_watering_active"
+                           ng-model="gestion.configurationCopy.isWateringActive"
+                           ng-value="false"
+                           ng-checked="!gestion.configuration.is_watering_active"
+                    />
+                </div>
+
                 <input type="number" min="0" max="24"
                        ng-value="gestion.getHours(gestion.configuration.watering_start)"
                        ng-model="gestion.configurationCopy.wateringStart.hour"
@@ -125,6 +143,10 @@
             </span>
 
             <span ng-hide="gestion.editConfiguration">
+
+                Activé: {{gestion.configuration.is_watering_active?"Oui":"Non"}}
+                <br>
+                De
                 {{gestion.getHours(gestion.configuration.watering_start)}}:{{gestion.getMinutes(gestion.configuration.watering_start)}}
                 à
                 {{gestion.getHours(gestion.configuration.watering_end)}}:{{gestion.getMinutes(gestion.configuration.watering_end)}}
@@ -151,7 +173,7 @@
 
 <div ng-if="!gestion.configuration">
 
-    <form name="configurationsList" novalidate ng-show="gestion.changeConfiguration">
+    <form novalidate ng-show="gestion.changeConfiguration">
         <select name="configurationSlug" ng-model="configuration.slug" >
             <option ng-repeat="configuration in gestion.configurations" ng-value="configuration.slug">
                 {{configuration.name}}
@@ -162,7 +184,7 @@
         <button type="submit" class="pure-button" ng-click="gestion.change('configuration', gestion.potager.slug, configuration.slug)">Valider</button>
     </form>
 
-    <form name="configurationForm" ng-submit="gestion.new('configuration', gestion.configurationModel, gestion.potager.slug)" ng-show="gestion.newConfiguration">
+    <form ng-submit="gestion.new('configuration', gestion.configurationModel, gestion.potager.slug)" ng-show="gestion.newConfiguration">
         <ul>
             <li>
                 Nom:
@@ -206,6 +228,23 @@
             <li>
                 Arrosage:
             <span>
+
+                <div>
+                    Activer:<br>
+                    Oui:
+                    <input type="radio" name="is_watering_active"
+                           ng-model="gestion.configurationModel.isWateringActive"
+                           ng-value="true"
+                    /> <br>
+                    Non:
+                    <input type="radio" name="is_watering_active"
+                           ng-model="gestion.configurationModel.isWateringActive"
+                           ng-value="false"
+                           checked
+                    />
+                </div>
+
+                De
                 <input type="number" min="0" max="24"
                        ng-model="gestion.configurationModel.wateringStart.hour"
                 />

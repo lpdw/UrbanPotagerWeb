@@ -9,9 +9,9 @@
         /**
          * Interact with gardens with access
          * */
-        var resourceAccessGardens = $resource(apiPath+'/gardens/:slugGarden/access/:slugType', {
+        var resourceAccessGardens = $resource(apiPath+'/gardens/:slugGarden/access/:slugAccess', {
             slugGarden: '@slugGarden',
-            slugType: '@slugType'
+            slugAccess: '@slugAccess'
 
         }, {
             //Get garden access types
