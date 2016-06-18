@@ -24,6 +24,13 @@
                     Authorization: 'Bearer '+ token
                 }
             },
+            patch: {
+                method: 'PATCH',
+                headers:{
+                    Accept: 'text/html, application/json, text/plain, */*',
+                    Authorization: 'Bearer '+ token
+                }
+            },
             post:{
                 method:"POST",
                 headers:{

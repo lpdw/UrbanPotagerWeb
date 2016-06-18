@@ -5,6 +5,7 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
         var vm = this;
         var path = $location.path();
         vm.title = "Page gestion";
+        vm.editPotager = false;
         vm.editConfiguration = false;
         vm.changeConfiguration = false;
         vm.newConfiguration = false;
@@ -83,8 +84,20 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
 
                 vm.potager = datas.garden;
 
-                vm.potagerCopy = angular.copy(vm.potager);
-
+                //vm.potagerCopy = angular.copy(vm.potager);
+                vm.potagerCopy = {
+                    "name": vm.potager.name,
+                    "description": vm.potager.description,
+                    "isPublic": vm.potager.isPublic,
+                    "latitude": parseFloat(vm.potager.coordinate.lat),
+                    "longitude": parseFloat(vm.potager.coordinate.lng),
+                    "showLocation": vm.potager.show_location,
+                    "country": vm.potager.address.country,
+                    "city": vm.potager.address.city,
+                    "zipCode": vm.potager.address.zipCode,
+                    "address1": vm.potager.address.line1,
+                    "address2": vm.potager.address.line2
+                };
 
                 ConfigurationService.resourceConfiguredGardens.get({slugGarden: params.potager}, function (datas) {
 
@@ -201,6 +214,9 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                 {
                     vm.newConfiguration = false;
                 }
+            } else if (type === "potager")
+            {
+                vm.editPotager = false;
             }
         };
 
@@ -243,9 +259,9 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                     vm.changeConfiguration = false;
                     vm.newConfiguration = true;
                 }
-            } else if (type === "location")
+            } else if (type === "potager")
             {
-                vm.editLocation = true;
+                vm.editPotager = true;
             }
         };
 
@@ -285,6 +301,12 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                 delete changes.slug;
                 AlertService.resourceAlert.patch({slug: slug}, changes, function(datas){
                    $route.reload();
+                });
+            } else if (type === "potager")
+            {
+                PotagerService.resource.patch({id: slug}, changes, function(datas){
+
+                    $route.reload();
                 });
             }
         };
