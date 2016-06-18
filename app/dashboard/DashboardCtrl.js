@@ -16,7 +16,7 @@
                 vm.listePotagers = datas;
             });
         };
-
+        
         /**
          * Gestion des images aléatoires des dash
          */

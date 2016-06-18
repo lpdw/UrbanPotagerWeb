@@ -9,6 +9,10 @@
         //Récupération des paramètres de l'url
         vm.potager = $location.search().param;
 
+        ConfigurationService.resourceConfiguredGardens.patch({slug: "gardentestassoci" }, MONOBJET, function (datas) {
+                 console.log('test update', datas);
+          });
+
         /**
          * Redirection vers la page de gestion du potager
          */
