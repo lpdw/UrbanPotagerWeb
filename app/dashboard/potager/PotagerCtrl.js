@@ -109,7 +109,6 @@
                 }else {
                     vm.isIrrigActive = false;
                     vm.irrigation = "Irrigation inactive";
-
                 }
 
             }, function (response) {
@@ -164,7 +163,7 @@
 
             //Suppression des valeurs au delà des 12 dernières heures
             for(var it = 0; it < datas.measures.length; it++){
-                if(moment(datas.measures[it].created_at).hour() <= moment().hour()){
+                if(moment(datas.measures[it].created_at) <= moment()){
                     datasAfterDeletedUseless.push(datas.measures[it]);
                 }
             }
