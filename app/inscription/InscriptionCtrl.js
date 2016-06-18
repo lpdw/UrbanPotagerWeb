@@ -3,6 +3,16 @@
 controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $location, localStorageService) {
         this.title = "Page d'inscription";
 
+        $scope.isHidden = false;
+        $scope.isVisible = false;
+
+        $scope.fadeIt = function() {
+          $scope.isHidden = !$scope.isHidden;
+          $scope.isVisible = !$scope.isVisible;
+
+        }
+
+
         this.inscription = function (data) {
 
             console.log(data);
@@ -52,5 +62,28 @@ controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $locatio
                 alt.fadeOut();
             }, 2000);
         }
+    })
+
+    controllers.directive("hideMe", function($animate) {
+      return function(scope, element, attrs) {
+        scope.$watch(attrs.hideMe, function(newVal) {
+          if (newVal) {
+            $animate.addClass(element, "fadeIn")
+          } else {
+            $animate.removeClass(element, "fadeIn")
+          }
+        })
+      }
+    })
+    controllers.directive("showMe", function($animate) {
+      return function(scope, element, attrs) {
+        scope.$watch(attrs.showMe, function(newVal) {
+          if (newVal) {
+            $animate.addClass(element, "fadeOut")
+          } else {
+            $animate.removeClass(element, "fadeOut")
+          }
+        })
+      }
     }
 );
