@@ -1,13 +1,15 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, PotagerService, $q, ConfigurationService, AlertService, localStorageService) {
+controllers.controller('GestionCtrl', function ($location, $route, PotagerService, $q, ConfigurationService, AlertService, localStorageService) {
 
         var vm = this;
         var path = $location.path();
         vm.title = "Page gestion";
-        vm.editionConfiguration = false;
+        vm.editConfiguration = false;
         vm.changeConfiguration = false;
-        vm.editionAlerts = [];
+        vm.newConfiguration = false;
+        vm.newAlert = false;
+        vm.editAlerts = [];
         vm.comparisonTable = [
             "==",
             "!=",
@@ -16,22 +18,28 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
             "<=",
             ">="
         ];
-        vm.typesTable = [
-            {
-                "name": "Niveau eau",
-                "description": "je suis description niveau eau",
-                "min": 0,
-                "max": 20,
-                "type": 1
+        vm.configurationModel = {
+            "name": null,
+            "description": null,
+            "lightTreshold": null,
+            "lightingStart": {
+                "hour": null,
+                "minute": null
             },
-            {
-                "name": "Acidité",
-                "description": "acidité du sol",
-                "min": 0,
-                "max": 14,
-                "type": 1
+            "lightingEnd": {
+                "hour": null,
+                "minute": null
+            },
+            "isWateringActive": null,
+            "wateringStart": {
+                "hour": null,
+                "minute": null
+            },
+            "wateringEnd": {
+                "hour": null,
+                "minute": null
             }
-        ];
+        };
 
 
         //Récupération des paramètres de l'url
@@ -71,9 +79,34 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
             ConfigurationService.resourceConfiguredGardens.get({slugGarden: params.potager}, function (datas) {
                 console.log(datas);
 
-                vm.potagerConfiguration = datas.configuration;
+                vm.configuration = datas.configuration;
 
-                vm.potagerConfigurationCopy = angular.copy(vm.potagerConfiguration);
+                //vm.configurationCopy = angular.copy(vm.configuration);
+
+                vm.configurationCopy = {
+                    "name": vm.configuration.name,
+                    "description": vm.configuration.description,
+                    "lightTreshold": vm.configuration.light_treshold,
+                    "lightingStart": {
+                        "hour":vm.getHours(vm.configuration.lighting_start),
+                        "minute": vm.getMinutes(vm.configuration.lighting_start)
+                    },
+                    "lightingEnd": {
+                        "hour":vm.getHours(vm.configuration.lighting_end),
+                        "minute": vm.getMinutes(vm.configuration.lighting_end)
+                    },
+                    "isWateringActive": vm.configuration.is_watering_active,
+                    "wateringStart": {
+                        "hour":vm.getHours(vm.configuration.watering_start),
+                        "minute": vm.getMinutes(vm.configuration.watering_start)
+                    },
+                    "wateringEnd": {
+                        "hour":vm.getHours(vm.configuration.watering_end),
+                        "minute": vm.getMinutes(vm.configuration.watering_end)
+                    }
+                };
+
+                console.log(vm.configurationCopy);
             });
 
             ConfigurationService.resourceConfig.get({}, function (datas) {
@@ -85,9 +118,9 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
             AlertService.resourceAlert.get({slugGarden: params.potager}, function(datas) {
                console.log(datas);
 
-                vm.potagerAlerts = datas.alerts;
+                vm.alerts = datas.alerts;
 
-                vm.potagerAlertsCopy = angular.copy(vm.potagerAlerts);
+                vm.alertsCopy = angular.copy(vm.alerts);
             });
 
         } else if (params.alerts)
@@ -111,34 +144,6 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
 
         }
 
-        vm.edit = function(type , index)
-        {
-
-            if(type === "configuration")
-            {
-                vm.editionConfiguration = true;
-            } else if(type === "alerts")
-            {
-                vm.editionAlerts[index] = true;
-
-            } else if (type === "location")
-            {
-                vm.editionLocation = true;
-            }
-
-        };
-
-
-        vm.change = function(type , index)
-        {
-
-            if(type === "configuration")
-            {
-                vm.changeConfiguration = true;
-            }
-
-        };
-
         vm.getHours = function (phpDate)
         {
             return new Date(phpDate).getUTCHours();
@@ -149,68 +154,117 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
             return new Date(phpDate).getUTCMinutes();
         };
 
-        vm.setHours = function (phpDate, hours)
+        vm.reset = function(type, action, index)
         {
-            return new Date(new Date(phpDate).setUTCHours(hours)).toISOString();
-        };
-
-        vm.setMinutes = function (phpDate, minutes)
-        {
-            return new Date(new Date(phpDate).setUTCMinutes(minutes)).toISOString();
-        };
-
-        vm.reset = function(type, index, action)
-        {
-            if(type === "alerts")
+            if(type === "alert")
             {
-                vm.editionAlerts[index] = false;
+                vm.editAlerts[index] = false;
             } else if(type === "configuration")
             {
-                if(action === "edition")
+                if(action === "edit")
                 {
-                    vm.editionConfiguration = false;
-                } else if(action === "change"){
+                    vm.editConfiguration = false;
+                } else if(action === "change")
+                {
                     vm.changeConfiguration = false;
+                } else if (action === "new")
+                {
+                    vm.newConfiguration = false;
                 }
             }
         };
 
-        vm.submitConfiguration = function()
+        vm.display = function(type, action, index)
         {
-            console.log(vm.potagerConfiguration);
-            console.log(vm.potagerConfigurationCopy);
-
-            ConfigurationService.resourceConfig.patch({slug: vm.potagerConfiguration.slug, data: vm.potagerConfigurationCopy}, function (datas){
-                console.log(datas);
-            });
-
+            if(type === "alert")
+            {
+                vm.editAlerts[index] = true;
+            } else if(type === "configuration")
+            {
+                if(action === "edit")
+                {
+                    vm.editConfiguration = true;
+                    vm.changeConfiguration = false;
+                    vm.newConfiguration = false;
+                } else if(action === "change")
+                {
+                    vm.editConfiguration = false;
+                    vm.changeConfiguration = true;
+                    vm.newConfiguration = false;
+                } else if (action === "new")
+                {
+                    vm.editConfiguration = false;
+                    vm.changeConfiguration = false;
+                    vm.newConfiguration = true;
+                }
+            } else if (type === "location")
+            {
+                vm.editLocation = true;
+            }
         };
 
-        vm.submitChangeConfiguration = function(slug)
+        vm.new = function(type, model, slugGarden)
         {
-            console.log(slug);
+            if(type==="configuration")
+            {
+                ConfigurationService.resourceConfig.post({}, model ,function (datas){
+                    ConfigurationService.resourceConfiguredGardens.post({slugGarden: slugGarden, slugConfiguration: datas.configuration.slug},function(datas) {
+                        $route.reload();
+                    });
 
-            ConfigurationService.resourceConfiguredGardens.delete({slugGarden: vm.potager.slug}, function (datas){
-                console.log('here');
-                console.log(datas);
-            });
-
-            ConfigurationService.resourceConfiguredGardens.post({slugGarden: vm.potager.slug, slugConfiguration: slug}, function (datas){
-                console.log('there');
-                console.log(datas);
-            });
-
+                });
+            }
         };
 
-        vm.selectConfiguration = function(slug)
+        vm.edit = function(type, slug, changes)
         {
-            console.log(slug);
+            if (type === "configuration")
+            {
+                ConfigurationService.resourceConfig.patch({slug: slug}, changes ,function (datas){
+                    $route.reload();
+                });
+            }
+        };
 
-            ConfigurationService.resourceConfiguredGardens.post({slugGarden: vm.potager.slug, slugConfiguration: slug}, function (datas){
-                console.log('there');
-                console.log(datas);
-            });
+        vm.change = function(type, slugGarden, slugConfiguration)
+        {
+            if(type === "configuration")
+            {
+                if(vm.configuration)
+                {
+                    ConfigurationService.resourceConfiguredGardens.delete({slugGarden: slugGarden}, function (datas){});
+                }
 
+                    ConfigurationService.resourceConfiguredGardens.post({slugGarden: slugGarden, slugConfiguration: slugConfiguration}, function (datas){
+                        ConfigurationService.resourceConfiguredGardens.get({slugGarden: slugGarden}, function (datas) {
+                            vm.configuration = datas.configuration;
+                            vm.changeConfiguration = false;
+                        });
+                    });
+            }
+        };
+
+        vm.unlink = function(type, slug)
+        {
+            if(type === "configuration")
+            {
+                ConfigurationService.resourceConfiguredGardens.delete({slugGarden: slug}, function (datas){
+                    delete vm.configuration;
+                });
+            }
+        };
+
+        vm.delete = function(type, slug)
+        {
+            if(type === "configuration")
+            {
+                ConfigurationService.resourceConfig.delete({slug: slug}, function(datas){
+                    $location.path(path).search({});
+                });
+            } else if (type === "potager")
+            {
+
+            }
         };
 
         /**
@@ -234,13 +288,6 @@ controllers.controller('GestionCtrl', function ($location, PotagerService, $q, C
          */
         vm.allPotagers = function () {
             $location.path(path).search({});
-        };
-
-        /**
-         * Supprime le potager sélectionné
-         */
-        vm.deletePotager = function (potager) {
-            $location.path(path).search({"delete": "success"});
         };
 
         /**

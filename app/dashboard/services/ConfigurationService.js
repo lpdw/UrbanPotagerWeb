@@ -79,6 +79,7 @@
             },
             post:{
                 method:"POST",
+                isArray:true,
                 headers:{
                     Accept: 'text/html, application/json, text/plain, */*' ,
                     Authorization: 'Bearer '+ token
