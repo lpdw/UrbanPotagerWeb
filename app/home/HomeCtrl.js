@@ -1,8 +1,64 @@
 'use strict';
 
-controllers.controller('HomeCtrl', function ($location, $scope) {
+controllers.controller('HomeCtrl', function ($location, $scope, PotagerService) {
+    var vm = this;
+    var path = $location.path();
+    vm.listMarkers = [];
 
-    this.test = "test";
+    function toObject(arr) {
+        var rv = {};
+        for (var i = 0; i < arr.length; ++i)
+            if (arr[i] !== undefined) rv[i] = arr[i];
+        return rv;
+    };
+
+    vm.constructMarkers = function () {
+        /**
+         * Récupération potagers publiques
+         */
+        PotagerService.resource.get(function (datas) {
+            vm.listePotagerPublic = datas.gardens;
+            for(var i = 0; i < vm.listePotagerPublic.length;i++){
+                if(vm.listePotagerPublic[i].coordinate != undefined){
+                    var m = "m"+ (i+1);
+                    console.log(m);
+                    var marker = {
+                        temp: {
+                            lat: Math.round(vm.listePotagerPublic[i].coordinate.lat*100)/100,
+                            lng: Math.round(vm.listePotagerPublic[i].coordinate.lng*100)/100,
+                            focus: false,
+                            message: vm.listePotagerPublic[i].name,
+                            icon: local_icons.leaf_icon
+                        }
+                    };
+                    vm.listMarkers.push(marker);
+                }
+            }
+
+            console.log('listMarkers', vm.listMarkers);
+            for(var j = 0; j < vm.listMarkers.length; j ++){
+                $scope.addMarkers(vm.listMarkers[j]);
+
+            }
+            /*   markers: {
+             m1: {
+             lat: 48.5,
+             lng: 2.18,
+             focus: false,
+             message: "",
+             icon: local_icons.leaf_icon,
+             },
+             m2: {
+             lat: 48.7,
+             lng: 2.18,
+             focus: false,
+             message: "",
+             icon: local_icons.orange_leaf_icon,
+             }*/
+
+
+        });
+    };
 
     var local_icons = {
         default_icon: {},
@@ -46,9 +102,7 @@ controllers.controller('HomeCtrl', function ($location, $scope) {
                 lng: 2.24428138732910156
             }
         },
-
         markers: {}
-
     };
 
     $scope.setRegion = function (region) {
@@ -66,41 +120,27 @@ controllers.controller('HomeCtrl', function ($location, $scope) {
         }
     });
 
-    $scope.addMarkers = function () {
+    $scope.addMarkers = function (marker) {
+        console.log('test',marker);
         angular.extend($scope, {
-            markers: {
+            markers: marker
+            /*{
                 m1: {
                     lat: 48.5,
                     lng: 2.18,
                     focus: false,
                     message: "",
-                    icon: local_icons.leaf_icon,
-                },
-                m2: {
-                    lat: 48.7,
-                    lng: 2.18,
-                    focus: false,
-                    message: "",
-                    icon: local_icons.orange_leaf_icon,
+                    icon: local_icons.leaf_icon
                 }
-            }
+            }*/
         });
     };
-
-    $scope.removeMarkers = function () {
-        $scope.markers = {};
-    };
-
-    $scope.addMarkers();
-
 
     $scope.$on("leafletDirectiveMarker.dragend", function (event, args) {
         $scope.position.lat = args.model.lat;
         $scope.position.lng = args.model.lng;
     });
 
-    var vm = this;
-    var path = $location.path();
 
     vm.main_title = "CONCEPT";
     vm.conceptImageUrl = "./assets/images/home-concept.png";
@@ -129,4 +169,11 @@ controllers.controller('HomeCtrl', function ($location, $scope) {
     vm.login = function () {
         $location.path('/inscription/');
     };
+
+    /**
+     * Point d'entrée du controller
+     */
+    (function () {
+        vm.constructMarkers();
+    })();
 });
