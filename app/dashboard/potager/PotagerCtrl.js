@@ -95,6 +95,7 @@
       });
     };
 
+<<<<<<< HEAD
     /**
     * Récupération configuration
     */
@@ -105,6 +106,72 @@
         if(vm.configCurrentPotager.configuration.is_watering_active){
           vm.isIrrigActive = true;
           vm.irrigation = "Irrigation active";
+=======
+        /**
+         * Récupération toutes les mesures présentes dans typesMeasures
+         */
+        vm.getDaylightMeasures = function () {
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "daylight-level"}, function (datasDaylight) {
+                    if(datasDaylight.measures[0] != undefined){
+                        vm.completeDaylight = datasDaylight;
+                        vm.currentDayLight = datasDaylight.measures[0].value;
+                    }else {
+                        vm.hasDaylight = false;
+                    }
+                });
+            }
+        };
+        vm.getWaterLevelMeasures = function () {
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-level"}, function (datasWater) {
+                    if(datasWater.measures[0] != undefined){
+                        vm.completeWaterLevel = datasWater;
+                        vm.currentWaterLevel = datasWater.measures[0].value;
+                    }else {
+                        vm.hasWaterLevel = false;
+                    }
+                });
+            }
+        };
+        vm.getHumidityMeasure = function () {
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "humidity-air"}, function (datasHumidity) {
+                    if(datasHumidity.measures[0] != undefined){
+                        vm.completeHumidity = datasHumidity;
+                        vm.currentAirHumidity = datasHumidity.measures[0].value;
+                    }else {
+                        vm.hasHumidity = false;
+                    }
+                });
+            }
+        };
+        vm.getWaterTempMeasure = function () {
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-temperature"}, function (datasWaterTemp) {
+                    if(datasWaterTemp.measures[0] != undefined){
+                        vm.completeWaterTemp = datasWaterTemp;
+                        vm.currentWaterTemp = datasWaterTemp.measures[0].value;
+                    }else {
+                        vm.hasWaterTemp = false;
+                    }
+                });
+            }
+        };
+        vm.getAirTempMeasure = function () {
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "air-temperature"}, function (datasAirTemp) {
+                    if(datasAirTemp.measures[0] != undefined){
+                        vm.completeAirTemp = datasAirTemp;
+                        vm.currentAirTemp = datasAirTemp.measures[0].value;
+                    }else {
+                        vm.hasAirTemp = false;
+                    }
+                    vm.alertingUser();
+                });
+            }
+        };
+>>>>>>> 3a7540f32651457bfa4af256eb8900b1fab6f0a6
 
         }else {
           vm.isIrrigActive = false;
@@ -293,6 +360,7 @@
       var container = document.getElementById('container');
       container.appendChild(a);*/
 
+<<<<<<< HEAD
       /**
       * Point d'entrée du controller
       */
@@ -310,6 +378,25 @@
         vm.getHumidityMeasure();
         vm.freshGraph({id: "0", name: ""}); //option settée par défaut dans le select
       })();
+=======
+        /**
+         * Point d'entrée du controller
+         */
+        (function () {
+            vm.isOndash = true;
+            //Redirige vers le dashboard si aucun potager n'a été sélectionné
+           if(typeof (vm.potager) === 'string'){
+                $location.path('/dashboard')
+            }
+            vm.getConfig();
+            vm.getWaterLevelMeasures();
+            vm.getAirTempMeasure();
+            vm.getDaylightMeasures();
+            vm.getWaterTempMeasure();
+            vm.getHumidityMeasure();
+            vm.freshGraph({id: "0", name: ""}); //option settée par défaut dans le select
+        })();
+>>>>>>> 3a7540f32651457bfa4af256eb8900b1fab6f0a6
 
     }
 

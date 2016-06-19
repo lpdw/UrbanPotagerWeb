@@ -38,8 +38,12 @@
   <link href="assets/dashboard.css" rel="stylesheet" type="text/css">
   <link href="assets/home.css" rel="stylesheet" type="text/css">
   <link href="assets/login.css" rel="stylesheet" type="text/css">
+<<<<<<< HEAD
   <link href="assets/garden.css" rel="stylesheet" type="text/css">
 
+=======
+  <link href="assets/profile.css" rel="stylesheet" type="text/css">
+>>>>>>> 3a7540f32651457bfa4af256eb8900b1fab6f0a6
   <link rel="stylesheet" type="text/css" href="assets/animate-custom.css" />
   <link rel="stylesheet" href="assets/leaflet.css" type="text/css" />
 
@@ -55,9 +59,9 @@
     <ul>
       <li><a href="#/home">Home</a></li>
       <li><a href="#/dashboard">Dashboard</a></li>
-      <li><a href="#/inscription">Inscription</a></li>
-      <li ng-if="login"><a href="#/gestion">Gestion</a></li>
-      <li><a ng-click="logout()" href>Logout</a></li>
+      <li><a href="#/gestion">Gestion</a></li>
+      <li><a href="#/profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+      <li><a ng-click="logout()" href><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
     </ul>
   </div>
   <div ng-view>
@@ -143,6 +147,8 @@
 <script src="gestion/services/TypeService.js"></script>
 <script src="gestion/services/AccessService.js"></script>
 <script src="inscription/InscriptionCtrl.js"></script>
+<script src="profile/ProfileCtrl.js"></script>
+<script src="profile/services/UserService.js"></script>
 <script src="gestion/GestionCtrl.js"></script>
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>

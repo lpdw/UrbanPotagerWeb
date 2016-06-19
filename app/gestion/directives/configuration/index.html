@@ -1,0 +1,42 @@
+
+<h1> Configuration {{gestion.configuration.name}}</h1>
+
+<div ng-hide="gestion.editConfiguration">
+
+    <ul>
+        <li>
+            Nom: {{gestion.configuration.name}}
+        </li>
+        <li>
+            Description: {{gestion.configuration.description}}
+        </li>
+
+
+        <li>
+            Allumage: De {{gestion.getHours(gestion.configuration.lighting_start)}}:{{gestion.getMinutes(gestion.configuration.lighting_start)}}
+            à
+            {{gestion.getHours(gestion.configuration.lighting_end)}}:{{gestion.getMinutes(gestion.configuration.lighting_end)}}
+        </li>
+        <li>
+            Arrosage: <br>
+            Activé: {{gestion.configuration.is_watering_active?"Oui":"Non"}}
+            <br>
+            De
+            {{gestion.getHours(gestion.configuration.watering_start)}}:{{gestion.getMinutes(gestion.configuration.watering_start)}}
+            à
+            {{gestion.getHours(gestion.configuration.watering_end)}}:{{gestion.getMinutes(gestion.configuration.watering_end)}}
+
+        </li>
+        <li>
+            Luminosité: {{gestion.configuration.light_treshold}}%
+        </li>
+    </ul>
+</div>
+
+<configurationeditform ng-show="gestion.editConfiguration"></configurationeditform>
+
+<div>
+    <button class="pure-button" ng-click="gestion.display('configuration', 'edit')" ng-hide="gestion.editConfiguration">Éditer</button>
+    <button class="pure-button" ng-click="gestion.delete('configuration', gestion.configuration.slug)" ng-hide="gestion.editConfiguration">Supprimer</button>
+</div>
+

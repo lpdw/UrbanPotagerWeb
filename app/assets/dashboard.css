@@ -62,6 +62,10 @@
 .hvr-sweep-to-right:before{
     background: #5bb05b;
 }
+
+.dashSelection:hover{
+    cursor: pointer;
+}
 /*********** Dashboard **********/
 /*********** Potager sélectionné **********/
 

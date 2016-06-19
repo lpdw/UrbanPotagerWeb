@@ -1,6 +1,7 @@
 'use strict';
 
-controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $location, localStorageService) {
+controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $location, localStorageService, $route) {
+
         this.title = "Page d'inscription";
 
         $scope.isHidden = false;
@@ -42,10 +43,11 @@ controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $locatio
                     }
                 })
                 .done(function (msg) {
-                    console.log(msg);
-                    $rootScope.login = true;
                     localStorageService.set("token", msg.token);
-                    $location.path("/home");
+                    $location.path("/profile");
+                })
+                .fail(function(){
+                    console.log("Error");
                 });
         };
 
