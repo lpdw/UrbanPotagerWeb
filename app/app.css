@@ -27,7 +27,7 @@
 }
 body{
   background-color: #fcfcfc;
-  background: url("assets/images/fond.png");
+  background: url("assets/images/fond2.png");
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
@@ -45,6 +45,7 @@ body{
   overflow: auto;
   height: 80px;
   padding: 0 8px;
+  background-color: #fff;
 }
 .menu .logo{
   height: 100%;

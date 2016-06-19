@@ -1,8 +1,4 @@
 
-.liveDatas{
-  background: url("images/fond2.png");
-  height: 150vh;
-}
 .dash-title{
   background-color: #292323;
   color: #fff;
@@ -16,8 +12,8 @@
   /* margin-top: 0; */
   /* padding-top: 0; */
   /* vertical-align: top; */
-  display: table-caption;
-  padding: 7% 0;
+  display: table-cell;
+padding: 11% 0;
 
 }
 .dashboard-box{
@@ -84,6 +80,8 @@
   background: -webkit-linear-gradient(top, #4aff7b 0%,#3fb570 100%);
   background: linear-gradient(to bottom, #4aff7b 0%,#3fb570 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4aff7b', endColorstr='#3fb570',GradientType=0 );
+  margin: 0 auto;
+  display: inherit;
 }
 .dash-temp, .dash-hum{
   margin-right: 1%;
@@ -153,20 +151,20 @@
   margin-top: 3%;
 }
 select#dataType {
-    background-color: rgba(255, 255, 255, 0.73);
-    height: 70px;
-padding-left: 51px;
+  background-color: rgba(255, 255, 255, 0.73);
+  height: 70px;
+  padding-left: 51px;
 }
 select#dataType option:checked {
-    background-color: rgba(255, 255, 255, 0.73);
-text-align: center;
+  background-color: rgba(255, 255, 255, 0.73);
+  text-align: center;
 }
 .chartContainer {
-    margin: 2em;
-    background-color: rgba(255, 255, 255, 0.73);
-    padding: 2%;
-    /* color: wheat; */
-    border-radius: 5px;
+  margin: 2em;
+  background-color: rgba(255, 255, 255, 0.73);
+  padding: 2%;
+  /* color: wheat; */
+  border-radius: 5px;
 }
 .dash-chart h2{
   margin-top: 5%;
@@ -175,11 +173,11 @@ text-align: center;
   font-family: 'geosans', Calibri, Arial, sans-serif;
 }
 /*.dash-chart label[for=dataType]{
-  color: #fff;
-  font-size: 1.5em;
-  height: 100px;
-  /* margin-top: -2%; */
+color: #fff;
+font-size: 1.5em;
+height: 100px;
+/* margin-top: -2%; */
 /*  overflow: inherit;
-  position: relative;
-  font-family: 'geosans', Calibri, Arial, sans-serif;
+position: relative;
+font-family: 'geosans', Calibri, Arial, sans-serif;
 }*/
