@@ -28,6 +28,10 @@ angular.module('myApp', ['ngRoute', 'controllers', 'toaster'])
                     templateUrl: 'gestion/gestion.html',
                     controller: 'GestionCtrl as gestion'
                 })
+                .when('/profile', {
+                    templateUrl: 'profile/profile.html',
+                    controller: 'ProfileCtrl as profile'
+                })
                 .otherwise({
                     redirectTo: '/home'
                 });
@@ -50,10 +54,14 @@ var controllers = angular.module('controllers', [
     'LocalStorageModule'
 ]);
 
-controllers.controller('MainCtrl', function ($scope, localStorageService){
+controllers.controller('MainCtrl', function ($route, $scope, $location, localStorageService){
+
+    //$scope.log = localStorageService.get("token");
 
     $scope.logout = function(){
         localStorageService.clearAll();
+        $route.reload();
+        $location.path("/home");
     }
 
 
