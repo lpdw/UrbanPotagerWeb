@@ -1,51 +1,91 @@
-<div class="pure-g liveDatas">
+<div class="liveDatas">
+  <div class="dash-title">
+    <div class="dashboard-container">
+      <h1 class="text-left">{{ potager.title }}</h1>
+    </div>
+  </div>
+  <div class="dashboard-container">
     <toaster-container class="toaster" toaster-options="{'limit':2}"></toaster-container>
-    <div class="pure-u-1">
-        <button class="pure-button button hvr-sweep-to-right btn pull-right" ng-click="potager.onEditClick()">
-            <i class="fa fa-pencil-square-o"></i>
-            Modifier
-        </button>
+    <div class="col-md-3 col-sm-3 dash-desc-box">
+      <div class="row dash-desc">
+        <!--<div class="col-md-2 col-sm-2">
+        <img src="assets/images/dashboards/plant-icon.svg" class="img-responsive center-block">
+      </div>-->
+      <h1 class="text-left"> {{ potager.potager.name }}</h1>
+      <p class="descrPotager text-left">{{ potager.configCurrentPotager.configuration.description }}</p>
+      <button class="hvr-sweep-to-right mui-btn mui-btn--large mui-btn--primary mui-btn--fab" ng-click="potager.onEditClick()"><i class="fa fa-pencil-square-o"></i></button>
+    </div>
+  </div>
+  <div class="col-md-9 col-sm-9 dahs-details">
+    <div class="row">
+      <div class="col-md-3 col-sm-3 dashboard-box dash-temp">
+        <h2 class="">Température de l'eau</h2>
+        <p>{{ potager.currentWaterTemp}} °C</p>
+      </div>
+      <div class="col-md-3 col-sm-3 dashboard-box dash-water">
+        <h2 class="">Niveau réservoir d'eau</h2>
+        <p>{{ potager.currentWaterLevel }} %</p>
+      </div>
+
+      <div class="col-md-3 col-sm-3 dashboard-box dash-light">
+        <h2 class="">Niveau d'ensoleillement</h2>
+        <p>{{ potager.currentDayLight }} %</p>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-3 col-sm-3 dashboard-box dash-hum">
+        <h2 class="">Niveau d'humidité dans l'air</h2>
+        <p> {{ potager.currentAirHumidity }} %</p>
+
+      </div>
+
+      <div class="col-md-3 col-sm-3 dashboard-box dash-air">
+        <h2 class="">Température de l'air </h2>
+        <p>{{ potager.currentAirTemp }} °C</p>
+
+      </div>
+
+      <div class="irrigStatus col-md-3 col-sm-3 dashboard-box dash-irrig">
+        <h2 class="">Irrigation</h2>
+        <p ng-bind-html="potager.irrigation | toTrusted"></p>
+
+      </div>
     </div>
 
-    <h1 class="pure-u-1"> {{ potager.potager.name }}</h1>
-    <div class="pure-u-1">
-        <p class="pure-u-1-2 descrPotager">{{ potager.configCurrentPotager.configuration.description }}</p>
+  </div>
+  <div class="col-md-12 col-sm-12">
+    <div class="row dash-chart">
+
+      <div class="">
+        <div class="">
+          <div id="container"></div>
+        </div>
+        <legend><h1 class="">Activité récente</h1></legend>
+
+        <div class="col-md-4 col-sm-4">
+<h2>Sélectionner un type de donnée</h2>
+          <form class="" name="dataTypeForm">
+            <div class="mui-select">
+              <label for="dataType" class="labelDatas"></label>
+              <select name="dataType" id="dataType" ng-model="potager.dataType.selectedOption" ng-options="option.name for option in potager.dataType.availableOptions track by option.id" ng-change="potager.updateSelectedOption(potager.dataType.selectedOption)">
+
+              </select>
+
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8 col-sm-8">
+
+
+          <div class="chartContainer">
+            <canvas id="line" class="chart chart-line" chart-data="data"
+            chart-labels="labels" chart-colours="yellow" chart-legend="true" chart-series="series"
+            chart-click="onClick">
+          </canvas>
+        </div>
+      </div>
     </div>
-    <div class="pure-u-1">
-        <p class="pure-u-1-5">Température de l'eau: {{ potager.currentWaterTemp}} °C</p>
-        <p class="pure-u-1-5">Niveau réservoir d'eau: {{ potager.currentWaterLevel }} %</p>
-    </div>
-
-    <div class="pure-u-1">
-        <p class="pure-u-1-5">Niveau d'ensoleillement: {{ potager.currentDayLight }} %</p>
-        <p class="pure-u-1-5">Niveau d'humidité dans l'air: {{ potager.currentAirHumidity }} %</p>
-        <p class="pure-u-1-5">Température de l'air: {{ potager.currentAirTemp }} °C</p>
-    </div>
-
-    <div class="pure-u-1 irrigStatus">
-        <p class="pure-u-10" ng-bind-html="potager.irrigation | toTrusted"></p>
-    </div>
-
-    <div class="pure-u-1">
-        <div id="container"></div>
-    </div>
-
-    <h1 class="pure-u-1">Historique des 12 dernières heures</h1>
-
-    <form class="pure-u-1" name="dataTypeForm">
-        <label for="dataType" class="pure-u-3 labelDatas">Sélectionner un type de donnée</label>
-        <select class="pure-u-3" name="dataType" id="dataType"
-                ng-options="option.name for option in potager.dataType.availableOptions track by option.id"
-                ng-model="potager.dataType.selectedOption"
-                ng-change="potager.updateSelectedOption(potager.dataType.selectedOption)">
-
-        </select>
-    </form>
-
-    <div class="pure-u-1 chartContainer">
-        <canvas id="line" class="chart chart-line" chart-data="data"
-            chart-labels="labels" chart-legend="true" chart-series="series"
-                chart-click="onClick">
-        </canvas>
-    </div>
+  </div>
+</div>
 </div>

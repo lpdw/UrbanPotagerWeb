@@ -1,13 +1,13 @@
 /* app css stylesheet */
 @font-face {
-    font-family: 'geosans';
-    src: url('assets/fonts/geosanslight-oblique-webfont.eot');
-    src: url('assets/fonts/geosanslight-oblique-webfont.eot?#iefix') format('embedded-opentype'),
-         url('assets/fonts/geosanslight-oblique-webfont.woff2') format('woff2'),
-         url('assets/fonts/geosanslight-oblique-webfont.woff') format('woff'),
-         url('assets/fonts/geosanslight-oblique-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;;
+  font-family: 'geosans';
+  src: url('assets/fonts/geosanslight-oblique-webfont.eot');
+  src: url('assets/fonts/geosanslight-oblique-webfont.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/geosanslight-oblique-webfont.woff2') format('woff2'),
+  url('assets/fonts/geosanslight-oblique-webfont.woff') format('woff'),
+  url('assets/fonts/geosanslight-oblique-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;;
 
 }
 
@@ -15,14 +15,14 @@
 
 
 @font-face {
-    font-family: 'geosans';
-    src: url('assets/fonts/geosanslight-webfont.eot');
-    src: url('assets/fonts/geosanslight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('assets/fonts/geosanslight-webfont.woff2') format('woff2'),
-         url('assets/fonts/geosanslight-webfont.woff') format('woff'),
-         url('assets/fonts/geosanslight-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'geosans';
+  src: url('assets/fonts/geosanslight-webfont.eot');
+  src: url('assets/fonts/geosanslight-webfont.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/geosanslight-webfont.woff2') format('woff2'),
+  url('assets/fonts/geosanslight-webfont.woff') format('woff'),
+  url('assets/fonts/geosanslight-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 
 }
 body{
@@ -43,16 +43,16 @@ body{
 .menu{
   position: relative;
   overflow: auto;
-  height: 125px;
+  height: 80px;
   padding: 0 8px;
-  background-color: #000;
 }
 .menu .logo{
   height: 100%;
-  padding: 15px;
+  padding: 8px;
   float: left;
 }
 .menu .logo img{
+  height: 60px;
 }
 
 .menu ul{
@@ -84,10 +84,10 @@ body{
   padding: 16px;
 }
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: 10vh;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 10vh;
 }
 .footer-social{
   background-color: #E6E0E0;
@@ -119,14 +119,14 @@ footer {
   background:#4b6ea8 !important;
 }
 .twitter:hover{
-	background:#4fd5f8 !important;
+  background:#4fd5f8 !important;
 }
 .linkedin:hover{
-	background:#0189c3 !important;
+  background:#0189c3 !important;
 }
 .instagram:hover{
-		background:#e1d4b8 !important;
-	}
+  background:#e1d4b8 !important;
+}
 .footer-btm{
   background-color: #fff;
   padding: 2% 0;
