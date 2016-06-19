@@ -3,10 +3,14 @@
 <h3>Configurations</h3>
 <div class="dash animated bounceIn test" ng-repeat="configuration in gestion.configurations">
 
-    <div ng-class="dash" ng-click="gestion.selectedConfiguration(configuration.slug)">
+    <div ng-class="dash" ng-click="gestion.goToPage('configuration', 'select', configuration.slug)">
         <h1>{{ configuration.name }}</h1>
         <p ng-bind="configuration.description" class="description"></p>
     </div>
 
 </div>
-<p ng-hide="gestion.configurations.length">No Configuration</p>
+<div ng-hide="gestion.configurations.length">
+    <p>No Configuration</p>
+    <configurationnewform ng-show="gestion.newConfiguration"></configurationnewform>
+    <button class="pure-button" ng-click="gestion.display('configuration', 'new')" ng-hide="gestion.newConfiguration">Nouvelle configuration</button>
+</div>

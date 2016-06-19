@@ -3,7 +3,10 @@
 <ul>
     <li ng-repeat="alert in gestion.alerts">
         <button class="pure-button" ng-click="gestion.display('alert', 'edit', $index)" ng-hide="gestion.editAlerts[$index]">Editer</button>
-        <button class="pure-button button-warning" ng-click="gestion.unlink('alert', gestion.potager.slug, alert.slug)">Dé-associer</button>
+
+        <button class="pure-button button-warning"
+                ng-click="gestion.unlink('alert', gestion.potager.slug, alert.slug)"
+        >Dé-associer</button>
 
         <form name="alertForm{{$index}}" ng-submit="gestion.edit('alert', alert.slug,gestion.alertsCopy[$index] )" ng-show="gestion.editAlerts[$index]">
                 <span>Nom:
@@ -26,7 +29,10 @@
                     </select>
 
                     <select name="comparison" ng-model="gestion.alertsCopy[$index].comparison">
-                        <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index+1}}" ng-selected="$index == alert.comparison">{{comparison}}</option>
+                        <option ng-repeat="comparison in gestion.comparisonTable"
+                                value="{{$index+1}}"
+                                ng-selected="$index+1 == alert.comparison"
+                        >{{comparison}}</option>
                     </select>
 
                     <input type="number" name="treshold" step="any" ng-model="gestion.alertsCopy[$index].threshold" value="{{alert.threshold}}"/>

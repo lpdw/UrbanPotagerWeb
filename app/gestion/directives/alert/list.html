@@ -9,4 +9,8 @@
     </div>
 
 </div>
-<p ng-hide="gestion.alerts.length">No Alert</p>
+<div ng-hide="gestion.alerts.length">
+    <p>No Alert</p>
+    <alertnewform ng-show="gestion.newAlert"></alertnewform>
+    <button class="pure-button" ng-click="gestion.display('alert', 'new')" ng-hide="gestion.newAlert">Nouvelle alerte</button>
+</div>
