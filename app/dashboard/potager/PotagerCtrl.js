@@ -44,55 +44,65 @@
          * Récupération toutes les mesures présentes dans typesMeasures
          */
         vm.getDaylightMeasures = function () {
-            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "daylight-level"}, function (datasDaylight) {
-                if(datasDaylight.measures[0] != undefined){
-                    vm.completeDaylight = datasDaylight;
-                    vm.currentDayLight = datasDaylight.measures[0].value;
-                }else {
-                    vm.hasDaylight = false;
-                }
-            });
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "daylight-level"}, function (datasDaylight) {
+                    if(datasDaylight.measures[0] != undefined){
+                        vm.completeDaylight = datasDaylight;
+                        vm.currentDayLight = datasDaylight.measures[0].value;
+                    }else {
+                        vm.hasDaylight = false;
+                    }
+                });
+            }
         };
         vm.getWaterLevelMeasures = function () {
-            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-level"}, function (datasWater) {
-                if(datasWater.measures[0] != undefined){
-                    vm.completeWaterLevel = datasWater;
-                    vm.currentWaterLevel = datasWater.measures[0].value;
-                }else {
-                    vm.hasWaterLevel = false;
-                }
-            });
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-level"}, function (datasWater) {
+                    if(datasWater.measures[0] != undefined){
+                        vm.completeWaterLevel = datasWater;
+                        vm.currentWaterLevel = datasWater.measures[0].value;
+                    }else {
+                        vm.hasWaterLevel = false;
+                    }
+                });
+            }
         };
         vm.getHumidityMeasure = function () {
-            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "humidity-air"}, function (datasHumidity) {
-                if(datasHumidity.measures[0] != undefined){
-                    vm.completeHumidity = datasHumidity;
-                    vm.currentAirHumidity = datasHumidity.measures[0].value;
-                }else {
-                    vm.hasHumidity = false;
-                }
-            });
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "humidity-air"}, function (datasHumidity) {
+                    if(datasHumidity.measures[0] != undefined){
+                        vm.completeHumidity = datasHumidity;
+                        vm.currentAirHumidity = datasHumidity.measures[0].value;
+                    }else {
+                        vm.hasHumidity = false;
+                    }
+                });
+            }
         };
         vm.getWaterTempMeasure = function () {
-            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-temperature"}, function (datasWaterTemp) {
-                if(datasWaterTemp.measures[0] != undefined){
-                    vm.completeWaterTemp = datasWaterTemp;
-                    vm.currentWaterTemp = datasWaterTemp.measures[0].value;
-                }else {
-                    vm.hasWaterTemp = false;
-                }
-            });
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "water-temperature"}, function (datasWaterTemp) {
+                    if(datasWaterTemp.measures[0] != undefined){
+                        vm.completeWaterTemp = datasWaterTemp;
+                        vm.currentWaterTemp = datasWaterTemp.measures[0].value;
+                    }else {
+                        vm.hasWaterTemp = false;
+                    }
+                });
+            }
         };
         vm.getAirTempMeasure = function () {
-            MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "air-temperature"}, function (datasAirTemp) {
-                if(datasAirTemp.measures[0] != undefined){
-                    vm.completeAirTemp = datasAirTemp;
-                    vm.currentAirTemp = datasAirTemp.measures[0].value;
-                }else {
-                    vm.hasAirTemp = false;
-                }
-                vm.alertingUser();
-            });
+            if(vm.isOndash == true){
+                MeasuresService.resource.get({slugGarden: vm.potager.slug, slugType: "air-temperature"}, function (datasAirTemp) {
+                    if(datasAirTemp.measures[0] != undefined){
+                        vm.completeAirTemp = datasAirTemp;
+                        vm.currentAirTemp = datasAirTemp.measures[0].value;
+                    }else {
+                        vm.hasAirTemp = false;
+                    }
+                    vm.alertingUser();
+                });
+            }
         };
 
         /**
@@ -295,7 +305,7 @@
          * Point d'entrée du controller
          */
         (function () {
-
+            vm.isOndash = true;
             //Redirige vers le dashboard si aucun potager n'a été sélectionné
            if(typeof (vm.potager) === 'string'){
                 $location.path('/dashboard')
