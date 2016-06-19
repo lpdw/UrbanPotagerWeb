@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService) {
+controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService, OpenStreetMapService, $scope) {
 
 
         if (!localStorageService.get('token'))
@@ -10,6 +10,8 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
             var vm = this;
             var path = $location.path();
             vm.title = "Page gestion";
+            vm.longitude = 40.095;
+            vm.latitude = -3.823;
             vm.editPotager = false;
             vm.editConfiguration = false;
             vm.changeConfiguration = false;
@@ -59,6 +61,28 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
             };
 
 
+            var mainMarker = {
+                lat: vm.latitude,
+                lng: vm.longitude,
+                focus: true,
+                draggable: false
+            };
+
+            angular.extend($scope, {
+                markers: {
+                    mainMarker: {
+                        lat: 42,
+                        lng: 42,
+                        focus: true,
+                        draggable: true
+                    }
+                },
+                center: {
+                    lat: 40.095,
+                    lon: -3.823,
+                    zoom: 8
+                }
+            });
 
             //Récupération des paramètres de l'url
             var params = $location.search();
@@ -214,9 +238,27 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
                 });
 
 
+            } else if ($location.hash() === "newPotager")
+            {
+                vm.page = "newPotager";
+
+                vm.potager = {
+                    "name": null,
+                    "description": null,
+                    "isPublic": null,
+                    "latitude": 42,
+                    "longitude": 42,
+                    "showLocation": null,
+                    "country": null,
+                    "city": null,
+                    "zipCode": null,
+                    "address1": null,
+                    "address2": null
+                };
             } else
             {
 
+                //if($location)
                 vm.page = "index";
 
                 ConfigurationService.resourceConfig.get({}, function (datas) {
@@ -339,13 +381,18 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
                     });
                 } else if (type==="alert")
                 {
-                    console.log(model);
                     AlertService.resourceAlert.post({}, model, function (datas) {
                         console.log(datas);
                         AlertService.resourceAlertGardens.post({slugGarden: slugGarden, slugAlert:datas.alert.slug}, function(datas){
                             $route.reload();
                         })
 
+                    });
+                } else if (type==="potager")
+                {
+                    console.log(model);
+                    PotagerService.resource.post({}, model, function(datas){
+                        $location.path(path).search({potager: datas.garden.slug});
                     });
                 }
             };
@@ -423,7 +470,9 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
                     });
                 } else if (type === "potager")
                 {
-
+                    PotagerService.resource.delete({id: slug}, function(datas){
+                        $location.path('/dashboard').search({});
+                    });
                 } else if (type === "alert")
                 {
                     AlertService.resourceAlert.delete({slug: slug}, function(datas){
@@ -456,20 +505,21 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
                 }
             };
 
-            /**
-             * Redirige l'utilisateur sur la configuration sélectionnée
-             * @param slug
-             */
-            vm.selectedConfiguration = function (slug) {
-                $location.path(path).search({"configuration": slug});
-            };
-
-            /**
-             * Redirige l'utilisateur sur l'alerte
-             * @param slug
-             */
-            vm.selectedAlert = function (slug) {
-                $location.path(path).search({"alert": slug});
+            vm.geocode = function(address1, address2, city, postalcode, country)
+            {
+                console.log('here');
+                OpenStreetMapService.resource.get({ street:address2?address1:address1+address2,city: city, postalcode:postalcode, country: country}, function(datas){
+                    if(datas[0])
+                    {
+                        vm.potager.longitude = datas[0].lon;
+                        vm.potager.latitude= datas[0].lat;
+                        $scope.markers['mainMarker'].lng = parseFloat(datas[0].lon);
+                        $scope.markers['mainMarker'].lat= parseFloat(datas[0].lat);
+                        $scope.center.lng = parseFloat(datas[0].lon);
+                        $scope.center.lat= parseFloat(datas[0].lat);
+                        $scope.center.zoom= 15;
+                    }
+                });
             };
 
             /**
@@ -477,14 +527,6 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
              */
             vm.goBack = function (type) {
                 $location.path('/potager').search({"param": vm.potager});
-            };
-
-            /**
-             * Supprime le potager sélectionné
-             */
-            vm.newPotager = function (potager) {
-                var newPotagerForm = [];
-                //$location.path(path).search({"delete":"success"});
             };
         }
 

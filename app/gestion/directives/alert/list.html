@@ -3,7 +3,7 @@
 <h3>Alertes</h3>
 <div class="dash animated bounceIn test" ng-repeat="alert in gestion.alerts">
 
-    <div ng-class="dash" ng-click="gestion.selectedAlert(alert.slug)">
+    <div ng-class="dash" ng-click="gestion.goToPage('alert', 'select', alert.slug)">
         <h1>{{ alert.name }}</h1>
         <p ng-bind="alert.description" class="description"></p>
     </div>
