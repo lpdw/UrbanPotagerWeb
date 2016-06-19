@@ -44,7 +44,7 @@ controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $locatio
                 })
                 .done(function (msg) {
                     localStorageService.set("token", msg.token);
-                    $route.reload();
+                    $location.path("/profile");
                 })
                 .fail(function(){
                     console.log("Error");
