@@ -8,15 +8,15 @@
   position: relative;
 }
 .dash-content-box {
-    background-color: rgba(14, 3, 0, 0.4);
-    height: inherit;
-    border-radius: 10px;
-    
+  background-color: rgba(14, 3, 0, 0.4);
+  height: inherit;
+  border-radius: 10px;
+
 }
 .dash-content-box:hover, .dash-content-box:focus, .dash-content-box:active {
-    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.02);
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.02);
 }
 .dash img{
   height: 400px;
@@ -45,6 +45,7 @@
 
 .dash h1{
   font-family: 'Montserrat', Calibri, Arial, sans-serif;
+  word-break: break-word;
 }
 .dash p{
   font-family: 'geosans', Calibri, Arial, sans-serif;
@@ -52,17 +53,17 @@
   padding: 11% 12%;
   text-transform: capitalize;
   color: #fff;
-
+  word-break: break-word;
 }
 .dash button{
   background: #4aff7b;
-    background: -moz-linear-gradient(top, #4aff7b 0%, #3fb570 100%);
-    background: -webkit-linear-gradient(top, #4aff7b 0%,#3fb570 100%);
-    background: linear-gradient(to bottom, #4aff7b 0%,#3fb570 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4aff7b', endColorstr='#3fb570',GradientType=0 );
-    position: absolute;
-    bottom: 20px;
-right: 20px;
+  background: -moz-linear-gradient(top, #4aff7b 0%, #3fb570 100%);
+  background: -webkit-linear-gradient(top, #4aff7b 0%,#3fb570 100%);
+  background: linear-gradient(to bottom, #4aff7b 0%,#3fb570 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4aff7b', endColorstr='#3fb570',GradientType=0 );
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 
 }
 /*************** Toaster *********************/
