@@ -89,8 +89,8 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
                     "name": vm.potager.name,
                     "description": vm.potager.description,
                     "isPublic": vm.potager.isPublic,
-                    "latitude": parseFloat(vm.potager.coordinate.lat),
-                    "longitude": parseFloat(vm.potager.coordinate.lng),
+                    //"latitude": parseFloat(vm.potager.coordinate.lat),
+                    //"longitude": parseFloat(vm.potager.coordinate.lng),
                     "showLocation": vm.potager.show_location,
                     "country": vm.potager.address.country,
                     "city": vm.potager.address.city,
@@ -396,12 +396,12 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
 
 
     })
-    .directive('configurationslist', function () {
+    .directive('configurationlist', function () {
         return {
-            templateUrl: 'gestion/directives/configurations-list.html'
+            templateUrl: 'gestion/directives/configuration/list.html'
         };
     })
-    .directive('alertslist', function () {
+    .directive('alertlist', function () {
         return {
             templateUrl: 'gestion/directives/alerts-list.html'
         };
