@@ -5,22 +5,6 @@ controllers.controller('HomeCtrl', function ($location, $scope, PotagerService) 
     var path = $location.path();
     vm.listMarkers = [];
 
-    function toObject(arr) {
-        var rv = {};
-        for (var i = 0; i < arr.length; ++i)
-            if (arr[i] !== undefined) rv[i] = arr[i];
-        return rv;
-    };
-
-    function arrayToObject(arr) {
-        arr.reduce(function(result, item) {
-            var key = Object.keys(item)[0]; //first property: a, b, c
-            result[key] = item[key];
-            console.log('result',result);
-            return result;
-        }, {});
-    }
-
     vm.constructMarkers = function () {
         /**
          * Récupération potagers publiques
@@ -46,7 +30,6 @@ controllers.controller('HomeCtrl', function ($location, $scope, PotagerService) 
             var convertedListMarkers = listMarkers.reduce(function(result, item) {
                 var key = Object.keys(item)[0];
                 result[key] = item[key];
-                console.log('result',result);
                 return result;
             }, {});;
             $scope.addMarkers(convertedListMarkers);
@@ -114,18 +97,8 @@ controllers.controller('HomeCtrl', function ($location, $scope, PotagerService) 
     });
 
     $scope.addMarkers = function (marker) {
-        console.log('test',marker);
         angular.extend($scope, {
             markers: marker
-            /*{
-                m1: {
-                    lat: 48.5,
-                    lng: 2.18,
-                    focus: false,
-                    message: "",
-                    icon: local_icons.leaf_icon
-                }
-            }*/
         });
     };
 
