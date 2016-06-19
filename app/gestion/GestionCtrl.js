@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService) {
+controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService) {
 
         var vm = this;
         var path = $location.path();
@@ -382,8 +382,8 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
         /**
          * Redirige l'utilisateur vers la page gestion
          */
-        vm.allPotagers = function () {
-            $location.path(path).search({});
+        vm.goBack = function () {
+            $window.history.back();
         };
 
         /**
@@ -396,28 +396,97 @@ controllers.controller('GestionCtrl', function ($location, $route, PotagerServic
 
 
     })
+    .directive('index', function () {
+        return {
+            templateUrl: 'gestion/directives/index.html'
+        };
+    })
+    .directive('alert', function () {
+        return {
+            templateUrl: 'gestion/directives/alert/index.html'
+        };
+    })
+    .directive('alertdisplay', function () {
+        return {
+            templateUrl: 'gestion/directives/alert/display.html'
+        };
+    })
+    .directive('alertlist', function () {
+        return {
+            templateUrl: 'gestion/directives/alert/list.html'
+        };
+    })
+    .directive('alertchangeform', function () {
+        return {
+            templateUrl: 'gestion/directives/alert/change_form.html'
+        };
+    })
+    .directive('alerteditform', function () {
+        return {
+            templateUrl: 'gestion/directives/alert/edit_form.html'
+        };
+    })
+    .directive('alertnewform', function () {
+        return {
+            templateUrl: 'gestion/directives/alert/new_form.html'
+        };
+    })
+    .directive('configuration', function () {
+        return {
+            templateUrl: 'gestion/directives/configuration/index.html'
+        };
+    })
+    .directive('configurationdisplay', function () {
+        return {
+            templateUrl: 'gestion/directives/configuration/display.html'
+        };
+    })
     .directive('configurationlist', function () {
         return {
             templateUrl: 'gestion/directives/configuration/list.html'
         };
     })
-    .directive('alertlist', function () {
+    .directive('configurationchangeform', function () {
         return {
-            templateUrl: 'gestion/directives/alerts-list.html'
+            templateUrl: 'gestion/directives/configuration/change_form.html'
         };
     })
-    .directive('potagers', function () {
+    .directive('configurationeditform', function () {
         return {
-            templateUrl: 'gestion/directives/potagers.html'
+            templateUrl: 'gestion/directives/configuration/edit_form.html'
+        };
+    })
+    .directive('configurationnewform', function () {
+        return {
+            templateUrl: 'gestion/directives/configuration/new_form.html'
         };
     })
     .directive('potager', function () {
         return {
-            templateUrl: 'gestion/directives/potager.html'
+            templateUrl: 'gestion/directives/potager/index.html'
         };
     })
-    .directive('newPotager', function () {
+    .directive('potagerdisplay', function () {
         return {
-            templateUrl: 'gestion/directives/new-potager.html'
+            templateUrl: 'gestion/directives/potager/display.html'
         };
-    });
+    })
+    .directive('potagerlist', function () {
+        return {
+            templateUrl: 'gestion/directives/potager/list.html'
+        };
+    })
+    .directive('potagerlistalert', function () {
+        return {
+            templateUrl: 'gestion/directives/potager/list_alert.html'
+        };
+    })
+    .directive('potagereditform', function () {
+        return {
+            templateUrl: 'gestion/directives/potager/edit_form.html'
+        };
+    }).directive('potagernewform', function () {
+    return {
+        templateUrl: 'gestion/directives/potager/new_form.html'
+    };
+});

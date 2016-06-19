@@ -8,423 +8,49 @@
 <div class="action-button-container">
     <button class="pure-button" ng-click="gestion.display('potager', 'edit')" ng-hide="gestion.editPotager">Editer</button>
 </div>
-<ul ng-hide="gestion.editPotager">
-    <li>
-        Nom: {{gestion.potager.name}}
-    </li>
-    <li>
-        Description: {{gestion.potager.description}}
-    </li>
-    <li>
-        Localisation:<br>
-        {{gestion.potager.address.line1}} <br>
-        {{gestion.potager.address.line2}}<br>
-        {{gestion.potager.address.zipCode}} {{gestion.potager.address.city}} - {{gestion.potager.address.country}}
-    </li>
-    <li>publique: {{gestion.potager.is_public?"Oui":"Non"}}</li>
-    <li>Afficher la position: {{gestion.potager.show_location?"Oui":"Non"}}</li>
-</ul>
-<form ng-show="gestion.editPotager" ng-submit="gestion.edit('potager', gestion.potager.slug, gestion.potagerCopy)">
-    <label for="potager.name">Nom</label>
-    <input type="text" id="potager.name" ng-model="gestion.potagerCopy.name" ng-value="gestion.potager.name"/>
-    <br>
-    <label for="potager.description">Description</label>
-    <textarea type="text" id="potager.description" ng-model="gestion.potagerCopy.description">{{gestion.potager.description}}</textarea>
-    <br>
 
-    <label for="potager.address1">Adresse (ligne1)</label>
-    <input type="text" id="potager.address1" ng-model="gestion.potagerCopy.line1" ng-value="gestion.potager.address.line1"/>
-    <br>
-    <label for="potager.address2">Adresse (ligne2)</label>
-    <input type="text" id="potager.address2" ng-model="gestion.potagerCopy.line2" ng-value="gestion.potager.address.line2"/>
-    <br>
-    <label for="potager.zipCode">Code Postal</label>
-    <input type="text" id="potager.zipCode" ng-model="gestion.potagerCopy.zipCode" ng-value="gestion.potager.address.zipCode"/>
-    <br>
-    <label for="potager.city">Ville</label>
-    <input type="text" id="potager.city" ng-model="gestion.potagerCopy.city" ng-value="gestion.potager.address.city"/>
-    <br>
-    <label for="potager.country">Pays</label>
-    <input type="text" id="potager.country" ng-model="gestion.potagerCopy.country" ng-value="gestion.potager.address.country"/>
-    <br>
-    <label>Publique: </label>
-    <label for="potager.pulic.true">Oui</label>
-    <input type="radio" id="potager.pulic.true" ng-model="gestion.potagerCopy.isPublic" ng-value="true" ng-checked="gestion.potager.is_public === true"/>
-    <label for="potager.pulic.false">Non</label>
-    <input type="radio" id="potager.pulic.false" ng-model="gestion.potagerCopy.isPublic" ng-value="false" ng-checked="gestion.potager.is_public === false"/>
-    <br>
-    <label>Afficher la position: </label>
-    <label for="potager.location.true">Oui</label>
-    <input type="radio" id="potager.location.true" ng-model="gestion.potagerCopy.showLocation" ng-value="true" ng-checked="gestion.potager.show_location === true"/>
-    <label for="potager.location.false">Oui</label>
-    <input type="radio" id="potager.location.false" ng-model="gestion.potagerCopy.showLocation" ng-value="false" ng-checked="gestion.potager.show_location === false"/>
-    <br>
+<potagerdisplay ng-hide="gestion.editPotager"></potagerdisplay>
 
+<potagereditform ng-show="gestion.editPotager"></potagereditform>
 
-
-    <button class="pure-button" type="reset" ng-click="gestion.reset('potager', 'edit')">Annuler</button>
-    <button class="pure-button" type="submit">Valider</button>
-
-</form>
 
 
 <h4>Configuration</h4>
 
 <div class="action-button-container">
-
     <button class="pure-button" ng-click="gestion.display('configuration', 'new')" ng-if="!gestion.configuration">Créer une configuration</button>
     <button class="pure-button" ng-click="gestion.display('configuration', 'edit')" ng-hide="gestion.editConfiguration" ng-if="gestion.configuration">Editer</button>
     <button class="pure-button" ng-click="gestion.display('configuration', 'change')" ng-if="gestion.configurations.length">Changer pour une autre configuration existante</button>
     <button class="pure-button" ng-click="gestion.unlink('configuration', gestion.potager.slug)" ng-show="gestion.configuration">Dé-associer</button>
-
-
 </div>
 
 
-<div ng-if="gestion.configuration">
-    <form novalidate ng-show="gestion.changeConfiguration">
-        <select name="configurationSlug" ng-model="configuration.slug" >
-            <option ng-repeat="configuration in gestion.configurations" ng-value="configuration.slug" ng-selected="gestion.configuration.slug === configuration.slug">
-                {{configuration.name}}
-            </option>
-        </select>
+<p ng-hide="gestion.changeConfiguration||gestion.newConfiguration||gestion.configuration">No configuration</p>
 
-        <button type="reset" class="pure-button" ng-click="gestion.reset('configuration', 'change')">Annuler</button>
-        <button type="submit" class="pure-button" ng-click="gestion.change('configuration', gestion.potager.slug, configuration.slug)">Valider</button>
-    </form>
+<configurationdisplay ng-hide="gestion.changeConfiguration||gestion.newConfiguration||gestion.editConfiguration||!gestion.configuration"></configurationdisplay>
 
-    <form ng-submit="gestion.edit('configuration', gestion.configuration.slug, gestion.configurationCopy)">
-        <ul>
-            <li>
-                Nom:
-            <span class="edit" ng-show="gestion.editConfiguration">
-                <input type="text"
-                       ng-value="gestion.configuration.name"
-                       ng-model="gestion.configurationCopy.name"
-                >
-            </span>
+<configurationchangeform ng-show="gestion.changeConfiguration"></configurationchangeform>
 
-            <span ng-hide="gestion.editConfiguration">
-                {{gestion.configuration.name}}
-            </span>
-            </li>
-            <li>
-                Description:
-            <span class="edit" ng-show="gestion.editConfiguration">
-                <textarea type="text"
-                          ng-model="gestion.configurationCopy.description"
-                >
-                    {{gestion.configuration.description}}
-                    </textarea>
-            </span>
-            <span ng-hide="gestion.editConfiguration">
-                {{gestion.configuration.description}}
-            </span>
-            </li>
+<configurationnewform ng-if="!gestion.configuration" ng-show="gestion.newConfiguration"></configurationnewform>
+
+<configurationeditform ng-if="gestion.configuration" ng-show="gestion.editConfiguration"></configurationeditform>
 
 
-            <li>Allumage:
-            <span class="edit" ng-show="gestion.editConfiguration">
-                <input type="number" min="0" max="24"
-                       ng-value="gestion.getHours(gestion.configuration.lighting_start)"
-                       ng-model="gestion.configurationCopy.lightingStart.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-value="gestion.getMinutes(gestion.configuration.lighting_start)"
-                       ng-model="gestion.configurationCopy.lightingStart.minute"
-                />
-                à
-                <input type="number" min="0" max="24"
-                       ng-value="gestion.getHours(gestion.configuration.lighting_end)"
-                       ng-model="gestion.configurationCopy.lightingEnd.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-value="gestion.getMinutes(gestion.configuration.lighting_end)"
-                       ng-model="gestion.configurationCopy.lightingEnd.minute"
-                       />
-            </span>
 
-            <span ng-hide="gestion.editConfiguration">
-                {{gestion.getHours(gestion.configuration.lighting_start)}}:{{gestion.getMinutes(gestion.configuration.lighting_start)}}
-                à
-                {{gestion.getHours(gestion.configuration.lighting_end)}}:{{gestion.getMinutes(gestion.configuration.lighting_end)}}
-            </span>
-            </li>
-            <li>
-                Arrosage:
-                <br>
-            <span class="edit" ng-show="gestion.editConfiguration">
-
-                <div>
-                    Activé:<br>
-                    Oui:
-                    <input type="radio" name="is_watering_active"
-                           ng-model="gestion.configurationCopy.isWateringActive"
-                           ng-value="true"
-                           ng-checked="gestion.configuration.is_watering_active"
-                    /> <br>
-                    Non:
-                    <input type="radio" name="is_watering_active"
-                           ng-model="gestion.configurationCopy.isWateringActive"
-                           ng-value="false"
-                           ng-checked="!gestion.configuration.is_watering_active"
-                    />
-                </div>
-
-                <input type="number" min="0" max="24"
-                       ng-value="gestion.getHours(gestion.configuration.watering_start)"
-                       ng-model="gestion.configurationCopy.wateringStart.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-value="gestion.getMinutes(gestion.configuration.watering_start)"
-                       ng-model="gestion.configurationCopy.wateringStart.minute"
-                />
-                à
-                <input type="number" min="0" max="24"
-                       ng-value="gestion.getHours(gestion.configuration.watering_end)"
-                       ng-model="gestion.configurationCopy.wateringEnd.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-value="gestion.getMinutes(gestion.configuration.watering_end)"
-                       ng-model="gestion.configurationCopy.wateringEnd.minute"
-                />
-            </span>
-
-            <span ng-hide="gestion.editConfiguration">
-
-                Activé: {{gestion.configuration.is_watering_active?"Oui":"Non"}}
-                <br>
-                De
-                {{gestion.getHours(gestion.configuration.watering_start)}}:{{gestion.getMinutes(gestion.configuration.watering_start)}}
-                à
-                {{gestion.getHours(gestion.configuration.watering_end)}}:{{gestion.getMinutes(gestion.configuration.watering_end)}}
-            </span>
-
-            </li>
-            <li>
-                Luminosité:
-            <span class="edit" ng-show="gestion.editConfiguration">
-                <input type="number" step="any" min="0" max="100" ng-value="gestion.configuration.light_treshold" ng-model="gestion.configurationCopy.lightTreshold"/>%
-            </span>
-
-            <span ng-hide="gestion.editConfiguration">
-            {{gestion.configuration.light_treshold}}%
-            </span>
-            </li>
-        </ul>
-    <span ng-show="gestion.editConfiguration">
-        <button class="pure-button" type="reset" ng-click="gestion.reset('configuration', 'edit')">Annuler</button>
-        <button class="pure-button" type="submit"> Envoyer </button>
-    </span>
-    </form>
-</div>
-
-<div ng-if="!gestion.configuration">
-
-    <form novalidate ng-show="gestion.changeConfiguration">
-        <select name="configurationSlug" ng-model="configuration.slug" >
-            <option ng-repeat="configuration in gestion.configurations" ng-value="configuration.slug">
-                {{configuration.name}}
-            </option>
-        </select>
-
-        <button type="reset" class="pure-button" ng-click="gestion.reset('configuration', 'change')">Annuler</button>
-        <button type="submit" class="pure-button" ng-click="gestion.change('configuration', gestion.potager.slug, configuration.slug)">Valider</button>
-    </form>
-
-    <form ng-submit="gestion.new('configuration', gestion.configurationModel, gestion.potager.slug)" ng-show="gestion.newConfiguration">
-        <ul>
-            <li>
-                Nom:
-            <span>
-                <input type="text"
-                       ng-model="gestion.configurationModel.name"
-                >
-            </span>
-            </li>
-            <li>
-                Description:
-            <span>
-                <textarea type="text"
-                          ng-model="gestion.configurationModel.description"
-                >
-                    {{gestion.configurationModel.description}}
-                </textarea>
-            </span>
-            </li>
-
-
-            <li>Allumage:
-            <span>
-                <input type="number" min="0" max="24"
-                       ng-model="gestion.configurationModel.lightingStart.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-model="gestion.configurationModel.lightingStart.minute"
-                />
-                à
-                <input type="number" min="0" max="24"
-                       ng-model="gestion.configurationModel.lightingEnd.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-model="gestion.configurationModel.lightingEnd.minute"
-                />
-            </span>
-            </li>
-            <li>
-                Arrosage:
-            <span>
-
-                <div>
-                    Activer:<br>
-                    Oui:
-                    <input type="radio" name="is_watering_active"
-                           ng-model="gestion.configurationModel.isWateringActive"
-                           ng-value="true"
-                    /> <br>
-                    Non:
-                    <input type="radio" name="is_watering_active"
-                           ng-model="gestion.configurationModel.isWateringActive"
-                           ng-value="false"
-                           checked
-                    />
-                </div>
-
-                De
-                <input type="number" min="0" max="24"
-                       ng-model="gestion.configurationModel.wateringStart.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-model="gestion.configurationModel.wateringStart.minute"
-                />
-                à
-                <input type="number" min="0" max="24"
-                       ng-model="gestion.configurationModel.wateringEnd.hour"
-                />
-                :
-                <input type="number" min="0" max="60"
-                       ng-model="gestion.configurationModel.wateringEnd.minute"
-                />
-            </span>
-
-            </li>
-            <li>
-                Luminosité:
-            <span>
-                <input type="number" step="any" min="0" max="100"
-                       ng-model="gestion.configurationModel.lightTreshold"
-                />%
-            </span>
-            </li>
-        </ul>
-        <span>
-            <button class="pure-button" type="reset" ng-click="gestion.reset('configuration', 'new')">Annuler</button>
-            <button class="pure-button" type="submit"> Envoyer </button>
-        </span>
-    </form>
-
-
-    <div ng-hide="gestion.changeConfiguration||gestion.newConfiguration">
-        <p>No configuration</p>
-    </div>
-</div>
 
 <h4>Alertes</h4>
 <div>
-    <ul>
-        <li ng-repeat="alert in gestion.alerts">
-            <button class="pure-button" ng-click="gestion.display('alert', 'edit', $index)" ng-hide="gestion.editAlerts[$index]">Editer</button>
-            <button class="pure-button button-warning" ng-click="gestion.unlink('alert', gestion.potager.slug, alert.slug)">Dé-associer</button>
-            <form name="alertForm{{$index}}" ng-submit="gestion.edit('alert', alert.slug,gestion.alertsCopy[$index] )" ng-show="gestion.editAlerts[$index]">
-                <span>Nom:
-                    <input type="text" name="name" ng-model="gestion.alertsCopy[$index].name" value="{{alert.name}}"/>
-                    <br>
-                    Description:
-                    <textarea name="description" ng-model="gestion.alertsCopy[$index].description">{{alert.description}}</textarea>
-                    <br>
-                    Message:
-                    <input type="text" name="message" ng-model="gestion.alertsCopy[$index].message" value="{{alert.message}}"/>
-                    <br>
-                    <select name="type" ng-model="gestion.alertsCopy[$index].type">
-                        <option
-                                ng-repeat="type in gestion.types"
-                                value="{{type.slug}}"
-                                ng-selected="type.slug == alert.type.slug"
-                        >
-                            {{type.name}}
-                        </option>
-                    </select>
+    <potagerlistalert></potagerlistalert>
 
-                    <select name="comparison" ng-model="gestion.alertsCopy[$index].comparison">
-                        <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index+1}}" ng-selected="$index == alert.comparison">{{comparison}}</option>
-                    </select>
 
-                    <input type="number" name="treshold" step="any" ng-model="gestion.alertsCopy[$index].threshold" value="{{alert.threshold}}"/>
-                </span>
-                <span>
-                    <button class="pure-button" type="reset" ng-click="gestion.reset('alert', 'edit', $index)">Annuler</button>
-                    <button class="pure-button" type="submit"> Envoyer </button>
-                </span>
-            </form>
+        <alertnewForm ng-show="gestion.newAlert"></alertnewForm>
 
-                <span ng-hide="gestion.editAlerts[$index]">
-
-                    <h5>{{alert.name}}</h5>
-                    <p>{{alert.description}}</p>
-                    <p>{{alert.message}}</p>
-
-                    <hr>
-                    {{alert.type.name}} {{gestion.comparisonTable[alert.comparison-1]}} {{alert.threshold}}
-                </span>
-        </li>
-        <p ng-hide="gestion.alerts.length">No Alert</p>
-        <form ng-show="gestion.newAlert" ng-submit="gestion.new('alert', gestion.alertModel, gestion.potager.slug)">
-            <label for="nameAlertNew">Nom</label>
-            <input id="nameAlertNew" type="text" ng-model="gestion.alertModel.name" placeholder="Nom de l'alerte"/>
-            <br>
-            <label for="descriptionAlertNew">Description</label>
-            <textarea id="descriptionAlertNew" ng-model="gestion.alertModel.description" placeholder="description de l'alerte"></textarea>
-            <br>
-            <label for="messageAlertNew">Message</label>
-            <input id="messageAlertNew" type="text" ng-model="gestion.alertModel.message" placeholder="Message à afficher"/>
-            <br>
-            <label for="typesAlertNew">Types</label>
-            <select id="typesAlertNew" ng-model="gestion.alertModel.type">
-                <option ng-repeat="type in gestion.types" value="{{type.slug}}">{{type.name}}</option>
-            </select>
-            <br>
-            <label for="comparisonAlertNew">Comparaison</label>
-            <select id="comparisonAlertNew" ng-model="gestion.alertModel.comparison">
-                <option ng-repeat="comparison in gestion.comparisonTable" value="{{$index+1}}">{{comparison}}</option>
-            </select>
-            <br>
-            <label for="tresholdAlertNew">Seuil</label>
-            <input id="tresholdAlertNew" type="number" step="any" ng-model="gestion.alertModel.threshold" placeholder="seuil voulu"/>
-            <br>
-            <button class="pure-button" type="reset" ng-click="gestion.reset('alert','new')">Annuler</button>
-            <button class="pure-button" type="submit">Ajouter</button>
-        </form>
-
-        <form novalidate ng-show="gestion.changeAlert">
-            <select ng-model="gestion.changeAlertValue">
-                <option ng-repeat="alert in gestion.userAlerts" ng-value="alert.slug">{{alert.name}}</option>
-            </select>
-            <button class="pure-button" type="reset" ng-click="gestion.reset('alert','change')">Annuler</button>
-            <button class="pure-button" type="submit" ng-click="gestion.change('alert', gestion.potager.slug, gestion.changeAlertValue )">Associer</button>
-        </form>
+        <alertchangeform ng-show="gestion.changeAlert"></alertchangeform>
 
         <div  ng-hide="gestion.newAlert||gestion.changeAlert">
             <button class="pure-button" ng-click="gestion.display('alert', 'new')">Créer une alerte</button>
             <button class="pure-button" ng-click="gestion.display('alert', 'change')">Associer une alerte existante</button>
         </div>
-    </ul>
 </div>
 
-<button class="pure-button" ng-click="gestion.allPotagers()">Voir tous</button>
+<button class="pure-button" ng-click="gestion.goBack()">Retours</button>
