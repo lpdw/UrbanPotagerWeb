@@ -1,5 +1,5 @@
 .dash{
-  height: 700px;
+  height: 480px;
   margin-bottom: 8%;
   border-radius: 10px;
   width: 30%;
@@ -19,7 +19,7 @@
   transform: scale(1.02);
 }
 .dash img{
-  height: 400px;
+  height: 250px;
   width: 100%;
   border-radius: 10px 10px 0 0;
 }
