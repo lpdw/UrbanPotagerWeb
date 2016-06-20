@@ -1,9 +1,9 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService, OpenStreetMapService, $scope) {
+controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, $localStorage, OpenStreetMapService, $scope) {
 
 
-        if (!localStorageService.get('token'))
+        if (!$localStorage.user)
         {
             $location.path('/inscription');
         } else {

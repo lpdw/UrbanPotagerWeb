@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    function OpenStreetMapService($resource, localStorageService){
+    function OpenStreetMapService($resource){
 
         var apiPath = 'http://nominatim.openstreetmap.org/search?format=json&limit=1';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $location, localStorageService, $route) {
+controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $location, $localStorage) {
 
         this.title = "Page d'inscription";
 
@@ -11,7 +11,7 @@ controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $locatio
           $scope.isHidden = !$scope.isHidden;
           $scope.isVisible = !$scope.isVisible;
 
-        }
+        };
 
 
         this.inscription = function (data) {
@@ -43,12 +43,14 @@ controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $locatio
                     }
                 })
                 .done(function (msg) {
-                    localStorageService.set("token", msg.token);
+                    $localStorage.user = {
+                        token: msg.token
+                    };
+
+                    console.log($localStorage.user.token);
+
                     $location.path("/profile");
                 })
-                .fail(function(){
-                    console.log("Error");
-                });
         };
 
         function msg(msg) {

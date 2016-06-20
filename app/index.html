@@ -52,10 +52,11 @@
     <div class="logo"><img src="assets/images/Logo.svg"></div>
     <ul>
       <li><a href="#/home">Home</a></li>
-      <li><a href="#/dashboard">Dashboard</a></li>
-      <li><a href="#/gestion">Gestion</a></li>
-      <li><a href="#/profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-      <li><a ng-click="logout()" href><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+      <li ng-if="log"><a href="#/dashboard">Dashboard</a></li>
+      <li ng-if="log"><a href="#/gestion">Gestion</a></li>
+      <li ng-if="log"><a href="#/profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+      <li ng-if="!log"><a href="#/inscription"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+      <li ng-if="log"><a ng-click="logout()" href><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
     </ul>
   </div>
   <div ng-view>
@@ -103,7 +104,7 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
 <script src="/node_modules/angular-animate/angular-animate.js"></script>
 <script src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
 <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js"></script>

@@ -1,10 +1,10 @@
 (function(){
     'use strict';
 
-    function AlertService($resource, localStorageService){
+    function AlertService($resource, $localStorage){
 
         var apiPath = 'https://urbanpotager.labesse.me';
-        var token =  localStorageService.get('token');
+        var token =  $localStorage.user.token;
 
         /**
          * Interact with configurations

@@ -1,10 +1,10 @@
 (function(){
     'use strict';
 
-    function MeasuresService($resource, localStorageService){
+    function MeasuresService($resource, $localStorage){
 
         var apiPath = 'https://urbanpotager.labesse.me';
-        var token =  localStorageService.get('token');
+        var token =  $localStorage.user.token;
 
         /**
          * Get measures of a garden

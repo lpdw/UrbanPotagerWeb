@@ -1,8 +1,8 @@
 'use strict';
 
-controllers.controller('ProfileCtrl', function ($scope, $rootScope, $location, localStorageService, UserService) {
+controllers.controller('ProfileCtrl', function ($scope, $rootScope, $location, $localStorage, UserService) {
 
-    if (localStorageService.get("token") == null) {
+    if (!$localStorage.user) {
         $location.path("/inscription");
     }
     else {
