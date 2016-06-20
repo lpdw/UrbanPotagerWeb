@@ -28,6 +28,19 @@ h1, h2{
 .concept-content{
   position: relative;
 }
+.concept-content h1{
+font-family: 'geosans', Arial, sans-serif;
+}
+.feature-cont h1{
+  font-family: 'geosans', Arial, sans-serif;
+
+}
+.feature-bg{
+  background: url('images/fond.png') no-repeat;
+  background-color: white;
+  padding-bottom: 2%;
+}
+
 .concept-container p{
   font-size: 1.5em;
   text-align: center;

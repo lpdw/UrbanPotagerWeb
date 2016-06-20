@@ -76,6 +76,7 @@ body{
   text-decoration: none;
   color: #58585a;
   transition: color 0.2s;
+  font-family: 'geosans';
 }
 .menu ul > li > a:hover {
   color: #5bb05b;
@@ -85,8 +86,7 @@ body{
   padding: 16px;
 }
 footer {
-  position: absolute;
-  bottom: 0;
+
   width: 100vw;
   height: 10vh;
 }
@@ -142,7 +142,7 @@ footer {
 }
 @media (min-width: 1200px){
   .footer-social .social{
-    width: 17%;
+    width: 21%;
   }
 }
 

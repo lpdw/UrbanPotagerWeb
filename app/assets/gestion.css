@@ -175,3 +175,9 @@ font-size: 1.5em;
 .btn-reset{
       background-color: #f4395c;
 }
+.edit-potager{
+  background-color: rgba(14, 3, 0, 0.4);
+  padding: 0;
+  border-radius: 10px;
+  color: #fff;
+}
