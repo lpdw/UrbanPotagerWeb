@@ -36,9 +36,7 @@ controllers.controller('InscriptionCtrl', function ($scope, $rootScope, $locatio
                 token: data.token
             };
             console.log($localStorage.user.token);
-            if(!$scope.$$phase) {
-                $scope.$apply();
-            }
+            window.location.reload();
             $location.path("/dashboard");
         });
 

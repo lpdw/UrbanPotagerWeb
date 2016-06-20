@@ -55,6 +55,7 @@ controllers.controller('MainCtrl', function ($route, $scope, $location, $localSt
     $scope.logout = function(){
         $localStorage.$reset();
         $route.reload();
+        window.location.reload();
         $location.path("/home");
     }
 
