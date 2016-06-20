@@ -83,6 +83,7 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
                     zoom: 8
                 }
             });
+            console.log('here');
 
             //Récupération des paramètres de l'url
             var params = $location.search();
