@@ -152,3 +152,26 @@ font-size: 1.5em;
   background: -ms-linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
   background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
 }
+ .mui-textfield>.input-nb{
+   width: 10%;
+   display: inline-block;
+}
+.mui-textfield>.input-nb,  .mui-textfield>textarea{
+
+}
+.edit-form-config{
+  color: #fff;
+  font-family:  'geosans', Arial, sans-serif;
+}
+.edit-form-config legend, .edit-form-config textarea
+{
+  color: #fff;
+}
+.mui-textfield>input{
+  color: #fff;
+  border-bottom: solid 1px rgba(147,184,189,1);
+
+}
+.btn-reset{
+      background-color: #f4395c;
+}

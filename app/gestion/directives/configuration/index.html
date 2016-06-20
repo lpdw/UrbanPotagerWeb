@@ -33,21 +33,23 @@
             à
             {{gestion.getHours(gestion.configuration.lighting_end)}}:{{gestion.getMinutes(gestion.configuration.lighting_end)}}</p>
           </div>
-          <h3>Allumage</h3>
+          <h3>Arrosage</h3>
 
-            <p><h3>Arrosage</h3>
               <div class="col-md-6 col-sm-6 col-md-offset-6 col-sm-offset-6">
 
-                <p>De {{gestion.getHours(gestion.configuration.lighting_start)}}:{{gestion.getMinutes(gestion.configuration.lighting_start)}}
-                  à
-                  {{gestion.getHours(gestion.configuration.lighting_end)}}:{{gestion.getMinutes(gestion.configuration.lighting_end)}}</p>
+                <p>
+                  Activé: {{gestion.configuration.is_watering_active?"Oui":"Non"}}
+                            <br>
+                  {{gestion.getHours(gestion.configuration.watering_start)}}:{{gestion.getMinutes(gestion.configuration.watering_start)}}</p>
                 </div></p>
 
 
                 <h3>Luminosité</h3>
                   <div class="col-md-6 col-sm-6 col-md-offset-6 col-sm-offset-6">
 
-                    <p>{{gestion.configuration.light_treshold}}%</p>
+                    <p>
+
+                      {{gestion.configuration.light_treshold}}%</p>
                   </div></p>
                 </div>
                 <configurationeditform ng-show="gestion.editConfiguration"></configurationeditform>
