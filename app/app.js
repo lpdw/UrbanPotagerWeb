@@ -9,7 +9,7 @@ angular.module('myApp', ['ngRoute', 'controllers', 'toaster'])
                     controller: 'HomeCtrl as home'
                 })
                 .when('/inscription', {
-                    templateUrl: 'inscription/inscription.html',
+                    templateUrl: 'profile/inscription/inscription.html',
                     controller: 'InscriptionCtrl as inscription'
                 })
                 .when('/dashboard', {
