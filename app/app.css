@@ -153,6 +153,9 @@ footer {
   .footer-btm img{
     width: 16vw;
   }
+  .dash-details{
+        margin-bottom: 8%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 992px){

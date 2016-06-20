@@ -8,7 +8,7 @@
 .alert-title{
   font-size: 2em;
   background-color: white;
-  height: 400px;
+  height: 500px;
   border-radius: 10px 0 0 10px;
   border-right: solid 8px #942b03;
   font-family: 'Montserrat', Calibri, Arial, sans-serif;
@@ -36,7 +36,7 @@
 .alert-title h1 {
   font-family: 'geosans';
   text-transform: uppercase;
-  font-size: 1.2em;
+  font-size: 1em;
   margin-top: 6%;
 }
 .alert-title h1:after{
@@ -53,7 +53,7 @@
   background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
 }
 .alert-box p{
-  padding: 3% 7%;
+  padding: 0 7%;
 }
 .alert-box button{
   position: absolute;
@@ -70,25 +70,25 @@
 }
 .single-alert1{
   background-color:rgba(150, 148, 148, 0.34);
-  height: 200px;
+  height: 250px;
 }
 .single-alert2{
   background-color: rgba(250, 235, 215, 0.34);
   border-radius: 0 10px 0 0;
-  height: 200px;
+  height: 250px;
 }
 .single-alert3{
   background-color: rgba(248, 250, 215, 0.25);
-  height: 200px;
+  height: 250px;
 }
 .single-alert4{
   background-color: rgba(215, 250, 226, 0.28);
-  height: 200px;
+  height: 250px;
 }
 .single-alert5{
   background-color: rgba(216, 215, 250, 0.37);
   border-radius: 0 0 10px 0;
-  height: 200px;
+  height: 250px;
 }
 .edit-alert{
   background-color: rgba(14, 3, 0, 0.4);

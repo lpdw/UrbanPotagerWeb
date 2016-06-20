@@ -57,7 +57,6 @@ padding: 11% 0;
   font-size: 3em;
   text-align: right;
   padding-right: 35px;
-  padding-top: 16px;
 }
 .dash-desc-box, .dash-details{
   height: 450px;
@@ -75,7 +74,7 @@ padding: 11% 0;
   border-radius: 10px;
 }
 .dash-desc button{
-  
+
   margin: 0 auto;
   display: inherit;
 }

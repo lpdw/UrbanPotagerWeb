@@ -1,5 +1,4 @@
 .dash{
-  height: 700px;
   margin-bottom: 8%;
   border-radius: 10px;
   width: 30%;
@@ -9,7 +8,6 @@
 }
 .dash-content-box {
   background-color: rgba(14, 3, 0, 0.4);
-  height: inherit;
   border-radius: 10px;
 
 }
