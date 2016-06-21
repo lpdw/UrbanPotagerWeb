@@ -76,7 +76,7 @@
   height: 701px;
   left: 0;
   background-size: cover;
-  background-position-y: 50%;
+  background-position: 50%;
   z-index: 3;
   width: 50%;
   border-radius: 10px 0 0 10px;
@@ -91,7 +91,7 @@
   background: linear-gradient(to bottom,  #4aff7b 0%,#3fb570 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4aff7b', endColorstr='#3fb570',GradientType=0 );
   color: #fff;
-  width: 70%;
+  width: 95%;
   height: 60px;
   font-size: 1.5em;
   font-family: 'Montserrat', Avenir, Calibri, Arial, sans-serif;

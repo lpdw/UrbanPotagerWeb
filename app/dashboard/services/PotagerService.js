@@ -1,10 +1,13 @@
 (function () {
     'use strict';
 
-    function PotagerService($resource, localStorageService) {
+    function PotagerService($resource, $localStorage) {
 
         var apiPath = 'https://urbanpotager.labesse.me';
-        var token =  localStorageService.get('token');
+        var token = "";
+        if ($localStorage.user){
+            token =  $localStorage.user.token;
+        }
 
         /**
          * All public gardens

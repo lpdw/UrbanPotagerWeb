@@ -1,9 +1,9 @@
 'use strict';
 
-controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, localStorageService, OpenStreetMapService, $scope) {
+controllers.controller('GestionCtrl', function ($location, $window, $route, PotagerService, $q, ConfigurationService, AlertService, TypeService, AccessService, $localStorage, OpenStreetMapService, $scope) {
 
 
-        if (!localStorageService.get('token'))
+        if (!$localStorage.user)
         {
             $location.path('/inscription');
         } else {
@@ -83,6 +83,7 @@ controllers.controller('GestionCtrl', function ($location, $window, $route, Pota
                     zoom: 8
                 }
             });
+            console.log('here');
 
             //Récupération des paramètres de l'url
             var params = $location.search();

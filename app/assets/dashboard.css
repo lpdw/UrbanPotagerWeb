@@ -1,4 +1,8 @@
 .dash{
+<<<<<<< HEAD
+=======
+  height: 480px;
+>>>>>>> 8637ddd6c0c518f253a9daa7bf17218ad9a173c4
   margin-bottom: 8%;
   border-radius: 10px;
   width: 30%;
@@ -17,7 +21,7 @@
   transform: scale(1.02);
 }
 .dash img{
-  height: 400px;
+  height: 250px;
   width: 100%;
   border-radius: 10px 10px 0 0;
 }
