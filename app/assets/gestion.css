@@ -53,12 +53,10 @@
   background: linear-gradient(left, rgba(147,184,189,0) 0%,rgba(147,184,189,0.8) 20%,rgba(147,184,189,1) 53%,rgba(147,184,189,0.8) 79%,rgba(147,184,189,0) 100%);
 }
 .alert-box p{
-<<<<<<< HEAD
-  padding: 0 7%;
-=======
+
   font-size: smaller;
   padding: 3% 7%;
->>>>>>> 8637ddd6c0c518f253a9daa7bf17218ad9a173c4
+
 }
 .alert-box button{
   position: absolute;
