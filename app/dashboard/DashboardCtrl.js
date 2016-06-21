@@ -1,7 +1,8 @@
 (function() {
-    'use strict';
+      'use strict';
 
     function DashboardCtrl($location, PotagerService, $localStorage) {
+
 
         if (!$localStorage.user) {
             $location.path('/inscription');
@@ -9,7 +10,7 @@
         else {
             var vm = this;
             vm.title = "MES POTAGERS";
-            vm.dash = undefined;
+          vm.dash = undefined;
 
             /**
              * Appel service pour récupérer les potagers
@@ -21,6 +22,7 @@
                 });
             };
 
+      
             /**
              * Gestion des images aléatoires des dash
              */
@@ -43,7 +45,7 @@
             vm.selectedPotager = function(p){
                 $location.path('/potager/').search({param: p});
             };
-        }
-    }
-    controllers.controller('DashboardCtrl', DashboardCtrl);
-}());
+         }
+      }
+      controllers.controller('DashboardCtrl', DashboardCtrl);
+  }());
